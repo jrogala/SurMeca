@@ -1,0 +1,386 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{nty/global}
+    \entry{brownjohn2007structural}{article}{}
+      \name{author}{1}{}{%
+        {{hash=11d380c1b3ed245def4a6c6293cf8e73}{%
+           family={Brownjohn},
+           family_i={B\bibinitperiod},
+           given={James\bibnamedelima MW},
+           given_i={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {The Royal Society}%
+      }
+      \strng{namehash}{11d380c1b3ed245def4a6c6293cf8e73}
+      \strng{fullhash}{11d380c1b3ed245def4a6c6293cf8e73}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Philosophical Transactions of the Royal Society of London A: Mathematical, Physical and Engineering Sciences}
+      \field{number}{1851}
+      \field{title}{Structural health monitoring of civil infrastructure}
+      \field{volume}{365}
+      \field{year}{2007}
+      \field{pages}{589\bibrangedash 622}
+      \range{pages}{34}
+    \endentry
+    \entry{dilena2015damage}{article}{}
+      \name{author}{3}{}{%
+        {{hash=fe0b0d0e15f6ed3acefdd5b1e28619f5}{%
+           family={Dilena},
+           family_i={D\bibinitperiod},
+           given={M},
+           given_i={M\bibinitperiod}}}%
+        {{hash=45f65c7ae17dedc31233743c1c56158e}{%
+           family={Limongelli},
+           family_i={L\bibinitperiod},
+           given={MP},
+           given_i={M\bibinitperiod}}}%
+        {{hash=77e26960a683d80ca35262ab160cdc83}{%
+           family={Morassi},
+           family_i={M\bibinitperiod},
+           given={A},
+           given_i={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{0c2dbda1fe2368d1139b37256e4f09ce}
+      \strng{fullhash}{0c2dbda1fe2368d1139b37256e4f09ce}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mechanical Systems and Signal Processing}
+      \field{title}{Damage localization in bridges via the FRF interpolation method}
+      \field{volume}{52}
+      \field{year}{2015}
+      \field{pages}{162\bibrangedash 180}
+      \range{pages}{19}
+    \endentry
+    \entry{fan2011vibration}{article}{}
+      \name{author}{2}{}{%
+        {{hash=a3166e33c48f3979fb2eb732457cdab1}{%
+           family={Fan},
+           family_i={F\bibinitperiod},
+           given={Wei},
+           given_i={W\bibinitperiod}}}%
+        {{hash=aae14f0a6e0e38b7c97daff5f1576dda}{%
+           family={Qiao},
+           family_i={Q\bibinitperiod},
+           given={Pizhong},
+           given_i={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SAGE Publications}%
+      }
+      \strng{namehash}{d0200243df948b874aa7459c9fa63c4e}
+      \strng{fullhash}{d0200243df948b874aa7459c9fa63c4e}
+      \field{sortinit}{F}
+      \field{sortinithash}{c6a7d9913bbd7b20ea954441c0460b78}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Structural Health Monitoring}
+      \field{number}{1}
+      \field{title}{Vibration-based damage identification methods: a review and comparative study}
+      \field{volume}{10}
+      \field{year}{2011}
+      \field{pages}{83\bibrangedash 111}
+      \range{pages}{29}
+    \endentry
+    \entry{farrar2007introduction}{article}{}
+      \name{author}{2}{}{%
+        {{hash=948b3ffeaec1fde6607c5b341da38deb}{%
+           family={Farrar},
+           family_i={F\bibinitperiod},
+           given={Charles\bibnamedelima R},
+           given_i={C\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=429eef03aaa7c54050f9d6db9016d3a9}{%
+           family={Worden},
+           family_i={W\bibinitperiod},
+           given={Keith},
+           given_i={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {The Royal Society}%
+      }
+      \strng{namehash}{8910f8950582b88f7f03cdd37c3f85af}
+      \strng{fullhash}{8910f8950582b88f7f03cdd37c3f85af}
+      \field{sortinit}{F}
+      \field{sortinithash}{c6a7d9913bbd7b20ea954441c0460b78}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Philosophical Transactions of the Royal Society of London A: Mathematical, Physical and Engineering Sciences}
+      \field{number}{1851}
+      \field{title}{An introduction to structural health monitoring}
+      \field{volume}{365}
+      \field{year}{2007}
+      \field{pages}{303\bibrangedash 315}
+      \range{pages}{13}
+    \endentry
+    \entry{fassois2007time}{article}{}
+      \name{author}{2}{}{%
+        {{hash=49c2940b8742d539e331e70a528d7f79}{%
+           family={Fassois},
+           family_i={F\bibinitperiod},
+           given={Spilios\bibnamedelima D},
+           given_i={S\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=19d40ebdd47f009441b55b10e456fc71}{%
+           family={Sakellariou},
+           family_i={S\bibinitperiod},
+           given={John\bibnamedelima S},
+           given_i={J\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {The Royal Society}%
+      }
+      \strng{namehash}{fed17a9e1c2c14ea892479c3e29445a4}
+      \strng{fullhash}{fed17a9e1c2c14ea892479c3e29445a4}
+      \field{sortinit}{F}
+      \field{sortinithash}{c6a7d9913bbd7b20ea954441c0460b78}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Philosophical Transactions of the Royal Society of London A: Mathematical, Physical and Engineering Sciences}
+      \field{number}{1851}
+      \field{title}{Time-series methods for fault detection and identification in vibrating structures}
+      \field{volume}{365}
+      \field{year}{2007}
+      \field{pages}{411\bibrangedash 448}
+      \range{pages}{38}
+    \endentry
+    \entry{friswell2007damage}{article}{}
+      \name{author}{1}{}{%
+        {{hash=d3c0cfce8575fac8eb0400a4501fcffe}{%
+           family={Friswell},
+           family_i={F\bibinitperiod},
+           given={Michael\bibnamedelima I},
+           given_i={M\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {The Royal Society}%
+      }
+      \strng{namehash}{d3c0cfce8575fac8eb0400a4501fcffe}
+      \strng{fullhash}{d3c0cfce8575fac8eb0400a4501fcffe}
+      \field{sortinit}{F}
+      \field{sortinithash}{c6a7d9913bbd7b20ea954441c0460b78}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Philosophical Transactions of the Royal Society of London A: Mathematical, Physical and Engineering Sciences}
+      \field{number}{1851}
+      \field{title}{Damage identification using inverse methods}
+      \field{volume}{365}
+      \field{year}{2007}
+      \field{pages}{393\bibrangedash 410}
+      \range{pages}{18}
+    \endentry
+    \entry{fritzen1998damage}{article}{}
+      \name{author}{3}{}{%
+        {{hash=06975c83de7569a06b76fb74aa84a3f1}{%
+           family={Fritzen},
+           family_i={F\bibinitperiod},
+           given={C-P},
+           given_i={C\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=ddb07a264402decc786cfe2538cd9e75}{%
+           family={Jennewein},
+           family_i={J\bibinitperiod},
+           given={D},
+           given_i={D\bibinitperiod}}}%
+        {{hash=0940c8f68fdbc3e3283e8642fe2b4815}{%
+           family={Kiefer},
+           family_i={K\bibinitperiod},
+           given={Th},
+           given_i={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{6cc962aa90bfe20fe56e042ac9efa743}
+      \strng{fullhash}{6cc962aa90bfe20fe56e042ac9efa743}
+      \field{sortinit}{F}
+      \field{sortinithash}{c6a7d9913bbd7b20ea954441c0460b78}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mechanical systems and signal processing}
+      \field{number}{1}
+      \field{title}{Damage detection based on model updating methods}
+      \field{volume}{12}
+      \field{year}{1998}
+      \field{pages}{163\bibrangedash 186}
+      \range{pages}{24}
+    \endentry
+    \entry{limongelli2016towards}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=5e70f50c9e1615a65a1967ebd16ea175}{%
+           family={Limongelli},
+           family_i={L\bibinitperiod},
+           given={M},
+           given_i={M\bibinitperiod}}}%
+        {{hash=fb1a8c5a2dd1103bd7045814f0196bf8}{%
+           family={Chatzi},
+           family_i={C\bibinitperiod},
+           given={E},
+           given_i={E\bibinitperiod}}}%
+        {{hash=b7f9f97685c70b44b520358583041e8e}{%
+           family={D\"{o}hler},
+           family_i={D\bibinitperiod},
+           given={M},
+           given_i={M\bibinitperiod}}}%
+        {{hash=acff6192ce342a0549789b5f42465355}{%
+           family={Reynders},
+           family_i={R\bibinitperiod},
+           given={Edwin},
+           given_i={E\bibinitperiod}}}%
+        {{hash=2c53fbbc94051ed00df4da32905c387a}{%
+           family={Lombaert},
+           family_i={L\bibinitperiod},
+           given={Geert},
+           given_i={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{179752e80cad0ea132e57cce4e7a97a4}
+      \strng{fullhash}{c266d8b512b7e266db2f91afa235da47}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 8th European Workshop On Structural Health Monitoring (EWSHM 2016)}
+      \field{title}{Towards extraction of vibration-based damage indicators}
+      \field{year}{2016}
+    \endentry
+    \entry{peeters2000system}{article}{}
+      \name{author}{1}{}{%
+        {{hash=613d35f40085a6de4b0074a11e021e8c}{%
+           family={Peeters},
+           family_i={P\bibinitperiod},
+           given={Bart},
+           given_i={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{613d35f40085a6de4b0074a11e021e8c}
+      \strng{fullhash}{613d35f40085a6de4b0074a11e021e8c}
+      \field{sortinit}{P}
+      \field{sortinithash}{c0a4896d0e424f9ca4d7f14f2b3428e7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Department of Civil Engineering, Katholieke Universiteit Leuven, Leuven}
+      \field{title}{System identification and damage detection in civil engineering}
+      \field{year}{2000}
+      \field{pages}{233}
+      \range{pages}{1}
+    \endentry
+    \entry{simoen2015dealing}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b429a110ba507b3d2676c0e92f23d066}{%
+           family={Simoen},
+           family_i={S\bibinitperiod},
+           given={Ellen},
+           given_i={E\bibinitperiod}}}%
+        {{hash=a6fb977da6bd84104f8bf50b541ce45b}{%
+           family={De\bibnamedelima Roeck},
+           family_i={D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           given={Guido},
+           given_i={G\bibinitperiod}}}%
+        {{hash=2c53fbbc94051ed00df4da32905c387a}{%
+           family={Lombaert},
+           family_i={L\bibinitperiod},
+           given={Geert},
+           given_i={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{322db35ba8f45443eab5c461d26de70f}
+      \strng{fullhash}{322db35ba8f45443eab5c461d26de70f}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mechanical Systems and Signal Processing}
+      \field{title}{Dealing with uncertainty in model updating for damage assessment: A review}
+      \field{volume}{56}
+      \field{year}{2015}
+      \field{pages}{123\bibrangedash 149}
+      \range{pages}{27}
+    \endentry
+    \entry{staszewski2007time}{article}{}
+      \name{author}{2}{}{%
+        {{hash=69b9faa29d317d03dd35f31d4feae6f2}{%
+           family={Staszewski},
+           family_i={S\bibinitperiod},
+           given={Wies{\l{}}aw\bibnamedelima J},
+           given_i={W\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=3e6335c8e8f3a9ecb574d7d9c2e35044}{%
+           family={Robertson},
+           family_i={R\bibinitperiod},
+           given={Amy\bibnamedelima N},
+           given_i={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {The Royal Society}%
+      }
+      \strng{namehash}{19bb65320f4eb5044f2da3009ce04239}
+      \strng{fullhash}{19bb65320f4eb5044f2da3009ce04239}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Philosophical Transactions of the Royal Society of London A: Mathematical, Physical and Engineering Sciences}
+      \field{number}{1851}
+      \field{title}{Time--frequency and time--scale analyses for structural health monitoring}
+      \field{volume}{365}
+      \field{year}{2007}
+      \field{pages}{449\bibrangedash 477}
+      \range{pages}{29}
+    \endentry
+    \entry{teughels2005damage}{article}{}
+      \name{author}{2}{}{%
+        {{hash=a23610e0ffbf5b91af7face3faa353d4}{%
+           family={Teughels},
+           family_i={T\bibinitperiod},
+           given={Anne},
+           given_i={A\bibinitperiod}}}%
+        {{hash=a6fb977da6bd84104f8bf50b541ce45b}{%
+           family={De\bibnamedelima Roeck},
+           family_i={D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           given={Guido},
+           given_i={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{400d064863b40a685a84eae8ae8dc1f8}
+      \strng{fullhash}{400d064863b40a685a84eae8ae8dc1f8}
+      \field{sortinit}{T}
+      \field{sortinithash}{423d138a005a533b47e6475e39378bf2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Revue europ\'{e}enne de g\'{e}nie civil}
+      \field{number}{1-2}
+      \field{title}{Damage detection and parameter identification by finite element model updating}
+      \field{volume}{9}
+      \field{year}{2005}
+      \field{pages}{109\bibrangedash 158}
+      \range{pages}{50}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
