@@ -33,8 +33,8 @@ def matrix_C(M,K,a,b):#make the C matrix
 	return a*M + b*K
 
 
-def write_F(forces):
-	f = open("F.txt",'w')
+def write_F(fichier, forces):
+	f = open(fichier,'w')
 	for m in forces:
 		p = 0#power
 		if (m > 0):
@@ -59,8 +59,8 @@ def write_F(forces):
 
 
 
-def write_Y(measures):
-	f = open("Y.txt",'w')
+def write_Y(fichier, measures):
+	f = open(fichier,'w')
 	for acc in measures:
 		for m in acc:
 			p = 0#power
@@ -88,7 +88,7 @@ def write_Y(measures):
 
 
 
-def simulation(pos,mass,stiffness,f, col):
+def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc):
 #pos: list of the positions of masses
 #mass: list of mass
 #stiffness: list of stiffness
@@ -222,9 +222,9 @@ def simulation(pos,mass,stiffness,f, col):
 	"""
 	print(measures[N-1])
 	
-	write_F(f)
+	write_F(fichier_forces, f)
 	print("F.txt created")
-	write_Y(measures)
+	write_Y(fichier_acc, measures)
 	print("Y.txt created")
 	
 	return acc, measures
@@ -258,7 +258,7 @@ def white_noise(n):
 ################################################
 
 
-
+"""
 N = 4
 
 pos = [ k for k in range(N) ]
@@ -268,7 +268,7 @@ stiffness = [ 100 for k in range(N) ]
 forces = white_noise(200)
 
 acc, measures = simulation(pos,mass,stiffness,forces,1)
-
+"""
 
 ##### write #######
 

@@ -36,13 +36,14 @@ def frf_multiple_capter_simu(inFile=None):
     mass = [ 100 for k in range(CAPTVALUE) ]
     stiffness = [ 100 for k in range(CAPTVALUE) ]
     N = CAPTVALUE
-    forces = simu.white_noise(100000)
+    forces = simu.white_noise(10000)
     #simu: a activer seulement si on veut de nouvelles donnees
-    measures = simu.simulation(pos,mass,stiffness,forces,1)
+    #measures = simu.simulation(pos,mass,stiffness,forces,1,"F_test.txt","Y_test.txt")
     #donnes de la simu
-    forces = parser.get("F.txt")[:]
-    measures = parser.get("Y.txt")[:]
+    forces = parser.get("F_test.txt")[:]
+    measures = parser.get("Y_test.txt")[:]
     #
+    
     res = []
     for i in range(CAPTVALUE):
         res.append(frf.frf(forces,tool.get_lines(measures,i)))
@@ -51,6 +52,39 @@ def frf_multiple_capter_simu(inFile=None):
     else:
         parser.writeValues(inFile,res)
         print("Values written in " + inFile)
+        
+        
+def frf_multiple_capter_simu_ref(inFile=None):
+    pos = [ k for k in range(CAPTVALUE) ]
+    mass = [ 100 for k in range(CAPTVALUE) ]
+    stiffness = [ 100 for k in range(CAPTVALUE) ]
+    stiffness[1] = 50
+    N = CAPTVALUE
+    #simu: a activer seulement si on veut de nouvelles donnees
+    #forces = simu.white_noise(100000)
+    #measures = simu.simulation(pos,mass,stiffness,forces,1,"F_ref.txt","Y_ref.txt")
+    
+    #donnes de la simu
+    forces = parser.get("F_ref.txt")[:]
+    measures = parser.get("Y_ref.txt")[:]
+    #
+    
+    for i in range(10):
+    	m = measures[i*10000:(i+1)*10000-1]
+    	res = []
+    	for j in range(CAPTVALUE):
+    	    res.append(frf.frf(forces,tool.get_lines(measures,j)))
+    	#if inFile == None:
+    	#    return res
+    	#else:
+     	parser.writeValues(inFile + str(i) + ".txt",res)
+    	print("Values written in " + inFile + str(i) + ".txt")
+
+
+
+
+
+
 
 
 def printPerCapter(res,time):
@@ -70,5 +104,9 @@ def printPerFreq(res,time):
         plt.plot(numpy.absolute(tool.get_lines(res,i)))
         plt.pause(delta)
         plt.clf()
-
-printPerCapter(frf_multiple_capter_simu(),10)
+       
+        
+        
+frf_multiple_capter_simu_ref("FRF_ref_")        
+frf_multiple_capter_simu("FRF_damage.txt")
+#printPerCapter(frf_multiple_capter_simu(),10)
