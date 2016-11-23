@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 import parser
 import sys
+import json
 
 #d = parser.get(sys.argv[1])
 
@@ -59,3 +60,58 @@ plt.plot(r2)
 plt.plot(i2)
 plt.show()
 """
+
+#entree: liste de valeur de la FRF pour une frequence pour chaque capteur
+#sortie: liste des erreurs au carre (une erreur par capteur)
+def interpolation_error(complex_list):
+	n = len(complex_list)
+	x_list = [k for k in range(n)]
+	error_list = []
+	for i in range(n):
+		x = []
+		y = []
+		for j in range(n):
+			if (j != i):
+				x += [x_list[j]]
+				y += [complex_list[j]]
+				f = interp1d(x, y, kind = 'cubic')
+				error_list += [ (np.absolute(complex_list[i] - f(i)))**2 ]
+	return error_list
+
+#entree: liste de N listes de m elements ou
+# N = nb de frequences
+# m = nb de capteurs
+#sortie: liste contenant l'erreur globale pour chaque capteur
+def global_error(frf_list):
+	nb_sensor = len(frf_list[0])
+	error = []
+	for i in range(nb_sensor):
+		e = 0
+		for frf in frf_list:
+			interpol = interpolation_error(frf)
+			e += interpol[i]
+		error += [math.sqrt(e)]
+	return error
+
+
+
+def create_ref(frf_ref,nb_frf):
+	frf_list = []
+	for i in range(nb_frf):
+		frf_list += [parser.get2(frf_ref + str(i) + ".txt")]
+	
+
+
+create_ref("FRF_ref_",10)
+
+
+
+
+
+
+
+
+
+
+
+
