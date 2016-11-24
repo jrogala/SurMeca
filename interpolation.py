@@ -68,6 +68,7 @@ def interpolation_error(complex_list):
 	n = len(complex_list)
 	x_list = [k for k in range(n)]
 	error_list = []
+	exc = 0
 	for i in range(n):
 		x = []
 		y = []
@@ -79,7 +80,9 @@ def interpolation_error(complex_list):
 			f = interp1d(x, y, kind = 'cubic')
 			error_list += [ np.absolute(complex_list[i] - f(i)) ]
 		except:
+			exc += 1
 			error_list += [ 0 ]
+	print(exc)
 	return error_list
 
 #entree: liste de N listes de m elements ou
