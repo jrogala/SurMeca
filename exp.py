@@ -21,8 +21,8 @@ def printRef(ref,inf,sup):
 
 def experience():
 	frf_list_ref = main.frf_multiple_capter_simu_ref()
-	frf_undamaged = main.frf_multiple_capter_simu_undamaged()
-	frf_damaged = main.frf_multiple_capter_simu_damaged()
+	frf_undamaged = numpy.transpose(main.frf_multiple_capter_simu_undamaged())
+	frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged())
 
 
 	print("*************************\n Average frf calcul \n *************************")
@@ -37,12 +37,24 @@ def experience():
 	
 	ref, inf, sup = interpolation.create_ref( frf_list_ref )
 	
-	printRef(ref,inf,sup)
+	#printRef(ref,inf,sup)
+	
+	error_ref = interpolation.global_error(ref)
+	error_undamaged = interpolation.global_error(frf_undamaged)
+	error_damaged = interpolation.global_error(frf_damaged)
 	
 	
+	undamaged = [0,0,0,0]
+	damaged = [0,0,0,0]
+	for i in range(nb_sensor):
+		undamaged[i] = error_undamaged[i] - error_ref[i]
+		damaged[i] = error_damaged[i] - error_ref[i]
 	
-	
-
+	print("*************************\n Errors \n *************************")
+	print("Undamaged state: ")
+	print(undamaged)
+	print("Damaged state: ")
+	print(damaged)
 
 
 
