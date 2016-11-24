@@ -23,7 +23,7 @@ y2 = [1.+9.j, 1.+2.j, 1.+3.j, 2] #donnees
 
 
 #t = f3(x)
-
+"""
 for j in x:
 	if(j>1 and j<len(x)) :  
 		print "Suppression du capteur : " + str(j)
@@ -35,7 +35,7 @@ for j in x:
 		for i in x :
 			print "Erreur d'interpolation du capteur " + str(i) + " : " + str(np.absolute(y[i-1] - f3(i)))
 			print "\n"
-
+"""
 """
 print "Pour x = 4, lineaire y = " + str(f(4)) + ", quadratique y = " + str(f2(4)) + " \net cubique = " + str(f3(4))
 
@@ -95,14 +95,45 @@ def global_error(frf_list):
 
 
 
-def create_ref(frf_ref,nb_frf):
-	frf_list = []
-	for i in range(nb_frf):
-		frf_list += [parser.get2(frf_ref + str(i) + ".txt")]
+#entree: liste de liste de valeur de la FRF pour chaque capteur
+#sortie: FRF moyenne
+def create_ref(frf_list_ref):
+	nb_frf = len(frf_list_ref)
+	nb_sensor = len(frf_list_ref[0])
+	nb_freq = len(frf_list_ref[0][0])
+
+	frf_average = [ [0,0,0,0] for k in range(nb_freq) ]
 	
-
-
-create_ref("FRF_ref_",10)
+	for i in range(nb_frf):
+		for j in range(nb_sensor):
+			for k in range(nb_freq):
+				frf_average[k][j] += frf_list_ref[i][j][k]
+	
+	for x in frf_average:
+		for y in x:
+			y /= 10
+	
+	std_dev = [ [0,0,0,0] for k in range(nb_freq) ]
+	for i in range(nb_frf):
+		for j in range(nb_sensor):
+			for k in range(nb_freq):
+				std_dev[k][j] += (frf_list_ref[i][j][k] - frf_average[k][j])**2
+				
+	for x in std_dev:
+		for y in x:
+			y /= 10
+	print(std_dev)
+	
+	frf_inf = [ [0,0,0,0] for k in range(nb_freq) ]
+	frf_sup = [ [0,0,0,0] for k in range(nb_freq) ]
+	
+	for j in range(nb_sensor):
+			for k in range(nb_freq):
+				frf_inf[k][j] = frf_average[k][j] - std_dev[k][j]
+				frf_sup[k][j] = frf_average[k][j] + std_dev[k][j]
+	
+	return frf_average, frf_inf, frf_sup
+	
 
 
 

@@ -157,8 +157,8 @@ def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc):
 	for i in eigenvalues:
 		frq += [abs(i)/(2*math.pi)]
 	
-	print( "Frequences du systeme:" )
-	print( frq )
+	#print( "Frequences du systeme:" )
+	#print( frq )
 	#print( "Frequences MK:" )
 	#print( frqMK )
 	
@@ -174,13 +174,13 @@ def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc):
 	
 	absorption =  - eigenvalues.real / np.abs(eigenvalues)
 	
-	print "Coefficient d'amortissement: "
-	print absorption
+	#print "Coefficient d'amortissement: "
+	#print absorption
 	
 	delta_t = 1/f_sampl
 	
-	print "Frequence d'echantillonage (Hz): "
-	print( f_sampl )
+	#print "Frequence d'echantillonage (Hz): "
+	#print( f_sampl )
 	
 #simulation
 	
@@ -220,7 +220,7 @@ def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc):
 	
 	print( np.abs( eig_log/ delta_t ) / (2*math.pi) )
 	"""
-	print(measures[N-1])
+	#print(measures[N-1])
 	
 	write_F(fichier_forces, f)
 	print("F.txt created")
