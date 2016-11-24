@@ -6,7 +6,7 @@ import parser
 import simu_one_sensor as simu
 
 
-CAPTVALUE = 4
+CAPTVALUE = 10
 
 def fibo(n):
     if n <= 1: return 1
@@ -55,12 +55,12 @@ def frf_multiple_capter_simu_undamaged(inFile=None):
         print("Values written in " + inFile)
 
 
-def frf_multiple_capter_simu_damaged(inFile=None):
+def frf_multiple_capter_simu_damaged(damage=5,inFile=None):
     print("*************************\n Simulation for damaged state \n *************************")
     pos = [ k for k in range(CAPTVALUE) ]
     mass = [ 100 for k in range(CAPTVALUE) ]
     stiffness = [ 100 for k in range(CAPTVALUE) ]
-    stiffness[1] = 50
+    stiffness[damage] = 10
     N = CAPTVALUE
     #simu: a activer seulement si on veut de nouvelles donnees
     forces = simu.white_noise(10000)

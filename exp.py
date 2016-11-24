@@ -44,8 +44,8 @@ def experience():
 	error_damaged = interpolation.global_error(frf_damaged)
 	
 	
-	undamaged = [0,0,0,0]
-	damaged = [0,0,0,0]
+	undamaged = [0 for i in range(nb_sensor) ]
+	damaged = [0 for i in range(nb_sensor) ]
 	for i in range(nb_sensor):
 		undamaged[i] = error_undamaged[i] - error_ref[i]
 		damaged[i] = error_damaged[i] - error_ref[i]

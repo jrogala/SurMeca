@@ -80,9 +80,9 @@ def interpolation_error(complex_list):
 			f = interp1d(x, y, kind = 'cubic')
 			error_list += [ np.absolute(complex_list[i] - f(i)) ]
 		except:
-			exc += 1
+			#exc += 1
 			error_list += [ 0 ]
-	print(exc)
+	#print(exc)
 	return error_list
 
 #entree: liste de N listes de m elements ou
@@ -91,7 +91,7 @@ def interpolation_error(complex_list):
 #sortie: liste contenant l'erreur globale pour chaque capteur
 def global_error(frf_list):
 	nb_sensor = len(frf_list[0])
-	error = [ 0,0,0,0 ]
+	error = [0 for i in range(nb_sensor) ]
 	for frf in frf_list:
 		interpol = interpolation_error(frf)
 		for i in range(nb_sensor):
@@ -109,7 +109,7 @@ def create_ref(frf_list_ref):
 	nb_sensor = len(frf_list_ref[0])
 	nb_freq = len(frf_list_ref[0][0])
 
-	frf_average = [ [0,0,0,0] for k in range(nb_freq) ]
+	frf_average = [ [0 for i in range(nb_sensor) ] for k in range(nb_freq) ]
 	
 	for i in range(nb_frf):
 		for j in range(nb_sensor):
@@ -120,7 +120,7 @@ def create_ref(frf_list_ref):
 		for y in x:
 			y /= 10
 	
-	std_dev = [ [0,0,0,0] for k in range(nb_freq) ]
+	std_dev = [ [0 for i in range(nb_sensor) ] for k in range(nb_freq) ]
 	for i in range(nb_frf):
 		for j in range(nb_sensor):
 			for k in range(nb_freq):
@@ -130,8 +130,8 @@ def create_ref(frf_list_ref):
 		for y in x:
 			y /= 10
 	
-	frf_inf = [ [0,0,0,0] for k in range(nb_freq) ]
-	frf_sup = [ [0,0,0,0] for k in range(nb_freq) ]
+	frf_inf = [ [0 for i in range(nb_sensor) ] for k in range(nb_freq) ]
+	frf_sup = [ [0 for i in range(nb_sensor) ] for k in range(nb_freq) ]
 	
 	for j in range(nb_sensor):
 			for k in range(nb_freq):
