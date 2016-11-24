@@ -51,10 +51,14 @@ def experience():
 		damaged[i] = error_damaged[i] - error_ref[i]
 	
 	print("*************************\n Errors \n *************************")
+	print("Error ref: ")
+	print(error_ref)
 	print("Undamaged state: ")
 	print(undamaged)
 	print("Damaged state: ")
 	print(damaged)
+	
+	printRef(ref,inf,sup)
 
 
 

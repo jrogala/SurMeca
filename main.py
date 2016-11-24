@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import numpy
 import tool
 import parser
-import simu_one_sensor as simu
-
+#import simu_one_sensor as simu
+import simu
 
 CAPTVALUE = 10
 
@@ -38,7 +38,7 @@ def frf_multiple_capter_simu_undamaged(inFile=None):
     stiffness = [ 100 for k in range(CAPTVALUE) ]
     N = CAPTVALUE
     #simu: a activer seulement si on veut de nouvelles donnees
-    forces = simu.white_noise(10000)
+    forces = simu.white_noise(10000,CAPTVALUE)
     measures = simu.simulation(pos,mass,stiffness,forces,1,"F_undamaged.txt","Y_undamaged.txt")
     #donnes de la simu
     forces = parser.get("F_undamaged.txt")[:]
@@ -47,8 +47,8 @@ def frf_multiple_capter_simu_undamaged(inFile=None):
     
     res = []
     for i in range(CAPTVALUE):
-        res.append(frf.frf(forces,tool.get_lines(measures,i)))
-    if inFile == None:
+        res.append(frf.frf(tool.get_lines(forces,i),tool.get_lines(measures,i)))
+    if (inFile == None):
         return res
     else:
         parser.writeValues(inFile,res)
@@ -63,7 +63,7 @@ def frf_multiple_capter_simu_damaged(damage=5,inFile=None):
     stiffness[damage] = 10
     N = CAPTVALUE
     #simu: a activer seulement si on veut de nouvelles donnees
-    forces = simu.white_noise(10000)
+    forces = simu.white_noise(10000,CAPTVALUE)
     measures = simu.simulation(pos,mass,stiffness,forces,1,"F_damaged.txt","Y_damaged.txt")
     #donnes de la simu
     forces = parser.get("F_damaged.txt")[:]
@@ -72,7 +72,7 @@ def frf_multiple_capter_simu_damaged(damage=5,inFile=None):
     
     res = []
     for i in range(CAPTVALUE):
-        res.append(frf.frf(forces,tool.get_lines(measures,i)))
+        res.append(frf.frf(tool.get_lines(forces,i),tool.get_lines(measures,i)))
     if inFile == None:
         return res
     else:
@@ -87,7 +87,7 @@ def frf_multiple_capter_simu_ref(inFile=None):
     stiffness = [ 100 for k in range(CAPTVALUE) ]
     N = CAPTVALUE
     #simu: a activer seulement si on veut de nouvelles donnees
-    #forces = simu.white_noise(100000)
+    #forces = simu.white_noise(100000,CAPTVALUE)
     #measures = simu.simulation(pos,mass,stiffness,forces,1,"F_ref.txt","Y_ref.txt")
     
     #donnes de la simu
@@ -99,7 +99,7 @@ def frf_multiple_capter_simu_ref(inFile=None):
     	m = measures[i*10000:(i+1)*10000]
     	frf_sensor = [ [] for k in range(CAPTVALUE) ]
     	for j in range(CAPTVALUE):
-    	    frf_sensor[j] = (frf.frf(forces,tool.get_lines(m,j)))
+    	    frf_sensor[j] = (frf.frf(tool.get_lines(forces,j),tool.get_lines(m,j)))
     	res.append(frf_sensor)
     if inFile == None:
     	return res
