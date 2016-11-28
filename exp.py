@@ -10,19 +10,44 @@ def printRef(ref,inf,sup):
     delta = 1
     plt.ion()
     for i in range(n):
-    	if (i%100 == 0):
+    	if (i%50 == 0):
         	plt.plot(numpy.absolute(ref[i]))
         	plt.plot(numpy.absolute(sup[i]))
         	plt.plot(numpy.absolute(inf[i]))
         	plt.pause(delta)
         	plt.clf()
 
+def printAll(ref,inf,sup,undamaged, damaged):
+    n = len(ref)
+    delta = 1
+    plt.ion()
+    for i in range(n):
+    	if (i%50 == 0):
+        	plt.plot(numpy.absolute(ref[i]), label = "Reference")
+        	plt.plot(numpy.absolute(sup[i]))
+        	plt.plot(numpy.absolute(inf[i]))
+        	plt.plot(numpy.absolute(undamaged[i]), label = "Undamaged")
+        	plt.plot(numpy.absolute(damaged[i]), label = "Damaged")
+        	plt.pause(delta)
+        	plt.clf()
+
+
+
+def freq_sampl(fichier_sampl):
+	f = open(fichier_sampl,'r')
+	freq = float(f.readline())
+	return freq
 
 
 def experience():
 	frf_list_ref = main.frf_multiple_capter_simu_ref()
+	f_sampl_ref = freq_sampl("f_sampl_ref.txt")
+	
 	frf_undamaged = numpy.transpose(main.frf_multiple_capter_simu_undamaged())
+	f_sampl_undamaged = freq_sampl("f_sampl_undamaged.txt")
+	
 	frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged())
+	f_sampl_damaged = freq_sampl("f_sampl_damaged.txt")
 
 
 	print("*************************\n Average frf calcul \n *************************")
@@ -34,6 +59,11 @@ def experience():
 	print("Nombre de frf par capteur et par frequence:" + str(nb_frf))
 	print("Nombre de capteur:" + str(nb_sensor))
 	print("Nombre de frequences:" + str(nb_freq))
+	
+	print("Frequence d'echantillonage reference: " + str( f_sampl_ref ) )
+	print("Frequence d'echantillonage (undamaged): " + str( f_sampl_undamaged ) )
+	print("Frequence d'echantillonage (damaged): " + str( f_sampl_damaged ) )
+	
 	
 	ref, inf, sup = interpolation.create_ref( frf_list_ref )
 	
@@ -58,7 +88,7 @@ def experience():
 	print("Damaged state: ")
 	print(damaged)
 	
-	printRef(ref,inf,sup)
+	printAll(ref,inf,sup, frf_undamaged, frf_damaged)
 
 
 

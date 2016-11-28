@@ -88,7 +88,7 @@ def write_Y(fichier, measures):
 
 
 
-def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc):
+def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc, fichier_sampl, damaged = ""):
 #pos: list of the positions of masses
 #mass: list of mass
 #stiffness: list of stiffness
@@ -166,7 +166,21 @@ def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc):
 	
 	omega_max = max_frq*(2*math.pi)
 	
-	f_sampl = (2.5)*max_frq  #Shannon
+	if (damaged == ""):
+		f_sampl = (2.5)*max_frq  #Shannon
+	
+		f_write_sampl = open(fichier_sampl,'w')
+		f_write_sampl.write(str(f_sampl))
+		f_write_sampl.close()
+	else:
+		f_write_sampl = open(damaged,'r')
+		f_sampl = float( f_write_sampl.readline() )
+		f_write_sampl.close()
+		
+		f_write_sampl = open(fichier_sampl,'w')
+		f_write_sampl.write(str(f_sampl))
+		f_write_sampl.close()
+		
 	
 	lambda_max = eigenvalues[ frq.index( max(frq) ) ]
 	
@@ -227,7 +241,7 @@ def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc):
 	write_Y(fichier_acc, measures)
 	print("Y.txt created")
 	
-	return acc, measures
+	return acc, measures, f_sampl
 
 
 

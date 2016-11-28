@@ -29,9 +29,10 @@ def frf_multiple_capter_file(inFile=None):
     else:
         parser.writeValues(inFile,res)
         print("Values written in " + inFile)
+        
 
 
-def frf_multiple_capter_simu_undamaged(inFile=None):
+def frf_multiple_capter_simu_undamaged(inFile=None, fichier_sampl = "f_sampl_undamaged.txt"):
     print("*************************\n Simulation for undamaged state \n *************************")
     pos = [ k for k in range(CAPTVALUE) ]
     mass = [ 100 for k in range(CAPTVALUE) ]
@@ -39,7 +40,7 @@ def frf_multiple_capter_simu_undamaged(inFile=None):
     N = CAPTVALUE
     #simu: a activer seulement si on veut de nouvelles donnees
     forces = simu.white_noise(10000,CAPTVALUE)
-    measures = simu.simulation(pos,mass,stiffness,forces,1,"F_undamaged.txt","Y_undamaged.txt")
+    acc, measures, f_sampl = simu.simulation(pos,mass,stiffness,forces,1,"F_undamaged.txt","Y_undamaged.txt", fichier_sampl)
     #donnes de la simu
     forces = parser.get("F_undamaged.txt")[:]
     measures = parser.get("Y_undamaged.txt")[:]
@@ -53,9 +54,10 @@ def frf_multiple_capter_simu_undamaged(inFile=None):
     else:
         parser.writeValues(inFile,res)
         print("Values written in " + inFile)
+        return res
 
 
-def frf_multiple_capter_simu_damaged(damage=5,inFile=None):
+def frf_multiple_capter_simu_damaged(damage=5,inFile=None, fichier_sampl = "f_sampl_damaged.txt"):
     print("*************************\n Simulation for damaged state \n *************************")
     pos = [ k for k in range(CAPTVALUE) ]
     mass = [ 100 for k in range(CAPTVALUE) ]
@@ -64,7 +66,7 @@ def frf_multiple_capter_simu_damaged(damage=5,inFile=None):
     N = CAPTVALUE
     #simu: a activer seulement si on veut de nouvelles donnees
     forces = simu.white_noise(10000,CAPTVALUE)
-    measures = simu.simulation(pos,mass,stiffness,forces,1,"F_damaged.txt","Y_damaged.txt")
+    acc, measures, f_sampl = simu.simulation(pos,mass,stiffness,forces,1,"F_damaged.txt","Y_damaged.txt", fichier_sampl, damaged = "f_sampl_ref.txt")
     #donnes de la simu
     forces = parser.get("F_damaged.txt")[:]
     measures = parser.get("Y_damaged.txt")[:]
@@ -78,9 +80,10 @@ def frf_multiple_capter_simu_damaged(damage=5,inFile=None):
     else:
         parser.writeValues(inFile,res)
         print("Values written in " + inFile)
+        return res
         
         
-def frf_multiple_capter_simu_ref(inFile=None):
+def frf_multiple_capter_simu_ref(inFile=None, fichier_sampl = "f_sampl_ref.txt"):
     print("*************************\n Simulation for reference state \n *************************")
     pos = [ k for k in range(CAPTVALUE) ]
     mass = [ 100 for k in range(CAPTVALUE) ]
@@ -88,7 +91,7 @@ def frf_multiple_capter_simu_ref(inFile=None):
     N = CAPTVALUE
     #simu: a activer seulement si on veut de nouvelles donnees
     #forces = simu.white_noise(100000,CAPTVALUE)
-    #measures = simu.simulation(pos,mass,stiffness,forces,1,"F_ref.txt","Y_ref.txt")
+    #acc, measures, f_sampl = simu.simulation(pos,mass,stiffness,forces,1,"F_ref.txt","Y_ref.txt", fichier_sampl)
     
     #donnes de la simu
     forces = parser.get("F_ref.txt")[:]
@@ -106,6 +109,7 @@ def frf_multiple_capter_simu_ref(inFile=None):
     else:
         parser.writeValues(inFile + str(i) + ".txt",res)
     	print("Values written in " + inFile + str(i) + ".txt")
+    	return res
 
 
 
