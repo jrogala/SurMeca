@@ -7,7 +7,7 @@ import numpy
 
 def printRef(ref,inf,sup):
     n = len(ref)
-    delta = 1
+    delta = 3
     plt.ion()
     for i in range(n):
     	if (i%50 == 0):
@@ -19,7 +19,7 @@ def printRef(ref,inf,sup):
 
 def printAll(ref,inf,sup,undamaged, damaged):
     n = len(ref)
-    delta = 1
+    delta = 3
     plt.ion()
     for i in range(n):
     	if (i%50 == 0):

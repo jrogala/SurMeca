@@ -215,6 +215,7 @@ def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc, fichier_s
 	"""
 	
 	acc = [ [0 for k in range(2*n) ] ]
+	
 	measures = []
 	
 	for i in range(N):
@@ -260,7 +261,6 @@ def white_noise(n,nb_sensor):
 	for i in range(n):
 		noise += [ norm.rvs(size=nb_sensor, loc = mean, scale = standard_deviation) ]
 	return noise
-
 
 
 #print( norm.rvs(loc = mean, scale = standard_deviation, size = 5) )

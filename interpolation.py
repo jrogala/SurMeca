@@ -114,11 +114,11 @@ def create_ref(frf_list_ref):
 	for i in range(nb_frf):
 		for j in range(nb_sensor):
 			for k in range(nb_freq):
-				frf_average[k][j] += frf_list_ref[i][j][k]
+				frf_average[k][j] = frf_average[k][j] + frf_list_ref[i][j][k]
 	
-	for x in frf_average:
-		for y in x:
-			y /= 10
+	for i in range(nb_freq):
+		for j in range(nb_sensor):
+			frf_average[i][j] =  frf_average[i][j] / nb_frf
 	
 	std_dev = [ [0 for i in range(nb_sensor) ] for k in range(nb_freq) ]
 	for i in range(nb_frf):
@@ -126,9 +126,9 @@ def create_ref(frf_list_ref):
 			for k in range(nb_freq):
 				std_dev[k][j] += (frf_list_ref[i][j][k] - frf_average[k][j])**2
 				
-	for x in std_dev:
-		for y in x:
-			y /= 10
+	for i in range(nb_freq):
+		for j in range(nb_sensor):
+			std_dev[i][j] =  std_dev[i][j] / nb_frf
 	
 	frf_inf = [ [0 for i in range(nb_sensor) ] for k in range(nb_freq) ]
 	frf_sup = [ [0 for i in range(nb_sensor) ] for k in range(nb_freq) ]

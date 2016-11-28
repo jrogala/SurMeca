@@ -94,12 +94,17 @@ def frf_multiple_capter_simu_ref(inFile=None, fichier_sampl = "f_sampl_ref.txt")
     #acc, measures, f_sampl = simu.simulation(pos,mass,stiffness,forces,1,"F_ref.txt","Y_ref.txt", fichier_sampl)
     
     #donnes de la simu
-    forces = parser.get("F_ref.txt")[:]
-    measures = parser.get("Y_ref.txt")[:]
+    #forces = parser.get("F_ref.txt")[:]
+    #measures = parser.get("Y_ref.txt")[:]
     #
     res = []
     for i in range(10):
-    	m = measures[i*10000:(i+1)*10000]
+    	#m = measures[i*10000:(i+1)*10000]
+    	#simu: a activer seulement si on veut de nouvelles donnees
+    	forces = simu.white_noise(10000,CAPTVALUE)
+    	acc, m, f_sampl = simu.simulation(pos,mass,stiffness,forces,1,"F_ref.txt","Y_ref.txt", fichier_sampl)
+    	
+    	
     	frf_sensor = [ [] for k in range(CAPTVALUE) ]
     	for j in range(CAPTVALUE):
     	    frf_sensor[j] = (frf.frf(tool.get_lines(forces,j),tool.get_lines(m,j)))
