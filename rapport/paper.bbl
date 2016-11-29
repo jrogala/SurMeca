@@ -44,6 +44,24 @@
       \field{pages}{589\bibrangedash 622}
       \range{pages}{34}
     \endentry
+    \entry{cauberghe2004applied}{article}{}
+      \name{author}{1}{}{%
+        {{hash=dba130b25ededc6c6a22d86b5c1a3e90}{%
+           family={Cauberghe},
+           family_i={C\bibinitperiod},
+           given={Bart},
+           given_i={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{dba130b25ededc6c6a22d86b5c1a3e90}
+      \strng{fullhash}{dba130b25ededc6c6a22d86b5c1a3e90}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Praca doktorska, VUB, Brussel}
+      \field{title}{Applied frequency-domain system identification in the field of experimental and operational modal analysis}
+      \field{year}{2004}
+    \endentry
     \entry{dilena2015damage}{article}{}
       \name{author}{3}{}{%
         {{hash=fe0b0d0e15f6ed3acefdd5b1e28619f5}{%

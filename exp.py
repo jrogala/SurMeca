@@ -22,12 +22,15 @@ def printAll(ref,inf,sup,undamaged, damaged):
     delta = 3
     plt.ion()
     for i in range(n):
-    	if (i%50 == 0):
+    	if ((i%20 == 0) and (i>300)):
         	plt.plot(numpy.absolute(ref[i]), label = "Reference")
         	plt.plot(numpy.absolute(sup[i]))
         	plt.plot(numpy.absolute(inf[i]))
         	plt.plot(numpy.absolute(undamaged[i]), label = "Undamaged")
         	plt.plot(numpy.absolute(damaged[i]), label = "Damaged")
+        	plt.xlabel('Sensors')
+        	plt.ylabel('FRF')
+        	plt.legend()
         	plt.pause(delta)
         	plt.clf()
 

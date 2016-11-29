@@ -1,19 +1,19 @@
 [0] Config.pm:340> INFO - This is Biber 2.4
-[1] Config.pm:343> INFO - Logfile is 'paper.blg'
-[70] biber:287> INFO - === mer. nov. 16, 2016, 18:57:03
-[204] Biber.pm:348> INFO - Reading 'paper.bcf'
-[427] Biber.pm:739> INFO - Using all citekeys in bib section 0
-[435] Biber.pm:3151> INFO - Processing section 0
-[484] Biber.pm:3308> INFO - Looking for bibtex format file 'biblio.bib' for section 0
-[515] bibtex.pm:1113> INFO - Decoding LaTeX character macros into UTF-8
-[543] bibtex.pm:974> INFO - Found BibTeX data source 'biblio.bib'
-[924] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[924] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[924] Biber.pm:3028> INFO - Sorting list 'nty/global' of type 'entry' with scheme 'nty' and locale 'en-US'
-[924] Biber.pm:3032> INFO - No sort tailoring available for locale 'en-US'
-[960] bbl.pm:519> INFO - Writing 'paper.bbl' with encoding 'ascii'
-[1049] Utils.pm:147> WARN - The entry 'limongelli2016towards' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
-[1086] Utils.pm:147> WARN - The entry 'staszewski2007time' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
-[1099] Utils.pm:147> WARN - The entry 'teughels2005damage' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
-[1106] bbl.pm:615> INFO - Output to paper.bbl
-[1106] Biber.pm:109> INFO - WARNINGS: 3
+[0] Config.pm:343> INFO - Logfile is 'paper.blg'
+[108] biber:287> INFO - === mar. nov. 29, 2016, 19:13:24
+[290] Biber.pm:348> INFO - Reading 'paper.bcf'
+[502] Biber.pm:739> INFO - Using all citekeys in bib section 0
+[622] Biber.pm:3151> INFO - Processing section 0
+[904] Biber.pm:3308> INFO - Looking for bibtex format file 'biblio.bib' for section 0
+[958] bibtex.pm:1113> INFO - Decoding LaTeX character macros into UTF-8
+[990] bibtex.pm:974> INFO - Found BibTeX data source 'biblio.bib'
+[1435] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1436] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1436] Biber.pm:3028> INFO - Sorting list 'nty/global' of type 'entry' with scheme 'nty' and locale 'en-US'
+[1436] Biber.pm:3032> INFO - No sort tailoring available for locale 'en-US'
+[1481] bbl.pm:519> INFO - Writing 'paper.bbl' with encoding 'ascii'
+[1576] Utils.pm:147> WARN - The entry 'limongelli2016towards' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
+[1610] Utils.pm:147> WARN - The entry 'staszewski2007time' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
+[1623] Utils.pm:147> WARN - The entry 'teughels2005damage' has characters which cannot be encoded in 'ascii'. Recoding problematic characters into macros.
+[1629] bbl.pm:615> INFO - Output to paper.bbl
+[1629] Biber.pm:109> INFO - WARNINGS: 3

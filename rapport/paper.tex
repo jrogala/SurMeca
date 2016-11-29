@@ -35,7 +35,11 @@
 
 
 \begin{abstract}
-abstract
+%The surveillance of a structure, as a bridge, with a human presence is something we want automate.
+%A damage identification strategy  is referred as a structural health monitoring (SHM).
+%The SHM can be divided into four levels: detection, localization, quantification and prediction.
+%We present the existing methods for the detection and the localization of damage, then we detail one of them, namely the Frequency Response Function interpolating method.
+%We also analyse this method with a simulation of a spring–mass system.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -53,14 +57,14 @@ Damage, Localization, Vibration, Health monitoring
 The process of implementing a damage identification strategy for aerospace,
  civil and mechanical engineering infrastructure is referred as a structural health monitoring (SHM) \cite{farrar2007introduction}.
 
-In the most general terms, damage can be defined as changes in one system that negatively affect its current or future performance. 
-In addition, a damage can only be observed by comparing two different states of the system,
- one of which is supposed to represent the initial state, and often undamaged, state.
+In the most general terms, damage can be defined as changes in a system that negatively affect its current or future performance. 
+In general, a damage can be observed by comparing two different states of the system,
+ one of which is supposed to represent the initial often undamaged state.
 
 
 Almost all industries want to detect damage in their infrastructure as quickly as possible whether 
  for the potential life-safety or economic impact.
-Such detectetion requires these industries to perform some form of SHM.
+Such detection requires these industries to perform some form of SHM.
 
 
 Clearly, such damage identification has significant life-safety implications.
@@ -71,7 +75,7 @@ SHM may one day provide the technology that can be used to significantly minimiz
 Thus additional catastrophes could be avoided.
 
 
-Generally, the damage identification can be divided into four levels:
+Generally, the damage identification can be divided into four levels \cite{peeters2000system}:
 \begin{itemize}
 \item detection: Is the structure damaged or not?
 \item localization: Where is the damaged area located?
@@ -83,14 +87,13 @@ Generally, the damage identification can be divided into four levels:
 Traditional methods of damage detection based on visual inspections or experimental techniques such as radiography
  or ultrasound allow to obtain detailed information about a local damage state but requires to know area where it is located (and hope for easy access). 
 These techniques may be costly, taking a long time to be performed and impractical to detect damage in large urban areas.
- Furthermore, they may fail if damage is not visibly evident. This is why other methods were invented.
+ Furthermore, they may fail if damage is not visibly evident. This is why other global methods were developed that are automated
+ and based on sensor measurements.
 
-
-(! A changer ? !) ->
 
 
 The purpose of this work is the analysis of a particular data-driven damage localization method,
- namely the FRF interpolation method, and the development of a statistical extension of this method.
+ namely the FRF interpolation method \cite{dilena2015damage}, and the development of a statistical extension of this method.
 This paper is organized as follows. In section II we  present the existing methods (model-based and data driven methods), 
 then in section III we detail the different models of vibrating structures and finally, in section IV we talk about the localization using FRF interpolation method and, finally,  its results in section V.
 
@@ -99,14 +102,13 @@ then in section III we detail the different models of vibrating structures and f
 \section{State of the art}
 
 The use of methods based on recorded responses proved to perform as valuable alternatives. 
-The general idea for vibration-based damage identification is that the damage affects the physical properties (mass, damping, and stiffness) of the structure. 
-And this will cause detectable changes in modal properties (natural frequencies, modal damping, and mode shapes). 
+The general idea for vibration-based damage identification is that the damage affects the physical properties (mass, damping, and stiffness) of the structure, and this will cause detectable changes in modal properties (natural frequencies, modal damping, and mode shapes). 
 For instance, cracks cause reductions in stiffness. Therefore, by analyzing the physical properties of the structure a damage can be detected.
 \\
 
 Most of the different vibration based damage identification methods can be classified as data-driven or model-based.
- The model-based method assumes that a detailed numerical model of the structure is available for damage identification and, by vibration measurements, updates the model parameters.
- On another side, data-driven methods is based solely on the recorded response. This method is interesting for a real-time damage identification but unavailability of a numerical model often hinders the estimation of damage severity.
+ The model-based methods assume that a detailed numerical model of the structure is available for damage identification and, by vibration measurements, updates the model parameters.
+ On another side, data-driven methods are based solely on the recorded response. These methods are interesting for a real-time damage identification but unavailability of a numerical model often hinders the estimation of damage severity.
  A third group includes data-driven methods that use finite element (FE) information without model updating.
 
 \subsection{Model-based methods}  
@@ -116,17 +118,16 @@ In model-based methods, damage is identified through the updating of a finite el
  Different types of modal data can be used. For changes in structural stiffness, model updating can be performed based only on natural frequencies or eigenvalues which are known to change in this case.
  Detailed informations about model-based methods can be found in references  %rajouter celles en-dessous
 % C.-P. Fritzen, D. Jennewein, T. Kiefer, (1998). Damage detection based on model updating methods, Mechanical Systems and Signal Processing, 12(1): 163–186.
-\cite{fritzen1998damage}
+\cite{fritzen1998damage},
 % Teughels A. and G. De Roeck. (2005). Damage detection and parameter identification by finite element model updating. Archives of Computational Methods in Engineering, 12(2):123-164.
-\cite{teughels2005damage}
+\cite{teughels2005damage} and
 % Simoen E., De Roeck G., and Lombaert G. (2015). Dealing with uncertainty in model updating for damage assessment: a review. Mechanical Systems and Signal Processing, 56-57:123-149.
-\cite{simoen2015dealing}
+\cite{simoen2015dealing}.
 
-A REFORMULER EN DESSOUS
 
 \subsection{Data driven methods}
 
-Data driven method are inverse methods that use models based on experimental response data recorded on the structure instead of physical models
+Data driven methods are inverse methods that use models based on experimental response data recorded on the structure instead of physical models
 \cite{limongelli2016towards}.
  In these methods, the damage parameter $D$ is the variation of the damage feature $d$ between the inspection $I$ and the reference $R$ configurations: %Damage-sensitive features are extracted from data and their changes used to identify damage in the structures so the damage parameter D in these method is the variation of the damage feature f between the inspection I and the reference R configurations.
 % référence TOWARDS EXTRACTION OF VIBRATION-BASED DAMAGE INDICATORS
@@ -137,13 +138,14 @@ Data driven method are inverse methods that use models based on experimental res
 D=d_{I} - d_{R}
 \end{equation}
 
-Data-driven methods do not require a FE model  and may be applied with a limited number of available signals (both responses and excitations), making it an interesting method.
+Data-driven methods do not require a FE model  and may be applied with a limited number of available signals (both responses and excitations).
 To extract the damage features, different signal-processing tools can be used. Therefore, depending on the tool,  data-driven methods can be classified in Fourier-based methods, Time series method and Time-variant methods.
-A more detailed description of this methods can be found in references %rajouter celles en-dessous
+A more detailed description of these methods can be found in references %rajouter celles en-dessous
 % Fassois S.D. and Sakellariou J.S. (2007) Time-series methods for fault detection and identification in vibrating structures. Phil. Trans. R. Soc. A. 365, 411–448. doi:10.1098/rsta.2006.1929.
-\cite{fassois2007time}
+\cite{fassois2007time} and
 % Staszewski W. J.and Robertson A.N. (2007). Time–frequency and time–scale analyses for structural health monitoring. Phil. Trans. R. Soc. A. 365, 449–477. doi:10.1098/rsta.2006.1936.
 \cite{staszewski2007time}.
+The analyzed method in this paper belongs to this class.
 
 \subsection{Combined data-driven and model-based methods}
 
@@ -161,8 +163,7 @@ A third group of methods for damage localization and quantification lies between
 
 \subsection{Finite element model}
 
-The dynamic behaviour of a mechanical system consisting of $n$ masses connected
-through springs and dampers is described by following matrix differential equation:
+The dynamic behaviour of a mechanical system consisting of $n$ degrees of freedom is described by following matrix differential equation:
 \begin{equation}
 M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)
 \label{fondamental}
@@ -172,9 +173,7 @@ where $q(t)$ is the displacement vector at a continous time $t$, and $M, C, K \i
 For civil engineering structures, Equation (\ref{fondamental}) is obtained as the finite element approximation of the system with only $n$ dregrees of freedom.
 The structure is divided in elements, and the global mass matrix $M$ and stiffness matrix $K$ are generated from the geometry and material
 properties of the elements.
-Due to the lack of identifiable or measurable material
-constants that govern the global damping behaviour of a structure, it is generally
-impossible to assemble the damping matrix C in the same way as M and K.
+
 
 
 \subsection{Continous-time state-space model} %(model parameters and reduction):
@@ -241,8 +240,8 @@ The discrete-time state-space model is:
 \begin{equation}
 \left\{
 \begin{array}{ll}
-x_{k+1} & = Ax_k + Bf_k \\
-y_k & = Cx_k + Bf_k
+x_{k+1} & = A_dx_k + B_df_k \\
+y_k & = C_dx_k + B_df_k
 \end{array}
 \right.
 \label{discrete}
@@ -250,10 +249,10 @@ y_k & = Cx_k + Bf_k
 where
 \begin{equation}
 \begin{array}{ll}
-A = exp(A_c \Delta t) \\
-B= (A - I) A^{-1}_c B_c \\
-C = C_c \\
-D = D_c
+A_d = exp(A_c \Delta t) \\
+B_d= (A_d - I) A^{-1}_c B_c \\
+C_d = C_c \\
+D_d = D_c
 \end{array}
 \end{equation}
 
@@ -267,12 +266,13 @@ D = D_c
 
 \section{Localization using FRF interpolation method}
 
+
 This method is presented in \cite{dilena2015damage}.
 The main hypothesis underlying the method is that a concentrated damage reflects in a loss of spatial regularity of the
 vibrational profile of a structure, compared with the reference (undamaged) state.
 
 In this section, we suppose that we have $n$ sensors, which are located along an axis $z$, and we denote them by
-$\{z_l\}, l\in \{1 ... n\}$. We also suppose we have $N$ measures for each sensor.
+$\{z_l\}, l\in \{1 ... n\}$. We also suppose we have $N$ measurements for each sensor.
 
 For each sensor, we calculate the Frequency Response Function (FRF) from the acceleration's measures, at certain frequencies 
 (which are $\frac{k}{N}, k \in \{0 ... N-1\}$).
@@ -334,6 +334,9 @@ Thus, once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be
   \label{proba}
 \end{figure}
 
+
+A detailled analysis of the statistical behaviour of the interpolation error is envisaged in the second part of this project.
+
 \section{Simulation}
 
 \subsection{Obtaining acceleration measures}
@@ -369,9 +372,11 @@ k_1 + k_2 & - k_1 \\
 \end{array}
 \end{equation}
 
-As we have seen earlier, the damping matrix can't be determined by measures.
-Thus, we do the same thing that in practical situations: we consider that we are in the case of Rayleigh damping: the damping 
-matrix is a linear combination of the mass and stiffness matrix:
+
+Due to the lack of identifiable or measurable material
+constants that govern the global damping behaviour of a structure, it is generally
+impossible to assemble the damping matrix C in the same way as M and K.
+Thus, we do the same thing that in practical situations: we consider that we are in the case of Rayleigh, i.e. a linear combination of the mass and stiffness matrix:
 \begin{equation}
 C = \alpha M + \beta K,\ \ \ \ \ \alpha, \beta \in \mathbb{R}_+
 \end{equation}
@@ -390,7 +395,7 @@ $|\lambda_i| = \sqrt{\omega_i^2 \xi_i^2 + \omega_i^2 (1 - \xi_i^2)} = \omega_i$
 \end{remark}
 
 \begin{remark}
-The matrix $A_c$ has $2 \times n$ eigenvalues, but we obtain $n$ frequencies (each of them appears two times). 
+The matrix $A_c$ has $2 \times n$ eigenvalues, but we obtain $n$ frequencies (for each eigenvalues, another one is its conjugated complex). 
 \end{remark}
 
 Now, we have the sampling period:
@@ -407,7 +412,7 @@ The FRF correspond to the transfer function of the system. In frequency domain, 
 H = \frac{S}{F}
 \end{equation} 
 
-We want to calculate the FRF of the system, for each sensor localization. Here, we calculate an estimation of the FRF, called $H_1$ estimator. We suppose we have a vector of the forces $\{ f_k\}_{k=1}^N$ and a vector of the accelerations $\{ y_k\}_{k=1}^N$ for each sensor (the two vectors are size $N$). We need to be in frequency domain, so we calculate the discrete Fourier transform:
+We want to calculate the FRF of the system, for each sensor localization. Here, we calculate an estimation of the FRF, called $H_1$ estimator \cite{cauberghe2004applied}. We suppose we have a vector of the forces $\{ f_k\}_{k=1}^N$ and a vector of the accelerations $\{ y_k\}_{k=1}^N$ for each sensor (the two vectors are size $N$). We need to be in frequency domain, so we calculate the discrete Fourier transform:
 \begin{equation}
 \begin{array}{ll}
 F_n = \sum\limits_{k=1}^N f_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\} \\
@@ -442,7 +447,18 @@ H_1(n) & = & S_{yf}(n) S_{ff}(n)^{-1} \\
 
 \subsection{Interpolation}
 
+
 \subsection{Result}
+
+Figure (\ref{frf_freq}) present results of the FRF on the simulation datas: here is the curve of the FRF (absolute value) for one sensor, in function of frequencies.
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/FRF_freq.png}
+  \caption{FRF for one sensor, in function of frequencies}
+  \label{frf_freq}
+\end{figure}
 
 \section{Conclusion}
 

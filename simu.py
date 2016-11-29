@@ -318,3 +318,126 @@ f.close()
 
 
 
+
+
+def simulation_with_damage(pos,mass,stiffness,f):
+#pos: list of the positions of masses
+#mass: list of mass
+#stiffness: list of stiffness
+#f: forces
+
+#first, we make all matrixes
+
+	N = len(f)#ici,absolument 130 000 ou plus
+	n = len(mass)
+	M = matrix_M(mass)
+	K = matrix_K(stiffness)
+	C = matrix_C(M,K,0.005,0.005)
+	
+	Minv = np.linalg.inv(M)
+	MinvK = np.dot(Minv,K)
+	MinvC = np.dot(Minv,C)
+	
+	
+	I = np.eye(2*n)
+	A = np.zeros((2*n,2*n))
+	B = np.zeros((2*n,n))
+	C = np.zeros((n,2*n))
+	D = np.linalg.inv(M)
+	
+	
+	for i in range(n):
+		for j in range(n):
+			A[n+i][j] = - MinvK[i][j]
+			A[n+i][n+j] = - MinvC[i][j]
+			
+			B[n+i][j] = Minv[i][j]
+			
+			C[i][j] = - MinvK[i][j]
+			C[i][n+j] = - MinvC[i][j]
+			
+		A[i][n+i] = 1
+#now, we calculate the time of measure delta_t
+	
+	eigenvalues, eigenvectors = np.linalg.eig(A)
+
+	frq = []
+	for i in eigenvalues:
+		frq += [abs(i)/(2*math.pi)]
+	
+	max_frq = max(frq)
+	
+	omega_max = max_frq*(2*math.pi)
+	
+	f_sampl = (2.5)*max_frq  #Shannon
+
+	lambda_max = eigenvalues[ frq.index( max(frq) ) ]
+	
+	absorption = - (lambda_max.real) / omega_max
+	
+	absorption =  - eigenvalues.real / np.abs(eigenvalues)
+	
+	#print "Coefficient d'amortissement: "
+	#print absorption
+	
+	delta_t = 1/f_sampl
+	
+	#print "Frequence d'echantillonage (Hz): "
+	#print( f_sampl )
+	
+#simulation
+	
+	Ad = scipy.linalg.expm(delta_t*A)
+	Bd = np.dot((Ad - I), np.dot( np.linalg.inv(A) , B ) )
+	
+#matrices with damage
+	stiffness[5] = 10
+	K = matrix_K(stiffness)
+	C = matrix_C(M,K,0.005,0.005)
+	
+	Minv = np.linalg.inv(M)
+	MinvK = np.dot(Minv,K)
+	MinvC = np.dot(Minv,C)
+	
+	A = np.zeros((2*n,2*n))
+	B = np.zeros((2*n,n))
+	C = np.zeros((n,2*n))
+	D = np.linalg.inv(M)
+	
+	
+	for i in range(n):
+		for j in range(n):
+			A[n+i][j] = - MinvK[i][j]
+			A[n+i][n+j] = - MinvC[i][j]
+			
+			B[n+i][j] = Minv[i][j]
+			
+			C[i][j] = - MinvK[i][j]
+			C[i][n+j] = - MinvC[i][j]
+			
+		A[i][n+i] = 1
+
+#simulation
+	
+	Ad_damage = scipy.linalg.expm(delta_t*A)
+	Bd_damage = np.dot((Ad_damage - I), np.dot( np.linalg.inv(A) , B ) )
+
+
+
+
+	
+	acc = [ [0 for k in range(2*n) ] ]
+	
+	measures = []
+	
+	for i in range(N):
+		if (i < 120000):
+			acc += [ np.dot(Ad,acc[-1]) + np.dot(Bd,f[i]) ]
+			measures += [ np.dot(C,acc[-2]) + np.dot(D,f[i]) ]
+		else:
+			acc += [ np.dot(Ad_damage,acc[-1]) + np.dot(Bd_damage,f[i]) ]
+			measures += [ np.dot(C,acc[-2]) + np.dot(D,f[i]) ]
+	
+	return measures[10000:109999], measures[109999:119999], measures[120000:129999]
+
+
