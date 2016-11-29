@@ -88,12 +88,11 @@ def write_Y(fichier, measures):
 
 
 
-def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc, fichier_sampl, damaged = ""):
+def simulation(pos,mass,stiffness,f, fichier_forces, fichier_acc, fichier_sampl, damaged = ""):
 #pos: list of the positions of masses
 #mass: list of mass
 #stiffness: list of stiffness
 #f: forces
-#col: sensor
 
 #return two lists:
 #	-the first with velocity and acceleration of each mass
@@ -201,19 +200,6 @@ def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc, fichier_s
 	Ad = scipy.linalg.expm(delta_t*A)
 	Bd = np.dot((Ad - I), np.dot( np.linalg.inv(A) , B ) )
 	
-	Bd_col = np.zeros(2*n)
-	D_col = np.zeros(n)
-	for i in range(2*n):
-		Bd_col[i] = Bd[i][col]
-	for i in range(n):
-		D_col[i] = D[i][col]
-	"""
-	print(Bd)
-	print(Bd_col)
-	print(D)
-	print(D_col)
-	"""
-	
 	acc = [ [0 for k in range(2*n) ] ]
 	
 	measures = []
@@ -238,9 +224,9 @@ def simulation(pos,mass,stiffness,f, col, fichier_forces, fichier_acc, fichier_s
 	#print(measures[N-1])
 	
 	write_Y(fichier_forces, f)
-	print("F.txt created")
+	#print("F.txt created")
 	write_Y(fichier_acc, measures)
-	print("Y.txt created")
+	#print("Y.txt created")
 	
 	return acc, measures, f_sampl
 
