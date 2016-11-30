@@ -9,13 +9,16 @@ import parser
 ###########################     Print functions    ########################################
 ###########################################################################################
 
+indices = [399, 386, 364, 334, 296, 252, 202, 147, 90, 30]
+
+
 
 def printRef(ref,inf,sup):
     n = len(ref)
     delta = 3
     plt.ion()
     for i in range(n):
-    	if (i%50 == 0):
+    	if (i%10 == 0):
         	plt.plot(numpy.absolute(ref[i]))
         	plt.plot(sup[i])
         	plt.plot(inf[i])
@@ -25,9 +28,9 @@ def printRef(ref,inf,sup):
 def printAll(ref,inf,sup,undamaged, damaged):
     n = len(ref)
     delta = 3
-    plt.ion()
+    #plt.ion()
     for i in range(n):
-    	if ((i%20 == 0) and (i>300)):
+    	if (i % 10 == 0):
         	plt.plot(numpy.absolute(ref[i]), label = "Reference")
         	plt.plot(numpy.absolute(sup[i]))
         	plt.plot(numpy.absolute(inf[i]))
@@ -35,9 +38,11 @@ def printAll(ref,inf,sup,undamaged, damaged):
         	plt.plot(numpy.absolute(damaged[i]), label = "Damaged")
         	plt.xlabel('Sensors')
         	plt.ylabel('FRF')
+        	plt.title('freq: ' + str(i))
         	plt.legend()
-        	plt.pause(delta)
-        	plt.clf()
+        	#plt.pause(delta)
+        	#plt.clf()
+        	plt.show()
 
 
 
@@ -77,12 +82,12 @@ def experience():
 	print("Nombre de frequences:" + str(nb_freq))
 	
 	
-	#f_sampl_ref = freq_sampl("f_sampl_ref.txt")
-	#f_sampl_undamaged = freq_sampl("f_sampl_undamaged.txt")
-	#f_sampl_damaged = freq_sampl("f_sampl_damaged.txt")
-	#print("Frequence d'echantillonage reference: " + str( f_sampl_ref ) )
-	#print("Frequence d'echantillonage (undamaged): " + str( f_sampl_undamaged ) )
-	#print("Frequence d'echantillonage (damaged): " + str( f_sampl_damaged ) )
+	f_sampl_ref = freq_sampl("f_sampl_ref.txt")
+	f_sampl_undamaged = freq_sampl("f_sampl_undamaged.txt")
+	f_sampl_damaged = freq_sampl("f_sampl_damaged.txt")
+	print("Frequence d'echantillonage reference: " + str( f_sampl_ref ) )
+	print("Frequence d'echantillonage (undamaged): " + str( f_sampl_undamaged ) )
+	print("Frequence d'echantillonage (damaged): " + str( f_sampl_damaged ) )
 	
 	
 	ref, inf, sup = interpolation.create_ref( frf_list_ref )

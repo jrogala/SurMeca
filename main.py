@@ -19,7 +19,7 @@ import simu
 CAPTVALUE = 10
 SAMPLVALUE = 100000
 MAKEREF = 10
-DAMAGE = 5
+DAMAGE = 9
 
 
 
@@ -81,7 +81,7 @@ def frf_multiple_capter_simu_damaged(inFile=None, fichier_sampl = "f_sampl_damag
     pos = [ k for k in range(CAPTVALUE) ]
     mass = [ 100 for k in range(CAPTVALUE) ]
     stiffness = [ 100 for k in range(CAPTVALUE) ]
-    stiffness[DAMAGE] = 10
+    stiffness[DAMAGE] = 80
     N = CAPTVALUE
     #simu: a activer seulement si on veut de nouvelles donnees
     forces = simu.white_noise(SAMPLVALUE,CAPTVALUE)
@@ -152,11 +152,12 @@ def frf_multiple_capter_simu_ref(inFile=None, fichier_sampl = "f_sampl_ref.txt")
 def printPerCapter(res,time):
     n = len(res)
     delta = time/n
-    plt.ion()
+    #plt.ion()
     for i in range(n):
         plt.plot(numpy.absolute(res[i]))
-        plt.pause(delta)
-        plt.clf()
+        #plt.pause(delta)
+        #plt.clf()
+        plt.show()
 
 def printPerCapter2(res1,res2,time):
     n = len(res1)
@@ -171,15 +172,15 @@ def printPerCapter2(res1,res2,time):
 def printPerFreq(res,time):
     n = len(res[0])
     delta = time/n/10
-    plt.ion()
+    #plt.ion()
     for i in range(n):
         plt.plot(numpy.absolute(tool.get_lines(res,i)))
-        plt.pause(delta)
-        plt.clf()
-       
+        #plt.pause(delta)
+        #plt.clf()
+        plt.show()
         
         
 #frf_multiple_capter_simu_ref("FRF_ref_")        
 #frf_multiple_capter_simu("FRF_damage.txt")
-#printPerCapter(frf_multiple_capter_simu(),10)
+#printPerCapter(frf_multiple_capter_simu_undamaged(),10)
 #printPerCapter2(frf_multiple_capter_simu_damaged(),frf_multiple_capter_simu_undamaged(),10)

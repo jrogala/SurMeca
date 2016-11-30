@@ -163,6 +163,8 @@ def simulation(pos,mass,stiffness,f, fichier_forces, fichier_acc, fichier_sampl,
 	
 	max_frq = max(frq)
 	
+	#print( frq )
+	
 	omega_max = max_frq*(2*math.pi)
 	
 	if (damaged == ""):
