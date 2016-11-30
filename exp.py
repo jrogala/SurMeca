@@ -56,18 +56,18 @@ def freq_sampl(fichier_sampl):
 
 def experience():
 	#frf_list_ref = main.frf_multiple_capter_simu_ref()
-	frf_list_ref = [ [] for i in range(main.MAKEREF) ]
-	for i in range(main.MAKEREF):
-		frf_list_ref[i] = parser.get("FRF_ref" + str(i) + ".txt")
+	frf_list_ref = [ parser.get2("FRF_ref" + str(i) + ".txt") for i in range(main.MAKEREF) ]
+	#for i in range(main.MAKEREF):
+	#	frf_list_ref[i] =
 	
 	
 	
-	frf_undamaged = numpy.transpose(main.frf_multiple_capter_simu_undamaged("FRF_undamaged.txt"))
-	frf_undamaged = numpy.transpose(parser.get("FRF_undamaged.txt"))
+	#frf_undamaged = numpy.transpose(main.frf_multiple_capter_simu_undamaged("FRF_undamaged.txt"))
+	frf_undamaged = numpy.transpose(parser.get2("FRF_undamaged.txt"))
 	
 	
-	frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
-	frf_damaged = numpy.transpose(parser.get("FRF_damaged.txt"))
+	#frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
+	frf_damaged = numpy.transpose(parser.get2("FRF_damaged.txt"))
 	
 	
 	

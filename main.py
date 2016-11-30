@@ -19,6 +19,7 @@ import simu
 CAPTVALUE = 10
 SAMPLVALUE = 100000
 MAKEREF = 10
+DAMAGE = 5
 
 
 
@@ -75,12 +76,12 @@ def frf_multiple_capter_simu_undamaged(inFile=None, fichier_sampl = "f_sampl_und
         #return res
 
 
-def frf_multiple_capter_simu_damaged(damage=5,inFile=None, fichier_sampl = "f_sampl_damaged.txt"):
+def frf_multiple_capter_simu_damaged(inFile=None, fichier_sampl = "f_sampl_damaged.txt"):
     print("*************************\n Simulation for damaged state \n *************************")
     pos = [ k for k in range(CAPTVALUE) ]
     mass = [ 100 for k in range(CAPTVALUE) ]
     stiffness = [ 100 for k in range(CAPTVALUE) ]
-    stiffness[damage] = 10
+    stiffness[DAMAGE] = 10
     N = CAPTVALUE
     #simu: a activer seulement si on veut de nouvelles donnees
     forces = simu.white_noise(SAMPLVALUE,CAPTVALUE)
