@@ -42,10 +42,19 @@
 \section{Introduction}
 
 \begin{frame}{Bridge}
+\includegraphics[width=5cm]{images/crack.jpg}
 \end{frame}
 
 
 \begin{frame}{Damage and SHM}
+\begin{exampleblock}{Damages}
+Changes in a system that negatively affect its performance.
+\end{exampleblock}
+
+\begin{exampleblock}{Structure Health Monitoring}
+A damage identification strategy for aerospace, civil and mechanical structures.
+\end{exampleblock}
+
 \end{frame}
 
 
@@ -90,14 +99,60 @@
 
 
 \begin{frame}{Finite Elements model}
+
+\begin{center}
+$M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)$
+\end{center}
+
 \end{frame}
 
 
-\begin{frame}{Continu model}
+\begin{frame}{Continous-time state-space model}
+
+\begin{center}
+$\left\{
+\begin{array}{ll}
+\dot{x}(t) = A_cx(t) + B_cf(t) \\
+y(t) = C_cx(t) + D_cf(t)
+\end{array}
+\right.$
+\end{center}
+
+$x =
+\begin{pmatrix}
+\dot{q} \\
+q
+\end{pmatrix}$
+
 \end{frame}
 
 
-\begin{frame}{Discret model}
+\begin{frame}{Discret-time state-space model}
+
+\begin{center}
+$\left\{
+\begin{array}{ll}
+x_{k+1} & = A_dx_k + B_df_k \\
+y_k & = C_dx_k + B_df_k
+\end{array}
+\right.$
+
+\vspace{5mm}
+
+where
+
+\vspace{5mm}
+
+$\begin{array}{ll}
+A_d = exp(A_c \Delta t) \\
+B_d= (A_d - I) A^{-1}_c B_c \\
+C_d = C_c \\
+D_d = D_c
+\end{array}$
+
+\end{center}
+
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -105,17 +160,46 @@
 
 
 \begin{frame}{Intro}
+
+\begin{itemize}
+\item FRF calcul
+\item Interpolation on the FRF
+\item Error calcul
+\end{itemize}
+
 \end{frame}
 
 
 \begin{frame}{Interpolation}
+\begin{center}
+\includegraphics[width=5cm]{images/interpolation.png}
+\end{center}
+
 \end{frame}
 
 
 \begin{frame}{Error}
+
+
+\begin{center}
+$E(z_l,f_i) = | H_R(z_l,f_i) - H_S(z_l,f_i) |$
+
+\vspace{5mm}
+
+$E(z_l) = \sqrt{  \sum\limits_{i=1}^N  E^2(z_l,f_i) }$
+
+\vspace{5mm}
+
+$\Delta E(z_l) = E_d(z_l) - E_0(z_l)$
+
+\end{center}
+
 \end{frame}
 
 \begin{frame}{Proba}
+\begin{center}
+\includegraphics[width=5cm]{images/gaussiennes.png}
+\end{center}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -123,19 +207,54 @@
 \section{Simulation}
 
 \begin{frame}{System masses-springs}
+\begin{center}
+\includegraphics[width=5cm]{images/ressorts.png}
+
+$M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)$
+\end{center}
+
+
+
+
 \end{frame}
 
 
-\begin{frame}{Discret model + sample freq}
+\begin{frame}{Sample frequency and Discret-time state-space model}
+
+We find the sample frequency with the eigenvalues of the matrix $A_c$ of the continous-time state-space model.
+
+\vspace{5mm}
+
+Thus, we have the matrices of the discrete-time state-space model
+\begin{center}
+$\left\{
+\begin{array}{ll}
+x_{k+1} & = A_dx_k + B_df_k \\
+y_k & = C_dx_k + B_df_k
+\end{array}
+\right.$
+\end{center}
+
 \end{frame}
 
-\begin{frame}{Interpolation}
+\begin{frame}{FRF and Interpolation}
 \end{frame}
 
 \begin{frame}{Results}
+\begin{center}
+\includegraphics[width=5cm]{images/FRF_freq.png}
+
+FRF for one sensor in function of frequencies
+\end{center}
 \end{frame}
 
 \begin{frame}{Results}
+\begin{center}
+\includegraphics[width=5cm]{images/curve_damage.png}
+
+For a fixed frequency, the FRF value for each sensor
+\end{center}
+
 \end{frame}
 
 \begin{frame}{Results}

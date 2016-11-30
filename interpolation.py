@@ -46,13 +46,13 @@ def interpolation_error(complex_list):
 def global_error(frf_list):
 	nb_sensor = len(frf_list[0])
 	error = [0 for i in range(nb_sensor) ]
-	i = 0
+	#k = 0
 	for frf in frf_list:
-		i += 1
-		if (i>350):
-			interpol = interpolation_error(frf)
-			for i in range(nb_sensor):
-				error[i] += interpol[i]**2
+		#k += 1
+		#if (k>350):
+		interpol = interpolation_error(frf)
+		for i in range(nb_sensor):
+			error[i] += interpol[i]**2
 	for i in range(nb_sensor):
 		error[i] = math.sqrt(error[i])
 	return error

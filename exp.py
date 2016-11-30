@@ -87,7 +87,7 @@ def experience():
 	
 	ref, inf, sup = interpolation.create_ref( frf_list_ref )
 	
-	printRef(ref,inf,sup)
+	#printRef(ref,inf,sup)
 	
 	error_ref = interpolation.global_error(ref)
 	error_undamaged = interpolation.global_error(frf_undamaged)
@@ -108,7 +108,7 @@ def experience():
 	print("Damaged state: ")
 	print(damaged)
 	
-	#printAll(ref,inf,sup, frf_undamaged, frf_damaged)
+	printAll(ref,inf,sup, frf_undamaged, frf_damaged)
 
 
 
