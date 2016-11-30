@@ -17,8 +17,8 @@ def printRef(ref,inf,sup):
     for i in range(n):
     	if (i%50 == 0):
         	plt.plot(numpy.absolute(ref[i]))
-        	plt.plot(numpy.absolute(sup[i]))
-        	plt.plot(numpy.absolute(inf[i]))
+        	plt.plot(sup[i])
+        	plt.plot(inf[i])
         	plt.pause(delta)
         	plt.clf()
 
@@ -57,9 +57,6 @@ def freq_sampl(fichier_sampl):
 def experience():
 	#frf_list_ref = main.frf_multiple_capter_simu_ref()
 	frf_list_ref = [ parser.get2("FRF_ref" + str(i) + ".txt") for i in range(main.MAKEREF) ]
-	#for i in range(main.MAKEREF):
-	#	frf_list_ref[i] =
-	
 	
 	
 	#frf_undamaged = numpy.transpose(main.frf_multiple_capter_simu_undamaged("FRF_undamaged.txt"))
@@ -68,13 +65,6 @@ def experience():
 	
 	#frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
 	frf_damaged = numpy.transpose(parser.get2("FRF_damaged.txt"))
-	
-	
-	
-	#f_sampl_ref = freq_sampl("f_sampl_ref.txt")
-	#f_sampl_undamaged = freq_sampl("f_sampl_undamaged.txt")
-	#f_sampl_damaged = freq_sampl("f_sampl_damaged.txt")
-
 
 	print("*************************\n Average frf calcul \n *************************")
 
@@ -86,6 +76,10 @@ def experience():
 	print("Nombre de capteur:" + str(nb_sensor))
 	print("Nombre de frequences:" + str(nb_freq))
 	
+	
+	#f_sampl_ref = freq_sampl("f_sampl_ref.txt")
+	#f_sampl_undamaged = freq_sampl("f_sampl_undamaged.txt")
+	#f_sampl_damaged = freq_sampl("f_sampl_damaged.txt")
 	#print("Frequence d'echantillonage reference: " + str( f_sampl_ref ) )
 	#print("Frequence d'echantillonage (undamaged): " + str( f_sampl_undamaged ) )
 	#print("Frequence d'echantillonage (damaged): " + str( f_sampl_damaged ) )
@@ -93,7 +87,7 @@ def experience():
 	
 	ref, inf, sup = interpolation.create_ref( frf_list_ref )
 	
-	#printRef(ref,inf,sup)
+	printRef(ref,inf,sup)
 	
 	error_ref = interpolation.global_error(ref)
 	error_undamaged = interpolation.global_error(frf_undamaged)
@@ -114,7 +108,7 @@ def experience():
 	print("Damaged state: ")
 	print(damaged)
 	
-	printAll(ref,inf,sup, frf_undamaged, frf_damaged)
+	#printAll(ref,inf,sup, frf_undamaged, frf_damaged)
 
 
 
