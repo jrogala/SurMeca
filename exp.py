@@ -44,6 +44,26 @@ def printAll(ref,inf,sup,undamaged, damaged):
         	#plt.clf()
         	plt.show()
 
+def printInterpolationError(ref,inf,sup,undamaged,damaged):
+    n = len(ref)
+    delta = 3
+    #plt.ion()
+    undamaged = interpolation.interpolation_error(undamaged)
+    damaged = interpolation.interpolation_error(damaged)
+    for i in range(n):
+    	if (i % 10 == 0):
+            undam = interpolation.interpolation_error(undamaged[i])
+            dam = interpolation.interpolation_error(damaged[i])
+        	plt.plot(numpy.absolute(undam), label = "Undamaged",'ro')
+        	plt.plot(numpy.absolute(dam), label = "Damaged",'ro')
+        	plt.xlabel('Sensors')
+        	plt.ylabel('FRF')
+        	plt.title('freq: ' + str(i))
+        	plt.legend()
+        	#plt.pause(delta)
+        	#plt.clf()
+        	plt.show()
+
 
 
 
@@ -62,12 +82,12 @@ def freq_sampl(fichier_sampl):
 def experience():
 	#frf_list_ref = main.frf_multiple_capter_simu_ref()
 	frf_list_ref = [ parser.get2("FRF_ref" + str(i) + ".txt") for i in range(main.MAKEREF) ]
-	
-	
+
+
 	#frf_undamaged = numpy.transpose(main.frf_multiple_capter_simu_undamaged("FRF_undamaged.txt"))
 	frf_undamaged = numpy.transpose(parser.get2("FRF_undamaged.txt"))
-	
-	
+
+
 	#frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
 	frf_damaged = numpy.transpose(parser.get2("FRF_damaged.txt"))
 
@@ -80,31 +100,31 @@ def experience():
 	print("Nombre de frf par capteur et par frequence:" + str(nb_frf))
 	print("Nombre de capteur:" + str(nb_sensor))
 	print("Nombre de frequences:" + str(nb_freq))
-	
-	
+
+
 	f_sampl_ref = freq_sampl("f_sampl_ref.txt")
 	f_sampl_undamaged = freq_sampl("f_sampl_undamaged.txt")
 	f_sampl_damaged = freq_sampl("f_sampl_damaged.txt")
 	print("Frequence d'echantillonage reference: " + str( f_sampl_ref ) )
 	print("Frequence d'echantillonage (undamaged): " + str( f_sampl_undamaged ) )
 	print("Frequence d'echantillonage (damaged): " + str( f_sampl_damaged ) )
-	
-	
+
+
 	ref, inf, sup = interpolation.create_ref( frf_list_ref )
-	
+
 	#printRef(ref,inf,sup)
-	
+
 	error_ref = interpolation.global_error(ref)
 	error_undamaged = interpolation.global_error(frf_undamaged)
 	error_damaged = interpolation.global_error(frf_damaged)
-	
-	
+
+
 	undamaged = [0 for i in range(nb_sensor) ]
 	damaged = [0 for i in range(nb_sensor) ]
 	for i in range(nb_sensor):
 		undamaged[i] = error_undamaged[i] - error_ref[i]
 		damaged[i] = error_damaged[i] - error_ref[i]
-	
+
 	print("*************************\n Errors \n *************************")
 	print("Error ref: ")
 	print(error_ref)
@@ -112,7 +132,7 @@ def experience():
 	print(undamaged)
 	print("Damaged state: ")
 	print(damaged)
-	
+
 	printAll(ref,inf,sup, frf_undamaged, frf_damaged)
 
 
