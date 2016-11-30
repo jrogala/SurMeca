@@ -3,6 +3,20 @@ import interpolation
 import matplotlib.pyplot as plt
 import numpy
 import parser
+import simu
+
+###########################################################################################
+###########################     Variables    ##############################################
+###########################################################################################
+
+
+CAPTVALUE = simu.CAPTVALUE
+SAMPLVALUE = simu.SAMPLVALUE
+MAKEREF = simu.MAKEREF
+DAMAGED_SENSOR = simu.DAMAGED_SENSOR
+DAMAGE = simu.DAMAGE
+
+
 
 
 ###########################################################################################
@@ -48,21 +62,19 @@ def printInterpolationError(ref,inf,sup,undamaged,damaged):
     n = len(ref)
     delta = 3
     #plt.ion()
-    undamaged = interpolation.interpolation_error(undamaged)
-    damaged = interpolation.interpolation_error(damaged)
     for i in range(n):
     	if (i % 10 == 0):
-            undam = interpolation.interpolation_error(undamaged[i])
-            dam = interpolation.interpolation_error(damaged[i])
-        	plt.plot(numpy.absolute(undam), label = "Undamaged",'ro')
-        	plt.plot(numpy.absolute(dam), label = "Damaged",'ro')
-        	plt.xlabel('Sensors')
-        	plt.ylabel('FRF')
-        	plt.title('freq: ' + str(i))
-        	plt.legend()
+			undam = interpolation.interpolation_error(undamaged[i])
+			dam = interpolation.interpolation_error(damaged[i])
+			plt.plot(numpy.absolute(undam), label = "Undamaged")
+			plt.plot(numpy.absolute(dam), label = "Damaged")
+			plt.xlabel('Sensors')
+			plt.ylabel('Error')
+			plt.title('freq: ' + str(i))
+			plt.legend()
         	#plt.pause(delta)
         	#plt.clf()
-        	plt.show()
+			plt.show()
 
 
 
@@ -88,7 +100,7 @@ def experience():
 	frf_undamaged = numpy.transpose(parser.get2("FRF_undamaged.txt"))
 
 
-	#frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
+	frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
 	frf_damaged = numpy.transpose(parser.get2("FRF_damaged.txt"))
 
 	print("*************************\n Average frf calcul \n *************************")
@@ -114,9 +126,9 @@ def experience():
 
 	#printRef(ref,inf,sup)
 
-	error_ref = interpolation.global_error(ref)
-	error_undamaged = interpolation.global_error(frf_undamaged)
-	error_damaged = interpolation.global_error(frf_damaged)
+	error_ref = interpolation.global_error([ref[i] for i in indices])
+	error_undamaged = interpolation.global_error([frf_undamaged[i] for i in indices])
+	error_damaged = interpolation.global_error([frf_damaged[i] for i in indices])
 
 
 	undamaged = [0 for i in range(nb_sensor) ]
@@ -132,8 +144,13 @@ def experience():
 	print(undamaged)
 	print("Damaged state: ")
 	print(damaged)
+	plt.plot(error_ref)
+	plt.plot(error_undamaged)
+	plt.plot(error_damaged)
+	plt.show()
 
-	printAll(ref,inf,sup, frf_undamaged, frf_damaged)
+	#printAll(ref,inf,sup, frf_undamaged, frf_damaged)
+	#printInterpolationError(ref,inf,sup,undamaged,damaged)
 
 
 

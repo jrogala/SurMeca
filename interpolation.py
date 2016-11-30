@@ -8,6 +8,20 @@ import math
 import parser
 import sys
 import json
+import simu
+
+###########################################################################################
+###########################     Variables    ##############################################
+###########################################################################################
+
+
+CAPTVALUE = simu.CAPTVALUE
+SAMPLVALUE = simu.SAMPLVALUE
+MAKEREF = simu.MAKEREF
+DAMAGED_SENSOR = simu.DAMAGED_SENSOR
+DAMAGE = simu.DAMAGE
+
+
 
 
 ###########################################################################################
