@@ -127,6 +127,8 @@ def simulation(f, fichier_forces, fichier_acc, fichier_sampl, damaged = ""):
 
 
 #first, we make all matrixes
+	if (damaged == ""):
+		stiffness[DAMAGED_SENSOR] = DAMAGE
 
 	N = len(f)
 	n = len(mass)
@@ -208,7 +210,7 @@ def simulation(f, fichier_forces, fichier_acc, fichier_sampl, damaged = ""):
 		f_write_sampl = open(fichier_sampl,'w')
 		f_write_sampl.write(str(f_sampl))
 		f_write_sampl.close()
-		stiffness[DAMAGED_SENSOR] = DAMAGE
+		
 		
 	
 	lambda_max = eigenvalues[ frq.index( max(frq) ) ]
