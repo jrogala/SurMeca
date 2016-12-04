@@ -102,27 +102,96 @@ A damage identification strategy for aerospace, civil and mechanical structures.
 \end{frame}
 
 
-\begin{frame}{transition/plan}
+\subsection{Tools}
+\begin{frame}{Tools}
+\begin{block}{Traditional methods}
+Visual inspections or experimental techniques (such as radiography or ultrasound)
+\end{block}
+
+\setbeamertemplate{itemize item}{\color{green}$\checkmark$}
+\begin{columns}
+		\begin{column}{0.5\textwidth} 
+		\begin{center}
+			\begin{itemize}
+				\item Detailed information about a local damage state
+			\end{itemize}
+		\end{center}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+		\begin{center}
+		\setbeamertemplate{itemize item}{\color{red}$\times$}
+			\begin{itemize}
+				\item Requires to know area where it is located
+				\item May be costly
+				\item Taking a long time to be performed
+				\item Hope for easy access
+			\end{itemize}
+		\end{center}
+		\end{column}
+	\end{columns}
+	\pause
+	\begin{center}
+	\textcolor{red}{{\large 
+$\Rightarrow$ Global methods automated and based on sensor measurements were developed.}}
+	
+	\end{center}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{State of the art}
 
-
-\begin{frame}{intro}
+\subsection{Vibration-based damage identification}
+\begin{frame}{Vibration-based damage identification}
+\begin{block}{General idea}
+	Damage affects the physical properties (mass, damping, and stiffness) of the structure.\newline 
+	
+	$\Rightarrow$ This will cause detectable changes in modal properties (natural frequencies, modal damping, and mode shapes).
+\end{block}
+\begin{itemize}
+\item Example: Cracks cause reductions in stiffness.
+\end{itemize}
+\vspace{0.5\baselineskip}
+\begin{center}
+\textcolor{red}{{\large Two differents methods : model-based or data-driven.}}
+\end{center}
 \end{frame}
 
-
+\subsection{Model based methods}
 \begin{frame}{Model based methods}
+\begin{center}
+\begin{itemize}
+\item Damage is identified through the updating of a finite element (FE) model.
+
+\vspace{1\baselineskip}
+\item Modal characteristics is the experimental data used for damage
+assessment through FE model updating.
+\vspace{1\baselineskip}
+\item Different types of modal data can be used (natural frequencies, eigenvalues, etc).
+\end{itemize}
+\end{center}
 \end{frame}
 
-
+\subsection{Data driven methods}
 \begin{frame}{Data driven methods}
-\end{frame}
+\begin{center}
+\begin{itemize}
+\item Methods that use models based on experimental response data recorded on the structure.
+
+\vspace{1\baselineskip}
+\item Damage parameter $D$ is the variation of the damage feature $d$ between
+the inspection $I$ and the reference $R$ configurations:
+
+\begin{equation}
+D=d_{I} - d_{R}
+\end{equation}
+\item Data-driven methods may be applied with a limited number of available signals (both
+responses and excitations).
+\end{itemize}
+\end{center}
 
 
-\begin{frame}{Combined methods}
 \end{frame}
 
 
@@ -133,7 +202,7 @@ A damage identification strategy for aerospace, civil and mechanical structures.
 
 \section{Physical Models}
 
-
+\subsection{Finite Elements model}
 \begin{frame}{Finite Elements model}
 
 \begin{center}
@@ -144,7 +213,7 @@ $M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)$
 
 \end{frame}
 
-
+\subsection{Continous-time state-space model}
 \begin{frame}{Continous-time state-space model}
 With the variable change $x =
 \begin{pmatrix}
@@ -166,7 +235,7 @@ where $A_c, B_c, C_c$ and $D_c$ rely on $M, C$ and $K$.
 
 \end{frame}
 
-
+\subsection{Discret-time state-space model}
 \begin{frame}{Discret-time state-space model}
 
 We need to convert the system to discret time:
@@ -203,7 +272,7 @@ D_d = D_c
 
 \section{FRF Interpolation Method}
 
-
+\subsection{FRF Interpolation Method}
 \begin{frame}{FRF Interpolation Method}
 
 \begin{alertblock}{Main hypothesis}
@@ -224,10 +293,11 @@ structure, compared with the undamaged state.
 \end{frame}
 
 
-
+\subsection{FRF calcul}
 \begin{frame}{FRF calcul}
 \end{frame}
 
+\subsection{Interpolation}
 \begin{frame}{Interpolation}
 Cubic polynomial spline interpolation:
 
@@ -235,7 +305,7 @@ Cubic polynomial spline interpolation:
 
 \end{frame}
 
-
+\subsection{Error calcul}
 \begin{frame}{Error calcul}
 
 \begin{center}
@@ -257,6 +327,7 @@ $\Delta E(z_l) = E_d(z_l) - E_0(z_l)$
 
 \end{frame}
 
+\subsection{Probability of identification of a damage}
 \begin{frame}{Probability of identification of a damage}
 \begin{center}
 \includegraphics[height=4cm]{images/gaussiennes.png}
@@ -267,6 +338,7 @@ $\Delta E(z_l) = E_d(z_l) - E_0(z_l)$
 
 \section{Simulation}
 
+\subsection{System masses-springs}
 \begin{frame}{System masses-springs}
 \begin{center}
 \includegraphics[width=5cm]{images/ressorts.png}
@@ -290,7 +362,7 @@ $
 
 \end{frame}
 
-
+\subsection{Sample frequency and Discret-time state-space model}
 \begin{frame}{Sample frequency and Discret-time state-space model}
 
 We find the sample frequency with the eigenvalues of the matrix $A_c$ of the continous-time state-space model.
@@ -309,10 +381,12 @@ y_k & = C_dx_k + B_df_k
 
 \end{frame}
 
+\subsection{FRF and Interpolation}
 \begin{frame}{FRF and Interpolation}
 \end{frame}
 
-\begin{frame}{Results}
+\subsection{Results}
+\begin{frame}{Results 1/3}
 \begin{center}
 \includegraphics[width=5cm]{images/FRF_freq.png}
 
@@ -320,7 +394,8 @@ FRF for one sensor in function of frequencies
 \end{center}
 \end{frame}
 
-\begin{frame}{Results}
+
+\begin{frame}{Results 2/3}
 \begin{center}
 \includegraphics[width=5cm]{images/curve_damage.png}
 
@@ -329,7 +404,8 @@ For a fixed frequency, the FRF value for each sensor
 
 \end{frame}
 
-\begin{frame}{Results}
+
+\begin{frame}{Results 3/3}
 \end{frame}
 
 
