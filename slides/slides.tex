@@ -9,6 +9,9 @@
   \author{Benjamin Fasquelle, Nicolas Pompidor and Jimmy Rogala}
   \institute{École Normale Supérieure de Rennes, département Informatique et Télécommunications}
 
+
+  \setbeamertemplate{navigation symbols}{} 
+
   \begin{document}
 
 
@@ -221,17 +224,23 @@ structure, compared with the undamaged state.
 \end{frame}
 
 
+
+\begin{frame}{FRF calcul}
+\end{frame}
+
 \begin{frame}{Interpolation}
 Cubic polynomial spline interpolation:
 
-\begin{center}
-\includegraphics[width=5cm]{images/interpolation.png}
-\end{center}
+
 
 \end{frame}
 
 
 \begin{frame}{Error calcul}
+
+\begin{center}
+\includegraphics[width=5cm]{images/interpolation.png}
+\end{center}
 
 For each sensor $z_l$ at the frequency $f_i$:
 \begin{center}
@@ -240,15 +249,11 @@ $E(z_l,f_i) = | H_R(z_l,f_i) - H_S(z_l,f_i) |$
 
 
 For each sensor:
-\begin{center}
 $E(z_l) = \sqrt{  \sum\limits_{i=1}^N  E^2(z_l,f_i) }$
-\end{center}
 
 
 Difference with the reference state:
-\begin{center}
 $\Delta E(z_l) = E_d(z_l) - E_0(z_l)$
-\end{center}
 
 \end{frame}
 
@@ -270,7 +275,18 @@ $M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)$
 \end{center}
 
 
-
+\begin{exampleblock}{Masses}
+\begin{center}
+$
+M = 
+\begin{pmatrix} 
+m_1\\ 
+&\ddots\\ 
+&&m_n
+\end{pmatrix}
+$
+\end{center}
+\end{exampleblock}
 
 \end{frame}
 

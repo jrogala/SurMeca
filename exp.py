@@ -96,7 +96,7 @@ def experience():
 	frf_list_ref = [ parser.get2("FRF_ref" + str(i) + ".txt") for i in range(main.MAKEREF) ]
 
 
-	#frf_undamaged = numpy.transpose(main.frf_multiple_capter_simu_undamaged("FRF_undamaged.txt"))
+	frf_undamaged = numpy.transpose(main.frf_multiple_capter_simu_undamaged("FRF_undamaged.txt"))
 	frf_undamaged = numpy.transpose(parser.get2("FRF_undamaged.txt"))
 
 
