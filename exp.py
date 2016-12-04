@@ -46,8 +46,8 @@ def printAll(ref,inf,sup,undamaged, damaged):
     for i in range(n):
     	if (i % 10 == 0):
         	plt.plot(numpy.absolute(ref[i]), label = "Reference")
-        	plt.plot(numpy.absolute(sup[i]))
-        	plt.plot(numpy.absolute(inf[i]))
+        	#plt.plot(numpy.absolute(sup[i]))
+        	#plt.plot(numpy.absolute(inf[i]))
         	plt.plot(numpy.absolute(undamaged[i]), label = "Undamaged")
         	plt.plot(numpy.absolute(damaged[i]), label = "Damaged")
         	plt.xlabel('Sensors')
@@ -96,7 +96,7 @@ def experience():
 	frf_list_ref = [ parser.get2("FRF_ref" + str(i) + ".txt") for i in range(main.MAKEREF) ]
 
 
-	frf_undamaged = numpy.transpose(main.frf_multiple_capter_simu_undamaged("FRF_undamaged.txt"))
+	#frf_undamaged = numpy.transpose(main.frf_multiple_capter_simu_undamaged("FRF_undamaged.txt"))
 	frf_undamaged = numpy.transpose(parser.get2("FRF_undamaged.txt"))
 
 
@@ -114,10 +114,8 @@ def experience():
 	print("Nombre de frequences:" + str(nb_freq))
 
 
-	f_sampl_ref = freq_sampl("f_sampl_ref.txt")
 	f_sampl_undamaged = freq_sampl("f_sampl_undamaged.txt")
 	f_sampl_damaged = freq_sampl("f_sampl_damaged.txt")
-	print("Frequence d'echantillonage reference: " + str( f_sampl_ref ) )
 	print("Frequence d'echantillonage (undamaged): " + str( f_sampl_undamaged ) )
 	print("Frequence d'echantillonage (damaged): " + str( f_sampl_damaged ) )
 
@@ -138,8 +136,8 @@ def experience():
 		damaged[i] = error_damaged[i] - error_ref[i]
 
 	print("*************************\n Errors \n *************************")
-	print("Error ref: ")
-	print(error_ref)
+	#print("Error ref: ")
+	#print(error_ref)
 	print("Undamaged state: ")
 	print(undamaged)
 	print("Damaged state: ")
@@ -148,8 +146,12 @@ def experience():
 	plt.plot(error_undamaged)
 	plt.plot(error_damaged)
 	plt.show()
+	
+	plt.plot(undamaged)
+	plt.plot(damaged)
+	plt.show()
 
-	#printAll(ref,inf,sup, frf_undamaged, frf_damaged)
+	printAll(ref,inf,sup, frf_undamaged, frf_damaged)
 	#printInterpolationError(ref,inf,sup,undamaged,damaged)
 
 

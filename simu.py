@@ -21,7 +21,7 @@ CAPTVALUE = 10
 SAMPLVALUE = 100000
 MAKEREF = 10
 DAMAGED_SENSOR = 5
-DAMAGE = 100
+DAMAGE = 10
 
 
 pos = [ k for k in range(CAPTVALUE) ]
@@ -115,7 +115,7 @@ def write_Y(fichier, measures):
 
 
 
-def simulation(f, fichier_forces, fichier_acc, fichier_sampl, damaged = ""):
+def simulation(f, fichier_forces, fichier_acc, fichier_sampl, damaged = None):
 #pos: list of the positions of masses
 #mass: list of mass
 #stiffness: list of stiffness
@@ -127,7 +127,7 @@ def simulation(f, fichier_forces, fichier_acc, fichier_sampl, damaged = ""):
 
 
 #first, we make all matrixes
-	if (damaged == ""):
+	if (damaged != None):
 		stiffness[DAMAGED_SENSOR] = DAMAGE
 
 	N = len(f)
@@ -196,7 +196,7 @@ def simulation(f, fichier_forces, fichier_acc, fichier_sampl, damaged = ""):
 	
 	omega_max = max_frq*(2*math.pi)
 	
-	if (damaged == ""):
+	if (damaged == None):
 		f_sampl = (2.5)*max_frq  #Shannon
 	
 		f_write_sampl = open(fichier_sampl,'w')

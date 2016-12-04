@@ -163,7 +163,7 @@ A third group of methods for damage localization and quantification lies between
 
 \subsection{Finite element model}
 
-The dynamic behaviour of a mechanical system consisting of $n$ degrees of freedom is described by following matrix differential equation:
+The dynamic behaviour of a mechanical system consisting of $n$ degrees of freedom (see Figure (\ref{finite_el}) is described by following matrix differential equation:
 \begin{equation}
 M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)
 \label{fondamental}
@@ -174,6 +174,12 @@ For civil engineering structures, Equation (\ref{fondamental}) is obtained as th
 The structure is divided in elements, and the global mass matrix $M$ and stiffness matrix $K$ are generated from the geometry and material
 properties of the elements.
 
+\begin{figure}
+  \centering
+  \includegraphics[height=0.3\textwidth]{images/finite_element.png}
+  \caption{Finite element model, from \cite{peeters2000system}}
+  \label{finite_el}
+\end{figure}
 
 
 \subsection{Continous-time state-space model} %(model parameters and reduction):
@@ -447,18 +453,37 @@ H_1(n) & = & S_{yf}(n) S_{ff}(n)^{-1} \\
 
 \subsection{Interpolation}
 
+We have to calculate for each sensor $z_l$ and for each considered frequency $f_i$ the cubic polynomial spline interpolation of the transfer function $H_R(z_k,f_i)$.
+The cubic spline interpolation is a piecewise continuous curve, passing through each of the values.
+There is a separate cubic polynomial interpolation for each interval, each with its own coefficients.
+Cubic polynomial spline interpolations produce an interpolated function that is continuous through to the second derivative.
+
+With this interpolation, we can calculate the error as it is described in the section IV.
 
 \subsection{Result}
 
-Figure (\ref{frf_freq}) present results of the FRF on the simulation datas: here is the curve of the FRF (absolute value) for one sensor, in function of frequencies.
+For the simulation, we put a sensor on each mass.
+
+Figure (\ref{frf_freq}) presents results of the FRF on the simulation datas: here is the curve of the FRF (absolute value) of one sensor (4 in total), in function of frequencies. We can see three peaks which are at the natural frequencies of the system, but there is one of these frequencies which not present a peak. Seeing this curve for each sensor, we observed that certain sensors have one peak for each natural frequencies, and others sensors have one peak for each except one, relied on the position of the sensor in the system. It is problematic because it is around the natural frequencies of the system that we have better datas, but if certain sensors haven't response with certain frequencies, we could miss out on a damage.
 
 
 \begin{figure}
   \centering
   \includegraphics[width=0.3\textwidth]{images/FRF_freq.png}
-  \caption{FRF for one sensor, in function of frequencies}
+  \caption{FRF of one sensor (4 in total), in function of frequencies}
   \label{frf_freq}
 \end{figure}
+
+
+Figure (\ref{damage}) is the FRF values for ten sensors (at a fixed frequency). Here, we easily can see that there is a damage between the sensors 4 and 5 (as we noticed it in the simulation).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/curve_damage.png}
+  \caption{FRF values for 10 sensors, at a fixed frequency}
+  \label{damage}
+\end{figure}
+
 
 \section{Conclusion}
 

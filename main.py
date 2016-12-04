@@ -72,7 +72,7 @@ def frf_multiple_capter_simu_damaged(inFile=None, fichier_sampl = "f_sampl_damag
     print("*************************\n Simulation for damaged state \n *************************")
     #simu: a activer seulement si on veut de nouvelles donnees
     forces = simu.white_noise(SAMPLVALUE,CAPTVALUE)
-    acc, measures, f_sampl = simu.simulation(forces,"F_damaged.txt","Y_damaged.txt", fichier_sampl, damaged = "f_sampl_ref.txt")
+    acc, measures, f_sampl = simu.simulation(forces,"F_damaged.txt","Y_damaged.txt", fichier_sampl, damaged = "f_sampl_undamaged.txt")
     #donnes de la simu
     forces = parser.get("F_damaged.txt")[:]
     measures = parser.get("Y_damaged.txt")[:]
