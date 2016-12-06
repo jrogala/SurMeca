@@ -163,24 +163,24 @@ A third group of methods for damage localization and quantification lies between
 
 \subsection{Finite element model}
 
-The dynamic behaviour of a mechanical system consisting of $n$ degrees of freedom (see Figure (\ref{finite_el}) is described by following matrix differential equation:
+The dynamic behaviour of a mechanical system consisting of $n$ degrees of freedom (see Figure (\ref{finite_el})) is described by following matrix differential equation:
 \begin{equation}
 M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)
 \label{fondamental}
 \end{equation}
 where $q(t)$ is the displacement vector at a continous time $t$, and $M, C, K \in \mathbb{R}^{n \times n}$, are the mass, damping and stiffness matrices. 
 
-For civil engineering structures, Equation (\ref{fondamental}) is obtained as the finite element approximation of the system with only $n$ dregrees of freedom.
-The structure is divided in elements, and the global mass matrix $M$ and stiffness matrix $K$ are generated from the geometry and material
-properties of the elements.
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[height=0.3\textwidth]{images/finite_element.png}
   \caption{Finite element model, from \cite{peeters2000system}}
   \label{finite_el}
 \end{figure}
 
+For civil engineering structures, Equation (\ref{fondamental}) is obtained as the finite element approximation of the system with only $n$ dregrees of freedom.
+The structure is divided in elements, and the global mass matrix $M$ and stiffness matrix $K$ are generated from the geometry and material
+properties of the elements.
 
 \subsection{Continous-time state-space model} %(model parameters and reduction):
 
@@ -294,13 +294,12 @@ E(z_l,f_i) = | H_R(z_l,f_i) - H_S(z_l,f_i) |
 \end{equation}
 
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{images/interpolation.png}
   \caption{Interpolation error, from \cite{dilena2015damage}}
   \label{interpolation_error}
 \end{figure}
-
 
 Since we want to characterize each location $z_l$ with a scalar-valued error index, we introduce the norm of the error on the whole range of
 frequencies:
@@ -333,7 +332,7 @@ Thus, once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be
 \end{itemize}
 
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{images/gaussiennes.png}
   \caption{Probabilities of false and missing alarm, from \cite{dilena2015damage}}
@@ -350,7 +349,7 @@ A detailled analysis of the statistical behaviour of the interpolation error is 
 We have implemented a simulation to check this method of localization. We made this on the following system: $n$ masses, connected
 through springs and dampers. We denote the masses $\{m_i\}_{i=1}^n$, the springs stifness $\{k_i\}_{i=1}^n$ and the dampers $\{c_i\}_{i=1}^n$ (see Figure (\ref{springs})).
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{images/ressorts.png}
   \caption{Masses connected through springs and dampers}
@@ -458,6 +457,14 @@ The cubic spline interpolation is a piecewise continuous curve, passing through 
 There is a separate cubic polynomial interpolation for each interval, each with its own coefficients.
 Cubic polynomial spline interpolations produce an interpolated function that is continuous through to the second derivative.
 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.25\textwidth]{images/interpolation_spline.png}
+  \caption{Cubic spline interpolation}
+  \label{spline}
+\end{figure}
+
+
 With this interpolation, we can calculate the error as it is described in the section IV.
 
 \subsection{Result}
@@ -467,7 +474,7 @@ For the simulation, we put a sensor on each mass.
 Figure (\ref{frf_freq}) presents results of the FRF on the simulation datas: here is the curve of the FRF (absolute value) of one sensor (ten in total), against frequencies. We can see three peaks which are at the natural frequencies of the system, but there is one of these frequencies which not present a peak. Seeing this curve for each sensor, we observed that certain sensors have one peak for each natural frequencies, and others sensors have one peak for each except one, relied on the position of the sensor in the system. It is problematic because it is around the natural frequencies of the system that we have better datas, but if certain sensors haven't response with certain frequencies, we could miss out on a damage.
 
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.3\textwidth]{images/persensor1.png}
   \caption{FRF of one sensor (ten in total), against frequencies}
@@ -475,13 +482,32 @@ Figure (\ref{frf_freq}) presents results of the FRF on the simulation datas: her
 \end{figure}
 
 
-Figure (\ref{damage}) is the FRF values for ten sensors (at a fixed frequency). Here, we easily can see that there is a damage between the sensors 4 and 5 (as we noticed it in the simulation).
+Figure (\ref{damage}) is the FRF values for ten sensors (at a fixed frequency). Here, we easily can see that there is a damage between the sensors 4 and 5 (as we noticed it in the simulation). However, 
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.3\textwidth]{images/damaged4.png}
-  \caption{FRF values for 10 sensors, at a fixed frequency}
+  \caption{FRF values for 10 sensors, at a fixed frequency (damage between sensors 4 and 5}
   \label{damage}
+\end{figure}
+
+Figure (\ref{damage2}) is the FRF values for the same ten sensors that in Figure (\ref{damage}), at a different frequency.
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/damaged3.png}
+  \caption{FRF values for 10 sensors, at a fixed frequency (damage between sensors 4 and 5}
+  \label{damage2}
+\end{figure}
+
+Finaly, we can see in Figure (\ref{globalerror}) the global error described in section IV.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/globalerror.png}
+  \caption{FRF values for 10 sensors, at a fixed frequency (damage between sensors 4 and 5}
+  \label{globalerror}
 \end{figure}
 
 
