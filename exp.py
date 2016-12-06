@@ -77,7 +77,27 @@ def printInterpolationError(ref,inf,sup,undamaged,damaged):
 			plt.show()
 
 
-
+def printAllMoustache(refs,undamaged, damaged):
+    n = len(undamaged)
+    delta = 3
+    #plt.ion()
+    for i in range(n):
+        if (i % 10 == 0):
+            l = [[] for j in range(len(refs[0]))]
+            for exp in range(len(refs)):
+                for captor in range(len(refs[exp])):
+                    l[captor] += [refs[exp][captor][i]]
+            l = [numpy.absolute(d) for d in l]
+            plt.boxplot(l,positions = [i for i in range(len(l))])
+            plt.plot(numpy.absolute(undamaged[i]), label = "Undamaged")
+            plt.plot(numpy.absolute(damaged[i]), label = "Damaged")
+            plt.xlabel('Sensors')
+            plt.ylabel('FRF')
+            plt.title('freq: ' + str(i))
+            plt.legend()
+            #plt.pause(delta)
+            #plt.clf()
+            plt.show()
 
 ###########################################################################################
 ###########################     Experience    #############################################
@@ -100,7 +120,7 @@ def experience():
 	frf_undamaged = numpy.transpose(parser.get2("FRF_undamaged.txt"))
 
 
-	frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
+	#frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
 	frf_damaged = numpy.transpose(parser.get2("FRF_damaged.txt"))
 
 	print("*************************\n Average frf calcul \n *************************")
@@ -147,13 +167,15 @@ def experience():
 	plt.plot(error_damaged)
 	plt.show()
 	
-	plt.plot(undamaged)
-	plt.plot(damaged)
+	plt.plot(undamaged, label = "Undamaged")
+	plt.plot(damaged, label = "Damaged")
+	plt.xlabel("Global error")
+	plt.legend()
 	plt.show()
 
-	printAll(ref,inf,sup, frf_undamaged, frf_damaged)
+	#printAll(ref,inf,sup, frf_undamaged, frf_damaged)
 	#printInterpolationError(ref,inf,sup,undamaged,damaged)
-
+	#printAllMoustache(frf_list_ref, frf_undamaged, frf_damaged)
 
 
 

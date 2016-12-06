@@ -163,7 +163,15 @@ plt.plot(i)
 plt.plot(r2)
 plt.plot(i2)
 plt.show()
+x =[1, 3, 4, 7, 8] #donnees
+y = [10.1, 5.2, 6, 2, 4] #donnees
+f = interp1d(x, y, kind = 'cubic')
+N = 1000
+x_affich = [ (1.0 + k*7.0/(N+1)) for k in range(N)]
+y_affich = [ f(1.0 + k*7.0/(N+1)) for k in range(N)]
+plt.plot(x,y, 'ro')
+plt.plot(x_affich, y_affich)
+plt.xlabel("Cubic spline interpolation")
+plt.legend()
+plt.show()
 """
-
-
-

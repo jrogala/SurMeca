@@ -110,8 +110,11 @@ def printPerCapter(res,time):
     #plt.ion()
     for i in range(n):
         plt.plot(numpy.absolute(res[i]))
+        plt.xlabel("Fequencies")
+        plt.ylabel("FRF")
         #plt.pause(delta)
         #plt.clf()
+        plt.legend()
         plt.show()
 
 def printPerCapter2(res1,res2,time):

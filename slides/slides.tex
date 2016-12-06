@@ -3,6 +3,7 @@
   \usepackage{graphicx}
   \usepackage{array}
   \usepackage{url}
+  \usepackage{color}
   \usetheme{Warsaw}
 
   \title{Damage localization based on vibrations}
@@ -89,14 +90,14 @@ A damage identification strategy for aerospace, civil and mechanical structures.
 \begin{frame}{4 levels in damage identification}
 
 \begin{center}
-\begin{itemize}[<+->]
-\item Detection: Is the structure damaged or not?
+\begin{itemize}
+\item<1-> Detection: Is the structure damaged or not?
 \vspace{1\baselineskip}
-\item Localization: Where is the damaged area located?
+\item<2-|alert@5> Localization: Where is the damaged area located?
 \vspace{1\baselineskip}
-\item Quantification: What is the extent of damage?
+\item<3-> Quantification: What is the extent of damage?
 \vspace{1\baselineskip}
-\item Prediction: What is the remaining service life of the structure?
+\item<4-> Prediction: What is the remaining service life of the structure?
 \end{itemize}
 \end{center}
 \end{frame}
@@ -195,8 +196,113 @@ responses and excitations).
 \end{frame}
 
 
-\begin{frame}{transition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{FRF Interpolation Method}
+
+\subsection{FRF Interpolation Method}
+\begin{frame}{FRF Interpolation Method}
+
+\begin{center}
+Data driven method
+\end{center}
+
+\pause
+
+\begin{alertblock}{Main hypothesis}
+A concentrated damage reflects
+in a loss of spatial regularity of the vibrational profile of a
+structure, compared with the undamaged state.
+\end{alertblock}
+
+\pause
+
+\underline{Main steps}:
+\begin{itemize}
+\item Frequency Response Function (FRF) calcul
+\item Interpolation on the FRF
+\item Error calcul
+\end{itemize}
+
+
 \end{frame}
+
+
+\subsection{FRF calcul}
+\begin{frame}{FRF calcul}
+\begin{exampleblock}{Frequency Response Function}
+\begin{center}
+$H = \frac{Y}{F}$
+\end{center}
+$F$: input
+
+$Y$: output
+\end{exampleblock}
+
+\pause
+
+Fourier transform:
+$
+F_n = \sum\limits_{k=1}^N f_k e^{-2i\pi kn/N},
+Y_n = \sum\limits_{k=1}^N y_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\}
+$
+
+
+\begin{block}{Estimator}
+\begin{center}
+$H_1(n) = \frac{Y_n}{F_n}$
+\end{center}
+\end{block}
+
+\end{frame}
+
+\subsection{Interpolation}
+\begin{frame}{Interpolation}
+\underline{Cubic polynomial spline interpolation:}
+\begin{itemize}
+\item piecewise continuous curve, passing through each of the values
+\item continuous through to the second derivative
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=5cm]{images/interpolation_spline.png}
+\end{center}
+
+\end{frame}
+
+\subsection{Error calcul}
+\begin{frame}{Error calcul}
+
+\begin{center}
+\includegraphics[width=6cm]{images/interpolation.png}
+\end{center}
+
+For each sensor $z_l$ at the frequency $f_i$:
+$E(z_l,f_i) = | H_R(z_l,f_i) - H_S(z_l,f_i) |$
+
+
+\pause
+
+For each sensor:
+$E(z_l) = \sqrt{  \sum\limits_{i=1}^N  E^2(z_l,f_i) }$
+
+\pause
+
+Difference with the reference state:
+$\Delta E(z_l) = E_d(z_l) - E_0(z_l)$
+
+\end{frame}
+
+\subsection{Probability of identification of a damage}
+\begin{frame}{Probability of identification of a damage}
+\begin{center}
+\includegraphics[height=4cm]{images/gaussiennes.png}
+\end{center}
+\end{frame}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -268,71 +374,7 @@ D_d = D_c
 
 
 \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{FRF Interpolation Method}
-
-\subsection{FRF Interpolation Method}
-\begin{frame}{FRF Interpolation Method}
-
-\begin{alertblock}{Main hypothesis}
-A concentrated damage reflects
-in a loss of spatial regularity of the vibrational profile of a
-structure, compared with the undamaged state.
-\end{alertblock}
-
-
-\underline{Main steps}:
-\begin{itemize}
-\item Frequency Response Function (FRF) calcul
-\item Interpolation on the FRF
-\item Error calcul
-\end{itemize}
-
-
-\end{frame}
-
-
-\subsection{FRF calcul}
-\begin{frame}{FRF calcul}
-\end{frame}
-
-\subsection{Interpolation}
-\begin{frame}{Interpolation}
-Cubic polynomial spline interpolation:
-
-
-
-\end{frame}
-
-\subsection{Error calcul}
-\begin{frame}{Error calcul}
-
-\begin{center}
-\includegraphics[width=5cm]{images/interpolation.png}
-\end{center}
-
-For each sensor $z_l$ at the frequency $f_i$:
-\begin{center}
-$E(z_l,f_i) = | H_R(z_l,f_i) - H_S(z_l,f_i) |$
-\end{center}
-
-
-For each sensor:
-$E(z_l) = \sqrt{  \sum\limits_{i=1}^N  E^2(z_l,f_i) }$
-
-
-Difference with the reference state:
-$\Delta E(z_l) = E_d(z_l) - E_0(z_l)$
-
-\end{frame}
-
-\subsection{Probability of identification of a damage}
-\begin{frame}{Probability of identification of a damage}
-\begin{center}
-\includegraphics[height=4cm]{images/gaussiennes.png}
-\end{center}
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -346,6 +388,7 @@ $\Delta E(z_l) = E_d(z_l) - E_0(z_l)$
 $M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)$
 \end{center}
 
+\pause
 
 \begin{exampleblock}{Masses}
 \begin{center}
@@ -381,31 +424,59 @@ y_k & = C_dx_k + B_df_k
 
 \end{frame}
 
-\subsection{FRF and Interpolation}
-\begin{frame}{FRF and Interpolation}
-\end{frame}
-
 \subsection{Results}
-\begin{frame}{Results 1/3}
+\begin{frame}{Results 1/4}
 \begin{center}
-\includegraphics[width=5cm]{images/FRF_freq.png}
+\includegraphics[height=4cm]{images/persensor1.png}
+\hfill
+\includegraphics[height=4cm]{images/persensor2.png}
 
-FRF for one sensor in function of frequencies
+FRF for one sensor against frequencies
 \end{center}
 \end{frame}
 
 
-\begin{frame}{Results 2/3}
+\begin{frame}{Results 2/4}
 \begin{center}
-\includegraphics[width=5cm]{images/curve_damage.png}
+\includegraphics[height=4cm]{images/damaged4.png}
+\hfill
+\includegraphics[height=4cm]{images/damaged_curve.png}
 
 For a fixed frequency, the FRF value for each sensor
+
+\vspace{5mm}
+
+Damage between sensors 4 and 5
 \end{center}
 
 \end{frame}
 
 
-\begin{frame}{Results 3/3}
+\begin{frame}{Results 3/4}
+\begin{center}
+\includegraphics[height=4cm]{images/damaged2.png}
+\hfill
+\includegraphics[height=4cm]{images/damaged3.png}
+
+For a fixed frequency, the FRF value for each sensor
+
+\vspace{5mm}
+
+Damage between sensors 4 and 5
+\end{center}
+\end{frame}
+
+\begin{frame}{Results 4/4}
+\begin{center}
+\includegraphics[height=4cm]{images/globalerror.png}
+
+Global error
+
+\vspace{5mm}
+
+Damage between sensors 4 and 5
+\end{center}
+
 \end{frame}
 
 
@@ -414,6 +485,19 @@ For a fixed frequency, the FRF value for each sensor
 \section{Conclusion}
 
 \begin{frame}{Conclusion}
+\underline{What we did:}
+\begin{itemize}
+\item State of the art
+\item Implementation of the FRF interpolation method with a simulation
+\end{itemize}
+
+\underline{What we will do:}
+\begin{itemize}
+\item Development of a statistical extension of this method
+\end{itemize}
+
+
+
 \end{frame}
 
 
