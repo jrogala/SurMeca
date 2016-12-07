@@ -120,7 +120,7 @@ def experience():
 	frf_undamaged = numpy.transpose(parser.get2("FRF_undamaged.txt"))
 
 
-	#frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
+	frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
 	frf_damaged = numpy.transpose(parser.get2("FRF_damaged.txt"))
 
 	print("*************************\n Average frf calcul \n *************************")
@@ -173,7 +173,7 @@ def experience():
 	plt.legend()
 	plt.show()
 
-	#printAll(ref,inf,sup, frf_undamaged, frf_damaged)
+	printAll(ref,inf,sup, frf_undamaged, frf_damaged)
 	#printInterpolationError(ref,inf,sup,undamaged,damaged)
 	#printAllMoustache(frf_list_ref, frf_undamaged, frf_damaged)
 

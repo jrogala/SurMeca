@@ -104,13 +104,16 @@ def frf_multiple_capter_simu_ref(inFile=None, fichier_sampl = "f_sampl_ref.txt")
 
 
 
-def printPerCapter(res,time):
+def printPerCapter(res,time,freq=[1]):
     n = len(res)
+    x = [ ((float(k)/len(res[0]))*freq[0]) for k in range(len(res[0])) ]
+    print(x)
+    print(freq)
     delta = time/n
     #plt.ion()
     for i in range(n):
-        plt.plot(numpy.absolute(res[i]))
-        plt.xlabel("Fequencies")
+        plt.plot(x,numpy.absolute(res[i]))
+        plt.xlabel("Frequencies (Hz)")
         plt.ylabel("FRF")
         #plt.pause(delta)
         #plt.clf()
@@ -140,5 +143,5 @@ def printPerFreq(res,time):
         
 #frf_multiple_capter_simu_ref("FRF_ref_")        
 #frf_multiple_capter_simu("FRF_damage.txt")
-#printPerCapter(frf_multiple_capter_simu_undamaged(),10)
+printPerCapter(frf_multiple_capter_simu_undamaged(),10, freq = parser.get("f_sampl_undamaged.txt"))
 #printPerCapter2(frf_multiple_capter_simu_damaged(),frf_multiple_capter_simu_undamaged(),10)

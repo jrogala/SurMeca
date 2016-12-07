@@ -8,7 +8,8 @@
 
   \title{Damage localization based on vibrations}
   \author{Benjamin Fasquelle, Nicolas Pompidor and Jimmy Rogala}
-  \institute{École Normale Supérieure de Rennes, département Informatique et Télécommunications}
+  \date{Supervised by Michael Döhler}
+  \institute{\textit{École Normale Supérieure de Rennes, département Informatique et Télécommunications}}
 
 
   \setbeamertemplate{navigation symbols}{} 
@@ -16,14 +17,14 @@
   \begin{document}
 
 
-%\AtBeginSection[]
-%{
-%  \begin{frame}<beamer>
-%    \frametitle{Sommaire}
-%{\scriptsize\tableofcontents[currentsection]
-%}
-%  \end{frame}
-%}
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+  \setcounter{tocdepth}{1}
+{\tableofcontents[currentsection]
+}
+  \end{frame}
+}
 
 \addtobeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber}
 
@@ -42,8 +43,20 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}<beamer>
+  \setcounter{tocdepth}{1}
+{\tableofcontents
+}
+\end{frame}
+
 \section{Introduction}
+
+
+
 \subsection{Purpose}
+
 \begin{frame}{Purpose}
 
 
@@ -91,9 +104,9 @@ A damage identification strategy for aerospace, civil and mechanical structures.
 
 \begin{center}
 \begin{itemize}
-\item<1-> Detection: Is the structure damaged or not?
+\item<1-> {\only<5-6>{\color{green}}Detection: Is the structure damaged or not?}
 \vspace{1\baselineskip}
-\item<2-|alert@5> Localization: Where is the damaged area located?
+\item<2-|alert@6> Localization: Where is the damaged area located?
 \vspace{1\baselineskip}
 \item<3-> Quantification: What is the extent of damage?
 \vspace{1\baselineskip}
@@ -122,7 +135,7 @@ Visual inspections or experimental techniques (such as radiography or ultrasound
 		\begin{center}
 		\setbeamertemplate{itemize item}{\color{red}$\times$}
 			\begin{itemize}
-				\item Requires to know area where it is located
+				\item Require to know area where it is located
 				\item May be costly
 				\item Taking a long time to be performed
 				\item Hope for easy access
@@ -172,6 +185,11 @@ assessment through FE model updating.
 \item Different types of modal data can be used (natural frequencies, eigenvalues, etc).
 \end{itemize}
 \end{center}
+
+\begin{block}{}
+Applicable to arbitrary structural types, but a precise model is required
+\end{block}
+
 \end{frame}
 
 \subsection{Data driven methods}
@@ -192,124 +210,21 @@ responses and excitations).
 \end{itemize}
 \end{center}
 
-
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{FRF Interpolation Method}
-
-\subsection{FRF Interpolation Method}
-\begin{frame}{FRF Interpolation Method}
-
-\begin{center}
-Data driven method
-\end{center}
-
-\pause
-
-\begin{alertblock}{Main hypothesis}
-A concentrated damage reflects
-in a loss of spatial regularity of the vibrational profile of a
-structure, compared with the undamaged state.
-\end{alertblock}
-
-\pause
-
-\underline{Main steps}:
-\begin{itemize}
-\item Frequency Response Function (FRF) calcul
-\item Interpolation on the FRF
-\item Error calcul
-\end{itemize}
-
-
-\end{frame}
-
-
-\subsection{FRF calcul}
-\begin{frame}{FRF calcul}
-\begin{exampleblock}{Frequency Response Function}
-\begin{center}
-$H = \frac{Y}{F}$
-\end{center}
-$F$: input
-
-$Y$: output
-\end{exampleblock}
-
-\pause
-
-Fourier transform:
-$
-F_n = \sum\limits_{k=1}^N f_k e^{-2i\pi kn/N},
-Y_n = \sum\limits_{k=1}^N y_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\}
-$
-
-
-\begin{block}{Estimator}
-\begin{center}
-$H_1(n) = \frac{Y_n}{F_n}$
-\end{center}
+\begin{block}{}
+Require no complicated model, allowing a simple and fast evaluation, but usually many sensors are required
 \end{block}
 
 \end{frame}
 
-\subsection{Interpolation}
-\begin{frame}{Interpolation}
-\underline{Cubic polynomial spline interpolation:}
-\begin{itemize}
-\item piecewise continuous curve, passing through each of the values
-\item continuous through to the second derivative
-\end{itemize}
-
-\begin{center}
-\includegraphics[width=5cm]{images/interpolation_spline.png}
-\end{center}
-
-\end{frame}
-
-\subsection{Error calcul}
-\begin{frame}{Error calcul}
-
-\begin{center}
-\includegraphics[width=6cm]{images/interpolation.png}
-\end{center}
-
-For each sensor $z_l$ at the frequency $f_i$:
-$E(z_l,f_i) = | H_R(z_l,f_i) - H_S(z_l,f_i) |$
-
-
-\pause
-
-For each sensor:
-$E(z_l) = \sqrt{  \sum\limits_{i=1}^N  E^2(z_l,f_i) }$
-
-\pause
-
-Difference with the reference state:
-$\Delta E(z_l) = E_d(z_l) - E_0(z_l)$
-
-\end{frame}
-
-\subsection{Probability of identification of a damage}
-\begin{frame}{Probability of identification of a damage}
-\begin{center}
-\includegraphics[height=4cm]{images/gaussiennes.png}
-\end{center}
-\end{frame}
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Physical Models}
 
-\subsection{Finite Elements model}
-\begin{frame}{Finite Elements model}
+\section{Vibration modelling}
+
+\subsection{Vibration modelling}
+\begin{frame}{Vibration modelling}
 
 \begin{center}
 \includegraphics[height=4cm]{images/finite_element.png}
@@ -378,6 +293,117 @@ D_d = D_c
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\section{FRF Interpolation Method}
+
+\subsection{FRF Interpolation Method}
+\begin{frame}{FRF Interpolation Method}
+
+\begin{center}
+\textbf{Data driven method}
+
+\textit{Damage localization in bridges via the FRF interpolation method}, by M. Dilena, M.P. Limongelli, A. Morassi
+\end{center}
+
+\pause
+
+\begin{alertblock}{Main hypothesis}
+A concentrated damage reflects
+in a loss of spatial regularity of the vibrational profile of a
+structure, compared with the undamaged state.
+\end{alertblock}
+
+\pause
+
+\underline{Main steps}:
+\begin{itemize}
+\item Frequency Response Function (FRF) computation
+\item Interpolation on the FRF
+\item Error computation
+\end{itemize}
+
+
+\end{frame}
+
+
+\subsection{FRF computation}
+\begin{frame}{FRF computation}
+\begin{exampleblock}{Frequency Response Function}
+\begin{center}
+$H = \frac{Y}{F}$
+\end{center}
+$F$: input
+
+$Y$: output
+\end{exampleblock}
+
+\pause
+
+Fourier transform:
+$
+F_n = \sum\limits_{k=1}^N f_k e^{-2i\pi kn/N},
+Y_n = \sum\limits_{k=1}^N y_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\}
+$
+
+
+\begin{block}{Estimator}
+\begin{center}
+$H_1(n) = \frac{Y_n}{F_n}$
+\end{center}
+\end{block}
+
+\end{frame}
+
+\subsection{Interpolation}
+\begin{frame}{Interpolation}
+\underline{Cubic polynomial spline interpolation:}
+\begin{itemize}
+\item piecewise continuous curve, passing through each of the values
+\item continuous through to the second derivative
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=5cm]{images/interpolation_spline.png}
+\end{center}
+
+\end{frame}
+
+\subsection{Error computation}
+\begin{frame}{Error computation}
+
+\begin{center}
+\includegraphics[width=6cm]{images/interpolation.png}
+\end{center}
+
+For each sensor $z_l$ at the frequency $f_i$:
+$E(z_l,f_i) = | H_R(z_l,f_i) - H_S(z_l,f_i) |$
+
+
+\pause
+
+For each sensor:
+$E(z_l) = \sqrt{  \sum\limits_{i=1}^N  E^2(z_l,f_i) }$
+
+\pause
+
+Difference with the reference state:
+$\Delta E(z_l) = E_d(z_l) - E_0(z_l)$
+
+\end{frame}
+
+\subsection{Probability of identification of a damage}
+\begin{frame}{Probability of identification of a damage}
+\begin{center}
+\includegraphics[height=4cm]{images/gaussiennes.png}
+\end{center}
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \section{Simulation}
 
 \subsection{System masses-springs}
@@ -400,6 +426,31 @@ m_1\\
 &&m_n
 \end{pmatrix}
 $
+\end{center}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}{System masses-springs}
+
+\begin{exampleblock}{Stiffness}
+\begin{center}
+$
+K = 
+\begin{pmatrix} 
+k_1 + k_2 & - k_1 \\ 
+- k_1 &\ddots\\ 
+& -k_i & k_i + k_{i+1} & -k_{i+1} \\
+&&&\ddots& -k_n\\
+&&& -k_n & k_n
+\end{pmatrix}
+$
+\end{center}
+\end{exampleblock}
+
+\begin{exampleblock}{Damping: Rayleigh case}
+\begin{center}
+$C = \alpha M + \beta K,\ \ \ \ \ \alpha, \beta \in \mathbb{R}_+$
 \end{center}
 \end{exampleblock}
 
@@ -433,6 +484,27 @@ y_k & = C_dx_k + B_df_k
 
 FRF for one sensor against frequencies
 \end{center}
+
+Natural frequencies (Hz):
+0.04,
+0.14,
+0.23,
+0.31,
+0.39,
+0.46,
+0.52,
+0.57,
+0.60,
+0.62
+
+
+
+
+
+
+
+
+
 \end{frame}
 
 
@@ -493,6 +565,7 @@ Damage between sensors 4 and 5
 
 \underline{What we will do:}
 \begin{itemize}
+\item More detailed evaluation
 \item Development of a statistical extension of this method
 \end{itemize}
 

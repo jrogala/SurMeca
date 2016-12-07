@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.5)  6 DEC 2016 19:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.5)  7 DEC 2016 12:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -639,44 +639,43 @@ Missing character: There is no € in font ptmr7t!
 Missing character: There is no “ in font ptmr7t!
  [3 <./images/interpolation.png> <./images/gaussiennes.png> <./images/ressorts.
 png>]
-<images/interpolation_spline.png, id=28, 572.1375pt x 460.72125pt>
+<images/interpolation_spline.png, id=28, 578.16pt x 433.62pt>
 File: images/interpolation_spline.png Graphic file (type png)
 
 <use images/interpolation_spline.png>
 Package pdftex.def Info: images/interpolation_spline.png used on input line 462
 .
-(pdftex.def)             Requested size: 129.0pt x 103.87573pt.
+(pdftex.def)             Requested size: 129.0pt x 96.74646pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/persensor1.png, id=29, 594.22pt x 455.7025pt>
+<images/persensor1.png, id=30, 578.16pt x 433.62pt>
 File: images/persensor1.png Graphic file (type png)
 
 <use images/persensor1.png>
 Package pdftex.def Info: images/persensor1.png used on input line 479.
-(pdftex.def)             Requested size: 154.80157pt x 118.71626pt.
- <images/damaged4.png, id=30, 594.22pt x 461.725pt>
+(pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
+ <images/damaged4.png, id=31, 578.16pt x 433.62pt>
 File: images/damaged4.png Graphic file (type png)
 
 <use images/damaged4.png>
 Package pdftex.def Info: images/damaged4.png used on input line 487.
-(pdftex.def)             Requested size: 154.80157pt x 120.2852pt.
+(pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
  [4 <./images/interpolation_spline.png> <./images/persensor1.png> <./images/dam
 aged4.png>]
-<images/damaged3.png, id=34, 609.27625pt x 459.7175pt>
+<images/damaged3.png, id=38, 578.16pt x 433.62pt>
 File: images/damaged3.png Graphic file (type png)
-
-<use images/damaged3.png>
+ <use images/damaged3.png>
 Package pdftex.def Info: images/damaged3.png used on input line 501.
-(pdftex.def)             Requested size: 154.80157pt x 116.80202pt.
+(pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
 
-<images/globalerror.png, id=35, 583.17876pt x 445.665pt>
+<images/globalerror.png, id=39, 578.16pt x 433.62pt>
 File: images/globalerror.png Graphic file (type png)
 
 <use images/globalerror.png>
 Package pdftex.def Info: images/globalerror.png used on input line 510.
-(pdftex.def)             Requested size: 154.80157pt x 118.29787pt.
+(pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
 
 Underfull \hbox (badness 1430) in paragraph at lines 544--544
 \OT1/ptm/m/n/10 mon-i-tor-ing". In: \OT1/ptm/m/it/10 Philo-soph-i-cal Trans-ac-
@@ -710,10 +709,10 @@ s/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (6 pages, 329654 bytes).
+Output written on paper.pdf (6 pages, 387596 bytes).
 PDF statistics:
- 81 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
+ 87 PDF objects out of 1000 (max. 8388607)
+ 52 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

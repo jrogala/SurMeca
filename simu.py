@@ -20,7 +20,7 @@ from scipy.stats import norm
 CAPTVALUE = 10
 SAMPLVALUE = 100000
 MAKEREF = 10
-DAMAGED_SENSOR = 5
+DAMAGED_SENSOR = [5,6]#must be a list
 DAMAGE = 10
 
 
@@ -128,7 +128,8 @@ def simulation(f, fichier_forces, fichier_acc, fichier_sampl, damaged = None):
 
 #first, we make all matrixes
 	if (damaged != None):
-		stiffness[DAMAGED_SENSOR] = DAMAGE
+		for d in DAMAGED_SENSOR:
+			stiffness[d] = DAMAGE
 
 	N = len(f)
 	n = len(mass)
