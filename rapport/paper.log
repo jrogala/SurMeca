@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.5)  7 DEC 2016 12:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.5)  3 JAN 2017 20:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -586,16 +586,19 @@ Package biblatex Info: ... file 'paper.bbl' found.
 Package biblatex Info: Reference section=0 on input line 18.
 Package biblatex Info: Reference segment=0 on input line 18.
 \c@remark=\count321
-LaTeX Font Info:    Try loading font information for U+msa on input line 80.
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no “ in font ptmr7t!
+LaTeX Font Info:    Try loading font information for U+msa on input line 83.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 80.
+LaTeX Font Info:    Try loading font information for U+msb on input line 83.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 104--108
+Underfull \hbox (badness 10000) in paragraph at lines 107--111
 
  []
 
@@ -603,30 +606,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--108
 
 
 ]
-<images/finite_element.png, id=15, 208.78pt x 340.27126pt>
+<images/finite_element.png, id=11, 208.78pt x 340.27126pt>
 File: images/finite_element.png Graphic file (type png)
 
 <use images/finite_element.png>
 Package pdftex.def Info: images/finite_element.png used on input line 176.
 (pdftex.def)             Requested size: 94.98228pt x 154.80157pt.
-
-<images/interpolation.png, id=16, 457.71pt x 250.9375pt>
+ [2 <./images/finite_element.png>]
+<images/interpolation.png, id=22, 457.71pt x 250.9375pt>
 File: images/interpolation.png Graphic file (type png)
 
 <use images/interpolation.png>
 Package pdftex.def Info: images/interpolation.png used on input line 299.
 (pdftex.def)             Requested size: 206.39685pt x 113.15439pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[2 <./images/finite_element.png>]
 <images/gaussiennes.png, id=23, 536.0025pt x 240.9pt>
 File: images/gaussiennes.png Graphic file (type png)
 
 <use images/gaussiennes.png>
 Package pdftex.def Info: images/gaussiennes.png used on input line 337.
 (pdftex.def)             Requested size: 206.39685pt x 92.75964pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <images/ressorts.png, id=24, 463.7325pt x 173.64874pt>
 File: images/ressorts.png Graphic file (type png)
@@ -647,9 +649,6 @@ Package pdftex.def Info: images/interpolation_spline.png used on input line 462
 .
 (pdftex.def)             Requested size: 129.0pt x 96.74646pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 <images/persensor1.png, id=30, 578.16pt x 433.62pt>
 File: images/persensor1.png Graphic file (type png)
 
@@ -662,27 +661,34 @@ File: images/damaged4.png Graphic file (type png)
 <use images/damaged4.png>
 Package pdftex.def Info: images/damaged4.png used on input line 487.
 (pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
- [4 <./images/interpolation_spline.png> <./images/persensor1.png> <./images/dam
-aged4.png>]
-<images/damaged3.png, id=38, 578.16pt x 433.62pt>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[4 <./images/interpolation_spline.png> <./images/persensor1.png>]
+<images/damaged3.png, id=37, 578.16pt x 433.62pt>
 File: images/damaged3.png Graphic file (type png)
  <use images/damaged3.png>
 Package pdftex.def Info: images/damaged3.png used on input line 501.
 (pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
 
-<images/globalerror.png, id=39, 578.16pt x 433.62pt>
+<images/globalerror.png, id=38, 578.16pt x 433.62pt>
 File: images/globalerror.png Graphic file (type png)
 
 <use images/globalerror.png>
 Package pdftex.def Info: images/globalerror.png used on input line 510.
 (pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[5 <./images/damaged4.png> <./images/damaged3.png> <./images/globalerror.png>]
 Underfull \hbox (badness 1430) in paragraph at lines 544--544
 \OT1/ptm/m/n/10 mon-i-tor-ing". In: \OT1/ptm/m/it/10 Philo-soph-i-cal Trans-ac-
 tions of the
  []
 
-[5 <./images/damaged3.png> <./images/globalerror.png>] [6
+[6
 
 ] (./paper.aux)
 Package logreq Info: Writing requests to 'paper.run.xml'.
@@ -690,11 +696,11 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 9585 strings out of 493029
- 161519 string characters out of 6136235
- 573137 words of memory out of 5000000
+ 9586 strings out of 493029
+ 161525 string characters out of 6136235
+ 574137 words of memory out of 5000000
  12997 multiletter control sequences out of 15000+600000
- 36891 words of font info for 72 fonts, out of 8000000 for 9000
+ 37969 words of font info for 73 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  44i,14n,45p,813b,1109s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -709,7 +715,7 @@ s/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (6 pages, 387596 bytes).
+Output written on paper.pdf (6 pages, 391708 bytes).
 PDF statistics:
  87 PDF objects out of 1000 (max. 8388607)
  52 compressed objects within 1 object stream

@@ -34,7 +34,7 @@ DAMAGE = simu.DAMAGE
 #sortie: liste des erreurs au carre (une erreur par capteur)
 def interpolation_error(complex_list):
 	n = len(complex_list)
-	x_list = [k for k in range(n)]
+	x_list = [k for k in range(n)]# attention: la liste des positions, ne fonctionne ici que s'il y a equidistance
 	error_list = []
 	exc = 0
 	for i in range(n):
@@ -53,6 +53,31 @@ def interpolation_error(complex_list):
 	#print(exc)
 	return error_list
 
+
+
+def interpolation_error_by_2(complex_list):
+	n = len(complex_list)
+	x_list = [k for k in range(n)]# attention: la liste des positions, ne fonctionne ici que s'il y a equidistance
+	error_list = [ 0 for k in range(n) ]
+	exc = 0
+	for i in range(n-1):
+		x = []
+		y = []
+		for j in range(n):
+			if (j != i and j != i+1):
+				x += [x_list[j]]
+				y += [complex_list[j]]
+		try:
+			f = interp1d(x, y, kind = 'cubic')
+			error_list[i] +=  np.absolute(complex_list[i] - f(i))
+			error_list[i+1] +=  np.absolute(complex_list[i+1] - f(i+1))
+		except:
+			#exc += 1
+			error_list += [ 0 ]
+	#print(exc)
+	return error_list
+
+
 #entree: liste de N listes de m elements ou
 # N = nb de frequences
 # m = nb de capteurs
@@ -69,6 +94,18 @@ def global_error(frf_list):
 			error[i] += interpol[i]**2
 	for i in range(nb_sensor):
 		error[i] = math.sqrt(error[i])
+	return error
+	
+
+
+def diff_with_ref(test,ref):
+	n = len(test[0])#nb de sensor
+	error = [ 0 for k in range(n) ]
+	nb_freq = len(test)
+	for f in range(nb_freq):
+		if f > -1:
+			for i in range(n):
+				error[i] += np.absolute( test[f][i] - ref[f][i] )
 	return error
 
 

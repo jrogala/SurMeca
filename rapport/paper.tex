@@ -35,11 +35,14 @@
 
 
 \begin{abstract}
-%The surveillance of a structure, as a bridge, with a human presence is something we want automate.
-%A damage identification strategy  is referred as a structural health monitoring (SHM).
-%The SHM can be divided into four levels: detection, localization, quantification and prediction.
-%We present the existing methods for the detection and the localization of damage, then we detail one of them, namely the Frequency Response Function interpolating method.
-%We also analyse this method with a simulation of a spring–mass system.
+For aerospace, civil and mechanical engineering infrastructure, implementing a damage identification strategy is referred as a structural health monitoring.
+With the help of accelerometers, a frequency point of view allows monitoring without the needs of human presence.
+The damage identification can be divided into four levels: detection, localization, quantification and prediction.
+We present the existing methods for the detection and the localization of damage, then we detail one of them, namely the Frequency Response Function interpolating method.
+We also analyse this method with a simulation of a spring–mass system, and discuss the results.
+
+
+
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -59,7 +62,7 @@ The process of implementing a damage identification strategy for aerospace,
 
 In the most general terms, damage can be defined as changes in a system that negatively affect its current or future performance. 
 In general, a damage can be observed by comparing two different states of the system,
- one of which is supposed to represent the initial often undamaged state.
+ one of which is supposed to represent the initial, and often undamaged, state.
 
 
 Almost all industries want to detect damage in their infrastructure as quickly as possible whether 
@@ -115,14 +118,11 @@ Most of the different vibration based damage identification methods can be class
 
 In model-based methods, damage is identified through the updating of a finite element (FE) model.
  Most of the time, modal characteristics is the experimental data used for damage assessment through FE model updating.% which are extracted from measured response time histories using modal analysis techniques.
- Different types of modal data can be used. For changes in structural stiffness, model updating can be performed based only on natural frequencies or eigenvalues which are known to change in this case.
- Detailed informations about model-based methods can be found in references  %rajouter celles en-dessous
-% C.-P. Fritzen, D. Jennewein, T. Kiefer, (1998). Damage detection based on model updating methods, Mechanical Systems and Signal Processing, 12(1): 163–186.
+Different types of modal data can be used. For changes in structural stiffness, model updating can be performed based only on natural frequencies or eigenvalues which are known to change in this case.
+ Detailed informations about model-based methods can be found in references 
 \cite{fritzen1998damage},
-% Teughels A. and G. De Roeck. (2005). Damage detection and parameter identification by finite element model updating. Archives of Computational Methods in Engineering, 12(2):123-164.
-\cite{teughels2005damage} and
-% Simoen E., De Roeck G., and Lombaert G. (2015). Dealing with uncertainty in model updating for damage assessment: a review. Mechanical Systems and Signal Processing, 56-57:123-149.
-\cite{simoen2015dealing}.
+\cite{simoen2015dealing} and
+\cite{teughels2005damage}.
 
 
 \subsection{Data driven methods}
@@ -340,7 +340,7 @@ Thus, once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be
 \end{figure}
 
 
-A detailled analysis of the statistical behaviour of the interpolation error is envisaged in the second part of this project.
+A detailed analysis of the statistical behaviour of the interpolation error is envisaged in the second part of this project.
 
 \section{Simulation}
 
@@ -515,11 +515,11 @@ Finaly, we can see in Figure (\ref{globalerror}) the global error described in s
 
 \section{Conclusion}
 
-In this paper, we presented the structure heatlh monitoring and a state of the art for this. Then we detailled one of the methods, the FRF interpolation method, and some physical models. Last, we presented our simulation with a sping-mass system and our results with the implementation of the FRF interpolation method.
+In this paper, we presented the structure heatlh monitoring and a state of the art for this. Then we detailed one of the methods, the FRF interpolation method, and some physical models. Last, we presented our simulation with a sping-mass system and our results with the implementation of the FRF interpolation method.
 
 We saw that we have to do a selection of the frequencies where we calculate the interpolation error. 
 
-In the second part of this project, we will do a detailled analysis of the statistical behaviour of the interpolation error.
+In the second part of this project, we will do a detailed analysis of the statistical behaviour of the interpolation error.
 
 
 %\appendices

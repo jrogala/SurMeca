@@ -143,5 +143,5 @@ def printPerFreq(res,time):
         
 #frf_multiple_capter_simu_ref("FRF_ref_")        
 #frf_multiple_capter_simu("FRF_damage.txt")
-printPerCapter(frf_multiple_capter_simu_undamaged(),10, freq = parser.get("f_sampl_undamaged.txt"))
+#printPerCapter(frf_multiple_capter_simu_undamaged(),10, freq = parser.get("f_sampl_undamaged.txt"))
 #printPerCapter2(frf_multiple_capter_simu_damaged(),frf_multiple_capter_simu_undamaged(),10)

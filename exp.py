@@ -23,7 +23,7 @@ DAMAGE = simu.DAMAGE
 ###########################     Print functions    ########################################
 ###########################################################################################
 
-indices = [399, 386, 364, 334, 296, 252, 202, 147, 90, 30]
+#indices = [399, 386, 364, 334, 296, 252, 202, 147, 90, 30] for 10
 
 
 
@@ -144,16 +144,16 @@ def experience():
 
 	#printRef(ref,inf,sup)
 
-	error_ref = interpolation.global_error([ref[i] for i in indices])
-	error_undamaged = interpolation.global_error([frf_undamaged[i] for i in indices])
-	error_damaged = interpolation.global_error([frf_damaged[i] for i in indices])
+	error_ref = interpolation.global_error(ref)
+	error_undamaged = interpolation.global_error(frf_undamaged)
+	error_damaged = interpolation.global_error(frf_damaged)
 
 
-	undamaged = [0 for i in range(nb_sensor) ]
-	damaged = [0 for i in range(nb_sensor) ]
-	for i in range(nb_sensor):
-		undamaged[i] = error_undamaged[i] - error_ref[i]
-		damaged[i] = error_damaged[i] - error_ref[i]
+	undamaged = [0 for i in range(nb_sensor-4) ]
+	damaged = [0 for i in range(nb_sensor-4) ]
+	for i in range(2,nb_sensor-2):
+		undamaged[i-2] = error_undamaged[i] - error_ref[i]
+		damaged[i-2] = error_damaged[i] - error_ref[i]
 
 	print("*************************\n Errors \n *************************")
 	#print("Error ref: ")
@@ -172,8 +172,15 @@ def experience():
 	plt.xlabel("Global error")
 	plt.legend()
 	plt.show()
+	
+	
+	erreur_brut = interpolation.diff_with_ref(frf_damaged, ref)
+	plt.plot(erreur_brut)
+	plt.xlabel("Erreur brute")
+	plt.legend()
+	plt.show()
 
-	printAll(ref,inf,sup, frf_undamaged, frf_damaged)
+	#printAll(ref,inf,sup, frf_undamaged, frf_damaged)
 	#printInterpolationError(ref,inf,sup,undamaged,damaged)
 	#printAllMoustache(frf_list_ref, frf_undamaged, frf_damaged)
 

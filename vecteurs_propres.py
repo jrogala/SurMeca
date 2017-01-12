@@ -43,8 +43,8 @@ n = len(mass)
 M = matrix_M(mass)
 K = matrix_K(stiffness)
 
-print( M )
-print( K )
+#print( M )
+#print( K )
 
 Minv = np.linalg.inv(M)
 MinvK = np.dot(Minv,K)
@@ -57,7 +57,7 @@ for i in eigenvalues:
 		frq += [math.sqrt(abs(i))/(2*math.pi)]
 
 frq = frq[::-1]
-print(frq)
+#print(frq)
 
 ev = ev[::-1]
 ev = transpo(ev)
@@ -80,15 +80,17 @@ eigenvalues, ev_damaged = np.linalg.eig(MinvK)
 
 ev_damaged = ev_damaged[::-1]
 ev_damaged = transpo(ev_damaged)
-
+"""
 for k in range(len(ev)):
 	plt.plot(pos,ev[k])
 	plt.plot(pos,ev_damaged[k])
 	plt.title("Vecteur " + str(k))
 	plt.show()
-
-
 """
+
+error = [ 0 for k in range(len(ev)) ]
+error_damaged = [ 0 for k in range(len(ev)) ]
+
 for k in range(len(ev)):
 	for i in range(len(ev[k]))[1:-1]:
 		x = []
@@ -99,7 +101,7 @@ for k in range(len(ev)):
 				x += [pos[j]]
 				y += [ev[k][j]]
 				yd += [ev_damaged[k][j]]
-		print(y)
+		#print(y)
 		f = interp1d(x, y, kind = 'cubic')
 		g = interp1d(x, yd, kind = 'cubic')
 		v_int = f( pos[i] )
@@ -113,12 +115,25 @@ for k in range(len(ev)):
 			else:
 				y += [v_int]
 				yd += [v_int_damaged]
-		plt.subplot(121)
-		plt.plot(pos,ev[k])
-		plt.plot(pos,y)
-		plt.subplot(122)
-		plt.plot(pos,ev_damaged[k])
-		plt.plot(pos,yd)
-		plt.show()
-"""
+		error[i] += abs(v_int - ev[k][i])
+		error_damaged[i] += abs(v_int_damaged - ev[k][i])
+		#plt.subplot(121)
+		#plt.plot(pos,ev[k])
+		#plt.plot(pos,y)
+		#plt.subplot(122)
+		#plt.plot(pos,ev_damaged[k])
+		#plt.plot(pos,yd)
+		#plt.show()
+
+diff = error_damaged
+for k in range(len(diff)):
+	diff[k] -= error[k]
+
+print("Damage on: " + str(DAMAGED_SENSOR))
+#print("Undamaged:")
+#print(error)
+#print("Damaged:")
+#print(error_damaged)
+print("Diff:")
+print(diff)
 
