@@ -14,10 +14,6 @@ def get(path):
                 s.append(values[0])
             else:
                 s.append(values)
-    try:
-        print(path + " done. Xsize= " + str(len(s)) + " Ysize= " + str(len(s[0])))
-    except:
-        print(path + " done. Xsize= " + str(len(s)))
     return s
 
 def writeValues(path,res):
@@ -47,10 +43,10 @@ def get2(path):
                 s.append(values[0])
             else:
                 s.append(values)
-    try:
-        print(path + " done. Xsize= " + str(len(s)) + " Ysize= " + str(len(s[0])))
-    except:
-        print(path + " done. Xsize= " + str(len(s)))
+    #try:
+    #    print(path + " done. Xsize= " + str(len(s)) + " Ysize= " + str(len(s[0])))
+    #except:
+    #    print(path + " done. Xsize= " + str(len(s)))
     return s
 
 

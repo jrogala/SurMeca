@@ -2,7 +2,7 @@ import scipy.signal
 import numpy
 import tool
 
-NPERSEGVALUE = 1000
+NPERSEGVALUE = 1024
 
 def frf(i,o,est = "H1"):
     """
