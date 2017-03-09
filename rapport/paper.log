@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.5)  3 JAN 2017 20:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.5)  7 MAR 2017 16:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -634,18 +634,19 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: images/ressorts.png Graphic file (type png)
 
 <use images/ressorts.png>
-Package pdftex.def Info: images/ressorts.png used on input line 354.
+Package pdftex.def Info: images/ressorts.png used on input line 370.
 (pdftex.def)             Requested size: 206.39685pt x 77.28801pt.
+ [3 <./images/interpolation.png> <./images/gaussiennes.png> <./images/ressorts.
+png>]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no “ in font ptmr7t!
- [3 <./images/interpolation.png> <./images/gaussiennes.png> <./images/ressorts.
-png>]
+
 <images/interpolation_spline.png, id=28, 578.16pt x 433.62pt>
 File: images/interpolation_spline.png Graphic file (type png)
 
 <use images/interpolation_spline.png>
-Package pdftex.def Info: images/interpolation_spline.png used on input line 462
+Package pdftex.def Info: images/interpolation_spline.png used on input line 478
 .
 (pdftex.def)             Requested size: 129.0pt x 96.74646pt.
 
@@ -653,53 +654,99 @@ Package pdftex.def Info: images/interpolation_spline.png used on input line 462
 File: images/persensor1.png Graphic file (type png)
 
 <use images/persensor1.png>
-Package pdftex.def Info: images/persensor1.png used on input line 479.
+Package pdftex.def Info: images/persensor1.png used on input line 499.
 (pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
- <images/damaged4.png, id=31, 578.16pt x 433.62pt>
-File: images/damaged4.png Graphic file (type png)
+ [4 <./images/interpolation_spline.png>]
+<images/detect_curve_without_noise.png, id=35, 578.16pt x 433.62pt>
+File: images/detect_curve_without_noise.png Graphic file (type png)
 
-<use images/damaged4.png>
-Package pdftex.def Info: images/damaged4.png used on input line 487.
-(pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
+<use images/detect_curve_without_noise.png>
+Package pdftex.def Info: images/detect_curve_without_noise.png used on input li
+ne 516.
+(pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
+
+<images/fp.png, id=36, 578.16pt x 433.62pt>
+File: images/fp.png Graphic file (type png)
+ <use images/fp.png>
+Package pdftex.def Info: images/fp.png used on input line 524.
+(pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[4 <./images/interpolation_spline.png> <./images/persensor1.png>]
-<images/damaged3.png, id=37, 578.16pt x 433.62pt>
-File: images/damaged3.png Graphic file (type png)
- <use images/damaged3.png>
-Package pdftex.def Info: images/damaged3.png used on input line 501.
-(pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
+<images/damage_noise_10percent.png, id=37, 578.16pt x 433.62pt>
+File: images/damage_noise_10percent.png Graphic file (type png)
 
-<images/globalerror.png, id=38, 578.16pt x 433.62pt>
-File: images/globalerror.png Graphic file (type png)
-
-<use images/globalerror.png>
-Package pdftex.def Info: images/globalerror.png used on input line 510.
-(pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
+<use images/damage_noise_10percent.png>
+Package pdftex.def Info: images/damage_noise_10percent.png used on input line 5
+40.
+(pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[5 <./images/damaged4.png> <./images/damaged3.png> <./images/globalerror.png>]
-Underfull \hbox (badness 1430) in paragraph at lines 544--544
+<images/detect_curve_with_005noise.png, id=38, 578.16pt x 433.62pt>
+File: images/detect_curve_with_005noise.png Graphic file (type png)
+
+<use images/detect_curve_with_005noise.png>
+Package pdftex.def Info: images/detect_curve_with_005noise.png used on input li
+ne 550.
+(pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/detect_curve_with_01noise.png, id=39, 578.16pt x 433.62pt>
+File: images/detect_curve_with_01noise.png Graphic file (type png)
+
+<use images/detect_curve_with_01noise.png>
+Package pdftex.def Info: images/detect_curve_with_01noise.png used on input lin
+e 558.
+(pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/fp_noise005.png, id=40, 578.16pt x 433.62pt>
+File: images/fp_noise005.png Graphic file (type png)
+
+<use images/fp_noise005.png>
+Package pdftex.def Info: images/fp_noise005.png used on input line 566.
+(pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<images/detect_max_10percent.png, id=41, 578.16pt x 433.62pt>
+File: images/detect_max_10percent.png Graphic file (type png)
+
+<use images/detect_max_10percent.png>
+Package pdftex.def Info: images/detect_max_10percent.png used on input line 577
+.
+(pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[5 <./images/persensor1.png> <./images/detect_curve_without_noise.png> <./image
+s/fp.png> <./images/damage_noise_10percent.png> <./images/detect_curve_with_005
+noise.png>]
+Underfull \hbox (badness 1430) in paragraph at lines 608--608
 \OT1/ptm/m/n/10 mon-i-tor-ing". In: \OT1/ptm/m/it/10 Philo-soph-i-cal Trans-ac-
 tions of the
  []
 
-[6
-
-] (./paper.aux)
+[6 <./images/detect_curve_with_01noise.png> <./images/fp_noise005.png> <./image
+s/detect_max_10percent.png>] (./paper.aux)
 Package logreq Info: Writing requests to 'paper.run.xml'.
 \openout1 = `paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 9586 strings out of 493029
- 161525 string characters out of 6136235
- 574137 words of memory out of 5000000
- 12997 multiletter control sequences out of 15000+600000
+ 9610 strings out of 493029
+ 162371 string characters out of 6136235
+ 576173 words of memory out of 5000000
+ 13017 multiletter control sequences out of 15000+600000
  37969 words of font info for 73 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  44i,14n,45p,813b,1109s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -715,10 +762,10 @@ s/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (6 pages, 391708 bytes).
+Output written on paper.pdf (6 pages, 578804 bytes).
 PDF statistics:
- 87 PDF objects out of 1000 (max. 8388607)
+ 95 PDF objects out of 1000 (max. 8388607)
  52 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

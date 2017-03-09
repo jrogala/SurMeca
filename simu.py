@@ -20,8 +20,12 @@ from scipy.stats import norm
 CAPTVALUE = 20
 SAMPLVALUE = 100000
 MAKEREF = 10
-DAMAGED_SENSOR = []#must be a list
+DAMAGED_SENSOR = [7]#must be a list
 DAMAGE = 90
+
+#for noise
+mean = 0
+standard_deviation = 10
 
 
 pos = [ k for k in range(CAPTVALUE) ]
@@ -272,8 +276,6 @@ def simulation(f, fichier_forces, fichier_acc, fichier_sampl, damaged = None):
 
 ##### white noise ######
 
-mean = 0
-standard_deviation = 1
 
 def white_noise(n,nb_sensor):
 	noise = []

@@ -6,8 +6,41 @@ from scipy.stats import norm
 import matplotlib.pyplot as plt
 from simu import *
 from scipy.interpolate import interp1d
+import random
+import curve_study as cs
+
+####################################################################################################################
+############################################## Parameters ##########################################################
+####################################################################################################################
+
+CAPTVALUE = 20
+DAMAGED_SENSOR = [2]#must be a list
+DAMAGE = 0.20
 
 
+pos = [ k for k in range(CAPTVALUE) ]
+mass = [ 100 for k in range(CAPTVALUE) ]
+stiffness = [ 100 for k in range(CAPTVALUE) ]
+#mass = [ 100*random.randint(1,5) for k in range(CAPTVALUE) ]
+#stiffness = [ 100*random.randint(1,5) for k in range(CAPTVALUE) ]
+
+
+####################################################################################################################
+############################################## Functions ###########################################################
+####################################################################################################################
+
+
+def matrix_K(stiffness):#make the stiffness matrix
+	n = len(stiffness)
+	K = np.zeros((n,n))
+	for i in range(n-1):
+		K[i][i] += stiffness[i+1]
+		K[i+1][i+1] += stiffness[i+1]
+		K[i+1][i] = - stiffness[i+1]
+		K[i][i+1] = - stiffness[i+1]
+	K[0][0] += stiffness[0]
+	K[n-1][n-1] += stiffness[n-1]
+	return K
 
 def transpo(m):
 	n = len(m)
@@ -19,78 +52,107 @@ def transpo(m):
 		t += [c]
 	return t
 
-#m = [ [1, 2, 3], [4, 5, 6], [7, 8, 9] ]
-#print(m)
-#print(transpo(m))
+def minus_list(l,m):
+	n = len(l)
+	r = [ (l[k] - m[k]) for k in range(n)]
+	return r		
 
+####################################################################################################################
+############################################## Undamaged state #####################################################
+####################################################################################################################
 
-
-
-CAPTVALUE = 8
-SAMPLVALUE = 1000
-MAKEREF = 10
-DAMAGED_SENSOR = [5]#must be a list
-DAMAGE = 70
-
-
-pos = [ k for k in range(CAPTVALUE) ]
-mass = [ 100 for k in range(CAPTVALUE) ]
-stiffness = [ 100 for k in range(CAPTVALUE) ]
-
-
-N = SAMPLVALUE
-n = len(mass)
 M = matrix_M(mass)
 K = matrix_K(stiffness)
-
-#print( M )
-#print( K )
-
 Minv = np.linalg.inv(M)
 MinvK = np.dot(Minv,K)
 
+#print("Without damage:")
+#print(stiffness)
+#print( M )
+#print( K )
+#print(MinvK)
+
 eigenvalues, ev = np.linalg.eig(MinvK)
-
-
-frq = []
-for i in eigenvalues:
-		frq += [math.sqrt(abs(i))/(2*math.pi)]
-
-frq = frq[::-1]
+#print(eigenvalues)
+#frq = []
+#for i in eigenvalues:
+#		frq += [math.sqrt(abs(i))/(2*math.pi)]
+#frq = frq[::-1]
 #print(frq)
+#ev = ev[::-1]
 
-ev = ev[::-1]
 ev = transpo(ev)
 
 
-for x in DAMAGED_SENSOR:
-	stiffness[x] = DAMAGE
+####################################################################################################################
+############################################## Damaged state #######################################################
+####################################################################################################################
 
-N = SAMPLVALUE
-n = len(mass)
+for x in DAMAGED_SENSOR:
+	stiffness[x] = int(stiffness[x]*(1-DAMAGE))
+
 M = matrix_M(mass)
 K = matrix_K(stiffness)
-C = matrix_C(M,K,0.005,0.005)
-
-
 Minv = np.linalg.inv(M)
 MinvK = np.dot(Minv,K)
 
+#print("With damage:")
+#print(stiffness)
+#print( K )
+#print(MinvK)
 eigenvalues, ev_damaged = np.linalg.eig(MinvK)
-
-ev_damaged = ev_damaged[::-1]
+#print(eigenvalues)
+#ev_damaged = ev_damaged[::-1]
 ev_damaged = transpo(ev_damaged)
+
+
+####################################################################################################################
+############################################## Damage research #####################################################
+####################################################################################################################
+
+
+for k in range(len(ev)):
+	if (ev[k][0] < 0):
+		for j in range(len(ev[k])):
+			ev[k][j] = - ev[k][j]
+	if (ev_damaged[k][0] < 0):
+		for j in range(len(ev_damaged[k])):
+			ev_damaged[k][j] = - ev_damaged[k][j]
+
+
 """
 for k in range(len(ev)):
-	plt.plot(pos,ev[k])
-	plt.plot(pos,ev_damaged[k])
-	plt.title("Vecteur " + str(k))
-	plt.show()
+	if (1):
+		plt.plot(pos,ev[k])
+		plt.plot(pos,ev_damaged[k])
+		plt.title("Vecteur " + str(k))
+		plt.show()
 """
 
+
+fund = []
+fund_damaged = []
+for x in ev:
+	if cs.is_fundamental(x):
+		fund += [ x ]
+for x in ev_damaged:
+	if cs.is_fundamental(x):
+		fund_damaged += [ x ]
+		
+if (len(fund) == len(fund_damaged)):
+	for k in range(len(fund)):
+		#plt.plot(pos,fund[k])
+		#plt.plot(pos,fund_damaged[k])
+		#plt.show()
+		diff = minus_list(fund[k],fund_damaged[k])
+		plt.plot(pos, diff)
+		plt.show()
+		dam, q = cs.max_derivate(diff)
+		print("Damage on:" + str(dam) + " , quantification: " + str(q) )
+		
+"""
 error = [ 0 for k in range(len(ev)) ]
 error_damaged = [ 0 for k in range(len(ev)) ]
-
 for k in range(len(ev)):
 	for i in range(len(ev[k]))[1:-1]:
 		x = []
@@ -136,4 +198,5 @@ print("Damage on: " + str(DAMAGED_SENSOR))
 #print(error_damaged)
 print("Diff:")
 print(diff)
+"""
 

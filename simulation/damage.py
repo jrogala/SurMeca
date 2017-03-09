@@ -262,27 +262,12 @@ def experience():
 	detect_damage1_inv = [ 0 for k in range(CAPTVALUE) ]
 	detect_damage2_inv = [ 0 for k in range(CAPTVALUE) ]
 	
-	
-	"""
-	detect_damage3 = [ 0 for k in range(CAPTVALUE) ]
-	detect_damage4 = [ 0 for k in range(CAPTVALUE) ]
-	detect_damage5 = [ 0 for k in range(CAPTVALUE) ]
-	detect_damage6 = [ 0 for k in range(CAPTVALUE) ]
-	detect_damage7 = [ 0 for k in range(CAPTVALUE) ]
-	"""
-	
 	threshold1 = parser.get3("data/threshold1.txt")
 	threshold2 = parser.get3("data/threshold2.txt")
 	
 	threshold1_inv = parser.get3("data/threshold1_inv.txt")
 	threshold2_inv = parser.get3("data/threshold2_inv.txt")
-	"""
-	threshold3 = [ 1.1*threshold1[k] for k in range(CAPTVALUE) ]
-	threshold4 = [ 1.2*threshold1[k] for k in range(CAPTVALUE) ]
-	threshold5 = [ 1.3*threshold1[k] for k in range(CAPTVALUE) ]
-	threshold6 = [ 1.5*threshold1[k] for k in range(CAPTVALUE) ]
-	threshold7 = [ 2*threshold1[k] for k in range(CAPTVALUE) ]
-	"""
+
 	for k in range(MAKEREF):
 		print(k)
 		frf_damaged, acc = frf_multiple_sensors(2, acc)
@@ -298,34 +283,13 @@ def experience():
 				detect_damage1_inv[x] = detect_damage1_inv[x] + 1
 			if error_damaged_inv[x] > threshold2_inv[x]:
 				detect_damage2_inv[x] = detect_damage2_inv[x] + 1
-			"""
-			if diff[x] > threshold3[x]:
-				detect_damage3[x] = detect_damage3[x] + 1
-			if diff[x] > threshold4[x]:
-				detect_damage4[x] = detect_damage4[x] + 1
-			if diff[x] > threshold5[x]:
-				detect_damage5[x] = detect_damage5[x] + 1
-			if diff[x] > threshold6[x]:
-				detect_damage6[x] = detect_damage6[x] + 1
-			if diff[x] > threshold7[x]:
-				detect_damage7[x] = detect_damage7[x] + 1
-			"""
+
 	
 	parser.writeValues3("data/detect_damage_1_"+str(DAMAGE)+"percent.txt",detect_damage1)
 	parser.writeValues3("data/detect_damage_2_"+str(DAMAGE)+"percent.txt",detect_damage2)
 	
 	parser.writeValues3("data/detect_damage_1_inv_"+str(DAMAGE)+"percent.txt",detect_damage1_inv)
 	parser.writeValues3("data/detect_damage_2_inv_"+str(DAMAGE)+"percent.txt",detect_damage2_inv)
-	
-	
-	
-	"""
-	parser.writeValues3("data/detect_damage_3_"+str(DAMAGE)+"percent.txt",detect_damage3)
-	parser.writeValues3("data/detect_damage_4_"+str(DAMAGE)+"percent.txt",detect_damage4)
-	parser.writeValues3("data/detect_damage_5_"+str(DAMAGE)+"percent.txt",detect_damage5)
-	parser.writeValues3("data/detect_damage_6_"+str(DAMAGE)+"percent.txt",detect_damage6)
-	parser.writeValues3("data/detect_damage_7_"+str(DAMAGE)+"percent.txt",detect_damage7)
-	"""
 	
 	print("Detect_damage writed in data/detect_damage_i_"+str(DAMAGE)+"percent.txt")
 	
@@ -334,13 +298,7 @@ def experience():
 	
 	plt.plot(detect_damage1_inv, label = 'Simple Threshold Inv')
 	plt.plot(detect_damage2_inv, label = 'With Gaussiennes Inv')
-	"""
-	plt.plot(detect_damage3, label = '110%')
-	plt.plot(detect_damage4, label = '120%')
-	plt.plot(detect_damage5, label = '130%')
-	plt.plot(detect_damage6, label = '150%')
-	plt.plot(detect_damage7, label = '200%')
-	"""
+
 	plt.title("Damage: "+str(DAMAGE)+"%")
 	plt.legend()
 	plt.show()

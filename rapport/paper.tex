@@ -340,7 +340,23 @@ Thus, once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be
 \end{figure}
 
 
-A detailed analysis of the statistical behaviour of the interpolation error is envisaged in the second part of this project.
+\subsection{A variant of the method}
+
+We propose here a variant of the FRF interpolation method. While we have worked on the implementation of the original method, we have observed the eigenvectors of the matrix $M^{-1}K$ (see part III), which have similar properties than the FRF. We noticed that the following method is better than the interpolation method (compute the interpolation error, then compute a difference) to detect damaged on the eigenvectors:
+\begin{itemize}
+\item first, compute the difference between the eigenvectors
+\item second, compute the interpolation error on this difference
+\end{itemize}
+
+Thus, we also study in this paper a variant of the FRF interpolation method . The only difference with the original method is the order of the steps:
+\begin{itemize}
+\item Compute the FRF
+\item Compute the difference between the FRF of reference and the FRF of the studied state, for each frequency
+\item Compute the interpolation error of these differencies
+\item Compute the sum of the interpolation errors at each frequency
+\end{itemize}
+
+From now on, to tell the difference between the two methods, we shall call our variant the FRF difference method.
 
 \section{Simulation}
 
@@ -467,12 +483,16 @@ Cubic polynomial spline interpolations produce an interpolated function that is 
 
 With this interpolation, we can calculate the error as it is described in the section IV.
 
-\subsection{Results}
+\section{Results}
 
-For the following simulation results, we consider a system with 10 masses. We put a sensor on each mass. For the damaged state, we lower the stifness of the spring between sensors 4 and 5 by 90\%. The values of the FRF on the figures are the norm of the FRF values.
+For the following simulation results, we consider a system with 10 masses. We put a sensor on each mass. For the damaged state, we lower the stifness of the spring between sensors 6 and 7. The values of the FRF on the figures are the norm of the FRF values.
 
-Figure (\ref{frf_freq}) presents results of the FRF on the simulation datas: here is the curve of the FRF of one sensor, against frequencies. We can see three peaks which are at the natural frequencies of the system, but there is one of these frequencies which not present a peak. Seeing this curve for each sensor, we observed that certain sensors have one peak for each natural frequencies, and others sensors have one peak for each except one, relied on the position of the sensor in the system. It is problematic because it is around the natural frequencies of the system that we have better datas, but if certain sensors haven't response with certain frequencies, we could miss out on a damage.
 
+\subsection{FRF results}
+
+Figure (\ref{frf_freq}) presents results of the FRF on the simulation datas: here is the curve of the FRF of one sensor, against frequencies. We can see peaks which are at the natural frequencies of the system, but there is one of these frequencies which not present a peak.
+
+Remake figure.
 
 \begin{figure}[h!]
   \centering
@@ -482,44 +502,88 @@ Figure (\ref{frf_freq}) presents results of the FRF on the simulation datas: her
 \end{figure}
 
 
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.3\textwidth]{images/damaged4.png}
-  \caption{FRF values for 10 sensors, at a fixed frequency (damage between sensors 4 and 5}
-  \label{damage}
-\end{figure}
-
-Figure (\ref{damage}) is the FRF values for the ten sensors (at a fixed frequency). Here, we easily can see that there is a damage between the sensors 4 and 5 (as we noticed it). However, as the damaged FRF is away from the reference FRF, we can see that there isn't a significant loss of regularity at sensors 4 and 5 (the interpolation error isn't high).
+To test the localization, we have to make a thresold for each sensor. We want that a computed error taller than the threshold on one sensor is equivalent to have a damage on this sensor. With the FRF interpolation method, we have compute two thresholds from 100 experiments with the undameged state. The first is the maximum of the 100 errors computed. The second is computed from the statistics of the 100 errors computed: we suppose that the probability of the error follow a normal distribution, and we choose the threshold at 95\% of this distribution. 
 
 
+\subsection{Without noise}
 
-Figure (\ref{damage2}) is the FRF values for the same ten sensors that in Figure (\ref{damage}), with the same damage, at a different frequency. Here, we can see a significant loss of regularity at sensors 6 and 8. It shows that we have to select the frequencies where we calculate the interpolation error. Indeed, an hypothesis is that significant values of the FRF are near to the natural frequencies of the system (that we can see in Figure (\ref{frf_freq})).
+
+Figure() presents the results of the localization of a damage on sensor 7, without noise.
 
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.3\textwidth]{images/damaged3.png}
-  \caption{FRF values for 10 sensors, at a fixed frequency (damage between sensors 4 and 5}
-  \label{damage2}
+  \includegraphics[width=0.4\textwidth]{images/detect_curve_without_noise.png}
+  \caption{Damage detection rate against damage (without noise)}
+  \label{detect}
 \end{figure}
 
-Finaly, we can see in Figure (\ref{globalerror}) the global error described in section IV. The two first and last values (i.e. for sensor 0,1,8 and 9) aren't useful because cubic spline interpolation requires two values on each side of the interpolate value. We can see that, if we consider all frequencies for the error calcul, results aren't as we want: here the damaged system has a FRF more regular than the undamaged system. A selection of the frequencies is necessary.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.3\textwidth]{images/globalerror.png}
-  \caption{FRF values for 10 sensors, at a fixed frequency (damage between sensors 4 and 5}
-  \label{globalerror}
+  \includegraphics[width=0.4\textwidth]{images/fp.png}
+  \caption{False positives rate against damage (without noise)}
+  \label{fp}
 \end{figure}
+
+
+
+\subsection{With noise}
+
+
+
+Figure (\ref{itp_error_noise}) presents the results of the localization of a damage on sensor 7, where noise (5\%) has been add at the measurement.
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/damage_noise_10percent.png}
+  \caption{Error computed for a damage of 10\% on sensor 7}
+  \label{itp_error_noise}
+\end{figure}
+
+
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/detect_curve_with_005noise.png}
+  \caption{}
+  \label{detect_5noise}
+\end{figure}
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/detect_curve_with_01noise.png}
+  \caption{}
+  \label{detect_10noise}
+\end{figure}
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/fp_noise005.png}
+  \caption{}
+  \label{fp_5noise}
+\end{figure}
+
+
+\subsection{Eliminate the false positives}
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/detect_max_10percent.png}
+  \caption{}
+  \label{detect_max}
+\end{figure}
+
 
 
 \section{Conclusion}
 
 In this paper, we presented the structure heatlh monitoring and a state of the art for this. Then we detailed one of the methods, the FRF interpolation method, and some physical models. Last, we presented our simulation with a sping-mass system and our results with the implementation of the FRF interpolation method.
-
-We saw that we have to do a selection of the frequencies where we calculate the interpolation error. 
-
-In the second part of this project, we will do a detailed analysis of the statistical behaviour of the interpolation error.
 
 
 %\appendices

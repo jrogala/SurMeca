@@ -120,7 +120,7 @@ def experience():
 	frf_undamaged = numpy.transpose(parser.get2("FRF_undamaged.txt"))
 
 
-	frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
+	#frf_damaged = numpy.transpose(main.frf_multiple_capter_simu_damaged("FRF_damaged.txt"))
 	frf_damaged = numpy.transpose(parser.get2("FRF_damaged.txt"))
 
 	print("*************************\n Average frf calcul \n *************************")
@@ -155,6 +155,7 @@ def experience():
 		undamaged[i-2] = error_undamaged[i] - error_ref[i]
 		damaged[i-2] = error_damaged[i] - error_ref[i]
 
+	"""
 	print("*************************\n Errors \n *************************")
 	#print("Error ref: ")
 	#print(error_ref)
@@ -166,21 +167,23 @@ def experience():
 	plt.plot(error_undamaged)
 	plt.plot(error_damaged)
 	plt.show()
+	"""
 	
+	"""
 	plt.plot(undamaged, label = "Undamaged")
 	plt.plot(damaged, label = "Damaged")
 	plt.xlabel("Global error")
 	plt.legend()
 	plt.show()
 	
-	
 	erreur_brut = interpolation.diff_with_ref(frf_damaged, ref)
 	plt.plot(erreur_brut)
 	plt.xlabel("Erreur brute")
 	plt.legend()
 	plt.show()
+	"""
 
-	#printAll(ref,inf,sup, frf_undamaged, frf_damaged)
+	printAll(ref,inf,sup, frf_undamaged, frf_damaged)
 	#printInterpolationError(ref,inf,sup,undamaged,damaged)
 	#printAllMoustache(frf_list_ref, frf_undamaged, frf_damaged)
 
