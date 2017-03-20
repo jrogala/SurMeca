@@ -4,13 +4,12 @@ import matplotlib.pyplot as plt
 
 DAMAGED_SENSOR = 7
 
-#NOISE = 0.05
-#error = [0,2,3,4,5,6,8,10,20]
-
-NOISE = 0.1
-damage = [0,5,10,20,30,40,50,60,70,80,90,100]
 
 NOISE = 0
+#damage = [0,5,10,20,30,40,50,60,70,80,90,100]
+
+NOISE = 0.05
+damage = [10,20,30,40,50]
 
 q1, q2, q1_inv, q2_inv = [], [], [], []
 

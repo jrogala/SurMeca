@@ -96,9 +96,9 @@ These techniques may be costly, taking a long time to be performed and impractic
 
 
 The purpose of this work is the analysis of a particular data-driven damage localization method,
- namely the FRF interpolation method \cite{dilena2015damage}, and the development of a statistical extension of this method.
+ namely the FRF interpolation method \cite{dilena2015damage}. Our contribution is the development of a simulation to obtain acceleration measurement (which can run on several structures), a proposition of a variant of the FRF interpolation method, and the statistical analysis of the two methods.
 This paper is organized as follows. In section II we  present the existing methods (model-based and data driven methods), 
-then in section III we detail the different models of vibrating structures and finally, in section IV we talk about the localization using FRF interpolation method and, finally,  its results in section V.
+then in section III we talk about the localization using FRF interpolation method, in section IV we detail the different models of vibrating structures used to obtain data and, finally, the experiences and its results in section V.
 
 
 
@@ -159,119 +159,9 @@ A third group of methods for damage localization and quantification lies between
 
 
 
-\section{Models of vibrating structures}% or Physical models
-
-\subsection{Finite element model}
-
-The dynamic behaviour of a mechanical system consisting of $n$ degrees of freedom (see Figure (\ref{finite_el})) is described by following matrix differential equation:
-\begin{equation}
-M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)
-\label{fondamental}
-\end{equation}
-where $q(t)$ is the displacement vector at a continous time $t$, and $M, C, K \in \mathbb{R}^{n \times n}$, are the mass, damping and stiffness matrices. 
-
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[height=0.3\textwidth]{images/finite_element.png}
-  \caption{Finite element model, from \cite{peeters2000system}}
-  \label{finite_el}
-\end{figure}
-
-For civil engineering structures, Equation (\ref{fondamental}) is obtained as the finite element approximation of the system with only $n$ dregrees of freedom.
-The structure is divided in elements, and the global mass matrix $M$ and stiffness matrix $K$ are generated from the geometry and material
-properties of the elements.
-
-\subsection{Continous-time state-space model} %(model parameters and reduction):
-
-From the Equation (\ref{fondamental}) and with the variable change $x =
-\begin{pmatrix}
-\dot{q} \\
-q
-\end{pmatrix}$, we obtain the state equation:
-\begin{equation}
-\dot{x}(t) = A_cx(t) + B_cf(t)
-\end{equation}
- where
-$A_c =
-\begin{pmatrix}
-0 & I \\
-M^{-1}K & M^{-1}C
-\end{pmatrix}$
-and
-$B_c=
-\begin{pmatrix}
-0 \\
-M^{-1}
-\end{pmatrix}$
-
-In a practical vibration experiment, not all $n$ degrees of freedom of the structure are measured, but only
-a subset. The observation equation is:
-\begin{equation}
-y(t) = C_cx(t) + D_cf(t)
-\end{equation}
-
-If it is assumed that all $n$ degrees of freedom are measured and that the sensors are accelerometers transducers, we have
-$C_c =
-\begin{pmatrix}
-M^{-1}K & M^{-1}C
-\end{pmatrix}$
-and
-$D_c=
-\begin{pmatrix}
-M^{-1}
-\end{pmatrix}$
-
-Thus, the classical continuous-time state-space model is:
-\begin{equation}
-\left\{
-\begin{array}{ll}
-\dot{x}(t) = A_cx(t) + B_cf(t) \\
-y(t) = C_cx(t) + D_cf(t)
-\end{array}
-\right.
-\end{equation}
-
-\subsection{Discrete-time state-space model} %(impulses response)
-
-Up to now all equations were expressed in continuous time, whereas in reality
-measurements are taken at discrete time instants.
-So this model need to be converted to discrete time.
-Another reason is that it is needed for performing simulations.
-
-Thus, we choose a certain fixed sampling period $\Delta t$, and the continuous-time equations are discretized and solved at all
-discrete time instants $k$ with $t = k \Delta t, k \in \mathbb{N}$.
-
-The discrete-time state-space model is:
-\begin{equation}
-\left\{
-\begin{array}{ll}
-x_{k+1} & = A_dx_k + B_df_k \\
-y_k & = C_dx_k + B_df_k
-\end{array}
-\right.
-\label{discrete}
-\end{equation}
-where
-\begin{equation}
-\begin{array}{ll}
-A_d = exp(A_c \Delta t) \\
-B_d= (A_d - I) A^{-1}_c B_c \\
-C_d = C_c \\
-D_d = D_c
-\end{array}
-\end{equation}
-
-
-
-%Stockastic state-space models
-%ARMA models
-%Continuous time frequency-domain models
-%Discrete time frequency-domain models
-
-
 \section{Localization using FRF interpolation method}
 
+\subsection{The FRF interpolation method}
 
 This method is presented in \cite{dilena2015damage}.
 The main hypothesis underlying the method is that a concentrated damage reflects in a loss of spatial regularity of the
@@ -339,6 +229,64 @@ Thus, once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be
   \label{proba}
 \end{figure}
 
+\subsection{Frequency Response Function}
+
+The FRF correspond to the transfer function of the system. In frequency domain, if $F$ is the force that is apply on the system and $S$ is the response of this force, the FRF is given by:
+\begin{equation}
+H = \frac{S}{F}
+\end{equation} 
+
+We want to calculate the FRF of the system, for each sensor localization. Here, we calculate an estimation of the FRF, called $H_1$ estimator \cite{cauberghe2004applied}. We suppose we have a vector of the forces $\{ f_k\}_{k=1}^N$ and a vector of the accelerations $\{ y_k\}_{k=1}^N$ for each sensor (the two vectors are size $N$). We need to be in frequency domain, so we calculate the discrete Fourier transform:
+\begin{equation}
+\begin{array}{ll}
+F_n = \sum\limits_{k=1}^N f_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\} \\
+Y_n = \sum\limits_{k=1}^N y_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\}
+\end{array}
+\end{equation}
+
+Then we calculate the power spectra, i.e. the Auto Power spectra of the inputs and the outputs
+and the Cross Power spectra between the inputs and outputs respectively given by:
+
+\begin{equation}
+\begin{array}{ll}
+S_{ff}(n) = F_n F_n^H \ \ \ \ \ n \in \{1 ... N\} \\
+S_{yf}(n) = Y_n F_n^H \ \ \ \ \ n \in \{1 ... N\}
+\end{array}
+\end{equation}
+where $M^H$ is the Hermitian of the matrix $M$. Thus, the FRF is given by:
+\begin{equation}
+H_1(n) = S_{yf}(n) S_{ff}(n)^{-1}
+\end{equation}
+
+\begin{remark}
+If we consider each sensor separately, $F_n$ and $Y_n$ are scalars, so we have:
+\begin{equation}
+\begin{array}{lll}
+H_1(n) & = & S_{yf}(n) S_{ff}(n)^{-1} \\
+& = & Y_n F_n^H (F_n F_n^H)^{-1} \\
+& = & Y_n / F_n
+\end{array}
+\end{equation}
+\end{remark}
+
+\subsection{Interpolation}
+
+We have to calculate for each sensor $z_l$ and for each considered frequency $f_i$ the cubic polynomial spline interpolation of the transfer function $H_R(z_k,f_i)$.
+The cubic spline interpolation is a piecewise continuous curve, passing through each of the values.
+There is a separate cubic polynomial interpolation for each interval, each with its own coefficients.
+Cubic polynomial spline interpolations produce an interpolated function that is continuous through to the second derivative.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.25\textwidth]{images/interpolation_spline.png}
+  \caption{Cubic spline interpolation}
+  \label{spline}
+\end{figure}
+
+
+With this interpolation, we can calculate the error as it is described in the section IV.
+
+
 
 \subsection{A variant of the method}
 
@@ -358,7 +306,112 @@ Thus, we also study in this paper a variant of the FRF interpolation method . Th
 
 From now on, to tell the difference between the two methods, we shall call our variant the FRF difference method.
 
+
+
 \section{Simulation}
+
+\subsection{Models of vibrating structures}% or Physical models
+
+\subsubsection{Finite element model}
+
+The dynamic behaviour of a mechanical system consisting of $n$ degrees of freedom (see Figure (\ref{finite_el})) is described by following matrix differential equation:
+\begin{equation}
+M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)
+\label{fondamental}
+\end{equation}
+where $q(t)$ is the displacement vector at a continous time $t$, and $M, C, K \in \mathbb{R}^{n \times n}$, are the mass, damping and stiffness matrices. 
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[height=0.3\textwidth]{images/finite_element.png}
+  \caption{Finite element model, from \cite{peeters2000system}}
+  \label{finite_el}
+\end{figure}
+
+For civil engineering structures, Equation (\ref{fondamental}) is obtained as the finite element approximation of the system with only $n$ dregrees of freedom.
+The structure is divided in elements, and the global mass matrix $M$ and stiffness matrix $K$ are generated from the geometry and material
+properties of the elements.
+
+\subsubsection{Continous-time state-space model} %(model parameters and reduction):
+
+From the Equation (\ref{fondamental}) and with the variable change $x =
+\begin{pmatrix}
+\dot{q} \\
+q
+\end{pmatrix}$, we obtain the state equation:
+\begin{equation}
+\dot{x}(t) = A_cx(t) + B_cf(t)
+\end{equation}
+ where
+$A_c =
+\begin{pmatrix}
+0 & I \\
+M^{-1}K & M^{-1}C
+\end{pmatrix}$
+and
+$B_c=
+\begin{pmatrix}
+0 \\
+M^{-1}
+\end{pmatrix}$
+
+In a practical vibration experiment, not all $n$ degrees of freedom of the structure are measured, but only
+a subset. The observation equation is:
+\begin{equation}
+y(t) = C_cx(t) + D_cf(t)
+\end{equation}
+
+If it is assumed that all $n$ degrees of freedom are measured and that the sensors are accelerometers transducers, we have
+$C_c =
+\begin{pmatrix}
+M^{-1}K & M^{-1}C
+\end{pmatrix}$
+and
+$D_c=
+\begin{pmatrix}
+M^{-1}
+\end{pmatrix}$
+
+Thus, the classical continuous-time state-space model is:
+\begin{equation}
+\left\{
+\begin{array}{ll}
+\dot{x}(t) = A_cx(t) + B_cf(t) \\
+y(t) = C_cx(t) + D_cf(t)
+\end{array}
+\right.
+\end{equation}
+
+\subsubsection{Discrete-time state-space model} %(impulses response)
+
+Up to now all equations were expressed in continuous time, whereas in reality
+measurements are taken at discrete time instants.
+So this model need to be converted to discrete time.
+Another reason is that it is needed for performing simulations.
+
+Thus, we choose a certain fixed sampling period $\Delta t$, and the continuous-time equations are discretized and solved at all
+discrete time instants $k$ with $t = k \Delta t, k \in \mathbb{N}$.
+
+The discrete-time state-space model is:
+\begin{equation}
+\left\{
+\begin{array}{ll}
+x_{k+1} & = A_dx_k + B_df_k \\
+y_k & = C_dx_k + B_df_k
+\end{array}
+\right.
+\label{discrete}
+\end{equation}
+where
+\begin{equation}
+\begin{array}{ll}
+A_d = exp(A_c \Delta t) \\
+B_d= (A_d - I) A^{-1}_c B_c \\
+C_d = C_c \\
+D_d = D_c
+\end{array}
+\end{equation}
 
 \subsection{Obtaining acceleration measures}
 
@@ -426,62 +479,6 @@ Now, we have the sampling period:
 
 So we can calculate the matrices $A, B$ and make the simulation with the discrete-time state-space model (Equation (\ref{discrete})). To simulate the forces $f_k$, we use a white noise.
 
-\subsection{Frequency Response Function}
-
-The FRF correspond to the transfer function of the system. In frequency domain, if $F$ is the force that is apply on the system and $S$ is the response of this force, the FRF is given by:
-\begin{equation}
-H = \frac{S}{F}
-\end{equation} 
-
-We want to calculate the FRF of the system, for each sensor localization. Here, we calculate an estimation of the FRF, called $H_1$ estimator \cite{cauberghe2004applied}. We suppose we have a vector of the forces $\{ f_k\}_{k=1}^N$ and a vector of the accelerations $\{ y_k\}_{k=1}^N$ for each sensor (the two vectors are size $N$). We need to be in frequency domain, so we calculate the discrete Fourier transform:
-\begin{equation}
-\begin{array}{ll}
-F_n = \sum\limits_{k=1}^N f_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\} \\
-Y_n = \sum\limits_{k=1}^N y_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\}
-\end{array}
-\end{equation}
-
-Then we calculate the power spectra, i.e. the Auto Power spectra of the inputs and the outputs
-and the Cross Power spectra between the inputs and outputs respectively given by:
-
-\begin{equation}
-\begin{array}{ll}
-S_{ff}(n) = F_n F_n^H \ \ \ \ \ n \in \{1 ... N\} \\
-S_{yf}(n) = Y_n F_n^H \ \ \ \ \ n \in \{1 ... N\}
-\end{array}
-\end{equation}
-where $M^H$ is the Hermitian of the matrix $M$. Thus, the FRF is given by:
-\begin{equation}
-H_1(n) = S_{yf}(n) S_{ff}(n)^{-1}
-\end{equation}
-
-\begin{remark}
-If we consider each sensor separately, $F_n$ and $Y_n$ are scalars, so we have:
-\begin{equation}
-\begin{array}{lll}
-H_1(n) & = & S_{yf}(n) S_{ff}(n)^{-1} \\
-& = & Y_n F_n^H (F_n F_n^H)^{-1} \\
-& = & Y_n / F_n
-\end{array}
-\end{equation}
-\end{remark}
-
-\subsection{Interpolation}
-
-We have to calculate for each sensor $z_l$ and for each considered frequency $f_i$ the cubic polynomial spline interpolation of the transfer function $H_R(z_k,f_i)$.
-The cubic spline interpolation is a piecewise continuous curve, passing through each of the values.
-There is a separate cubic polynomial interpolation for each interval, each with its own coefficients.
-Cubic polynomial spline interpolations produce an interpolated function that is continuous through to the second derivative.
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.25\textwidth]{images/interpolation_spline.png}
-  \caption{Cubic spline interpolation}
-  \label{spline}
-\end{figure}
-
-
-With this interpolation, we can calculate the error as it is described in the section IV.
 
 \section{Results}
 
@@ -579,6 +576,41 @@ Figure (\ref{itp_error_noise}) presents the results of the localization of a dam
   \label{detect_max}
 \end{figure}
 
+
+\subsection{Beam}
+
+We test our localization on another structure: a beam. We don't detail this model in this paper, we just use it to verify our methods. The damage is localized between the sensors 4 and 5.
+
+Figure (\ref{beam_curve}) shows two FRF, one for the undamaged state and the second for the damaged one, at a fixed frequency. We can easily see there is an irregularity at the sensor 4.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/poutre_curve2.png}
+  \caption{}
+  \label{beam_curve}
+\end{figure}
+
+
+Figure (\ref{beam_error}) shows the computed error. We can see that there are only two sensors with a positiv error, which are the sensors 4 and 5. Thus, the localization is good.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/poutre_error.png}
+  \caption{}
+  \label{beam_error}
+\end{figure}
+
+
+
+\subsection{Quantification}
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/quantification_without_noise_100.png}
+  \caption{}
+  \label{quant}
+\end{figure}
 
 
 \section{Conclusion}

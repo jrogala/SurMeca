@@ -24,10 +24,9 @@ CAPTVALUE = 20
 SAMPLVALUE = 10000
 MAKEREF = 100
 DAMAGED_SENSOR = [7]#must be a list
-DAMAGE = 30# % of damage
+DAMAGE = 20# % of damage
 
 pos = [ k for k in range(CAPTVALUE) ]
-z = [ 0 for k in range(CAPTVALUE) ]
 mass = [ 100 for k in range(CAPTVALUE) ]
 
 
@@ -64,7 +63,7 @@ def two_max_ind(tab):
 			else:
 				b = i
 				vb = tab[i]
-	return a, b
+	return a, b, va, vb
 
 
 
@@ -206,7 +205,7 @@ A, B, C, D, sampling_freq = make_matrices(mass, stiffness_undamaged)
 for x in DAMAGED_SENSOR:
 	stiffness_damaged[x] = int(float(stiffness_undamaged[x])*float(100-DAMAGE)/100)
 
-A_damaged, B_damaged, C_useless, D_useless, freq_useless = make_matrices(mass, stiffness_damaged)
+A_damaged, B_damaged, C_damaged, D_useless, freq_useless = make_matrices(mass, stiffness_damaged)
 
 #acc = [ [0 for k in range(2*n) ] ]
 
@@ -239,7 +238,7 @@ def simulation(typ,acc,std_noise):
 		f_damaged = white_noise(SAMPLVALUE,n)
 		for i in range(SAMPLVALUE):
 			acc += [ np.dot(A_damaged,acc[-1]) + np.dot(B_damaged,f_damaged[i]) ]
-			measurement_damaged += [ np.dot(C,acc[-2]) + np.dot(D,f_damaged[i]) ]
+			measurement_damaged += [ np.dot(C_damaged,acc[-2]) + np.dot(D,f_damaged[i]) ]
 		for i in range(SAMPLVALUE):
 			for j in range(CAPTVALUE):
 				measurement_damaged[i][j] = measurement_damaged[i][j] + NOISE*norm.rvs(size=1, loc = 0, scale = std_noise)[0]
@@ -311,6 +310,12 @@ def experience():
 	threshold1_inv = parser.get3("data/threshold1_inv_noise"+str(NOISE)+".txt")
 	threshold2_inv = parser.get3("data/threshold2_inv_noise"+str(NOISE)+".txt")
 	
+	
+	quantification1 = [ 0 for k in range(CAPTVALUE) ]
+	quantification2 = [ 0 for k in range(CAPTVALUE) ]
+	quantification1_inv = [ 0 for k in range(CAPTVALUE) ]
+	quantification2_inv = [ 0 for k in range(CAPTVALUE) ]
+	
 	for k in range(MAKEREF):
 		print(k)
 		frf_damaged, acc = frf_multiple_sensors(2, acc, std_noise)
@@ -318,35 +323,79 @@ def experience():
 		error_damaged_inv = itp.global_error(minus_list(frf_ref,frf_damaged))
 		diff = minus_list(error_damaged, error_ref)
 		#threshold1
-		max1, max2 = two_max_ind(minus_list(diff,threshold1))
+		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(diff,threshold1))
 		if max1 > 0:
-			detect_damage1[max1] = detect_damage1[max1] + 1
+			detect_damage1[ind_max1] = detect_damage1[ind_max1] + 1
+			quantification1[ind_max1] = quantification1[ind_max1] + max1
 		if max2 > 0:
-			detect_damage1[max2] = detect_damage1[max2] + 1
+			detect_damage1[ind_max2] = detect_damage1[ind_max2] + 1
+			quantification1[ind_max2] = quantification1[ind_max2] + max2
 		#threshold2
-		max1, max2 = two_max_ind(minus_list(diff,threshold2))
+		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(diff,threshold2))
 		if max1 > 0:
-			detect_damage2[max1] = detect_damage2[max1] + 1
+			detect_damage2[ind_max1] = detect_damage2[ind_max1] + 1
+			quantification2[ind_max1] = quantification2[ind_max1] + max1
 		if max2 > 0:
-			detect_damage2[max2] = detect_damage2[max2] + 1
+			detect_damage2[ind_max2] = detect_damage2[ind_max2] + 1
+			quantification2[ind_max2] = quantification2[ind_max2] + max2
 		#threshold_inv1
-		max1, max2 = two_max_ind(minus_list(error_damaged_inv,threshold1_inv))
+		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(error_damaged_inv,threshold1_inv))
 		if max1 > 0:
-			detect_damage1_inv[max1] = detect_damage1_inv[max1] + 1
+			detect_damage1_inv[ind_max1] = detect_damage1_inv[ind_max1] + 1
+			quantification1_inv[ind_max1] = quantification1_inv[ind_max1] + max1
 		if max2 > 0:
-			detect_damage1_inv[max2] = detect_damage1_inv[max2] + 1
+			detect_damage1_inv[ind_max2] = detect_damage1_inv[ind_max2] + 1
+			quantification1_inv[ind_max2] = quantification1_inv[ind_max2] + max2
 		#threshold_inv2
-		max1, max2 = two_max_ind(minus_list(error_damaged_inv,threshold2_inv))
+		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(error_damaged_inv,threshold2_inv))
 		if max1 > 0:
-			detect_damage2_inv[max1] = detect_damage2_inv[max1] + 1
+			detect_damage2_inv[ind_max1] = detect_damage2_inv[ind_max1] + 1
+			quantification2_inv[ind_max1] = quantification2_inv[ind_max1] + max1
 		if max2 > 0:
-			detect_damage2_inv[max2] = detect_damage2_inv[max2] + 1
-	
+			detect_damage2_inv[ind_max2] = detect_damage2_inv[ind_max2] + 1
+			quantification2_inv[ind_max2] = quantification2_inv[ind_max2] + max2
+			
+			
 	parser.writeValues3("data/detect_damage_1_"+str(DAMAGE)+"percent_noise"+str(NOISE)+"_max.txt",detect_damage1)
 	parser.writeValues3("data/detect_damage_2_"+str(DAMAGE)+"percent_noise"+str(NOISE)+"_max.txt",detect_damage2)
 	parser.writeValues3("data/detect_damage_1_inv_"+str(DAMAGE)+"percent_noise"+str(NOISE)+"_max.txt",detect_damage1_inv)
 	parser.writeValues3("data/detect_damage_2_inv_"+str(DAMAGE)+"percent_noise"+str(NOISE)+"_max.txt",detect_damage2_inv)
 	print("Detect_damage writed in data/detect_damage_i_"+str(DAMAGE)+"percent_noise"+str(NOISE)+"_max.txt")
+	
+	
+	for k in range(1,CAPTVALUE-1):
+		if detect_damage1[k] > 0:
+			quantification1[k] = (quantification1[k]/detect_damage1[k] ) / threshold1[k]
+		if detect_damage2[k] > 0:
+			quantification2[k] = (quantification2[k]/detect_damage2[k]) / threshold2[k]
+		if detect_damage1_inv[k] > 0:
+			quantification1_inv[k] = (quantification1_inv[k]/detect_damage1_inv[k]) / threshold1_inv[k]
+		if detect_damage2_inv[k] > 0:
+			quantification2_inv[k] = (quantification2_inv[k]/detect_damage2_inv[k]) / threshold2_inv[k]
+	
+	parser.writeValues3("data/quantification1_"+str(DAMAGE)+"damage_"+str(NOISE)+"noise.txt",quantification1)
+	parser.writeValues3("data/quantification2_"+str(DAMAGE)+"damage_"+str(NOISE)+"noise.txt",quantification2)
+	parser.writeValues3("data/quantification1_inv_"+str(DAMAGE)+"damage_"+str(NOISE)+"noise.txt",quantification1_inv)
+	parser.writeValues3("data/quantification2_inv_"+str(DAMAGE)+"damage_"+str(NOISE)+"noise.txt",quantification2_inv)
+	
+	print("Quantification writed in data/quantification_i_"+str(DAMAGE)+"damage_"+str(NOISE)+"noise.txt")
+	
+	
+	for k in range(CAPTVALUE):
+		if detect_damage1[k] > 0:
+			print("Threshold 1: damage detected on sensor " + str(k) + "with quantification : " + str(quantification1[k]) )
+	
+	for k in range(CAPTVALUE):
+		if detect_damage2[k] > 0:
+			print("Threshold 2: damage detected on sensor " + str(k) + "with quantification : " + str(quantification2[k]) )
+	
+	for k in range(CAPTVALUE):
+		if detect_damage1_inv[k] > 0:
+			print("Threshold 1 inv: damage detected on sensor " + str(k) + "with quantification : " + str(quantification1_inv[k]) )
+	
+	for k in range(CAPTVALUE):
+		if detect_damage2_inv[k] > 0:
+			print("Threshold 2 inv: damage detected on sensor " + str(k) + "with quantification : " + str(quantification2_inv[k]) )
 	
 	plt.plot(detect_damage1, label = 'Simple Threshold')
 	plt.plot(detect_damage2, label = 'With Gaussiennes')
