@@ -19,7 +19,7 @@ import random
 ############# variables ########################
 ################################################
 
-NOISE = 0.15
+NOISE = 0.04
 CAPTVALUE = 20
 SAMPLVALUE = 10000
 MAKEREF = 100

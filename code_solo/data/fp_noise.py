@@ -1,11 +1,13 @@
 import parser as pa
 import matplotlib.pyplot as plt
 
-
-error = [0,2,3,4,5,10,20]
-
 DAMAGED_SENSOR = 7
-NOISE = 0.05
+
+#error = [0,2,3,4,5,10,20]
+#NOISE = 0.05
+
+NOISE = 0.04
+error = [5,10,15,20,25,30]
 
 
 def fp(t):

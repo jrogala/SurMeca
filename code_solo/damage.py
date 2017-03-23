@@ -25,7 +25,7 @@ SAMPLVALUE = 10000
 MAKEREF = 100
 DAMAGED_SENSOR = [7]#must be a list
 EXCITED_SENSOR = 0
-DAMAGE = 10# % of damage
+DAMAGE = 8# % of damage
 
 pos = [ k for k in range(CAPTVALUE) ]
 z = [ 0 for k in range(CAPTVALUE) ]
@@ -166,7 +166,7 @@ A, B, C, D, sampling_freq = make_matrices(mass, stiffness_undamaged)
 for x in DAMAGED_SENSOR:
 	stiffness_damaged[x] = int(float(stiffness_undamaged[x])*float(100-DAMAGE)/100)
 
-A_damaged, B_damaged, C_useless, D_useless, freq_useless = make_matrices(mass, stiffness_damaged)
+A_damaged, B_damaged, C_damaged, D_damaged, freq_useless = make_matrices(mass, stiffness_damaged)
 
 #acc = [ [0 for k in range(2*n) ] ]
 
@@ -193,7 +193,7 @@ def simulation(typ,acc):
 		f_damaged = white_noise(SAMPLVALUE,n)
 		for i in range(SAMPLVALUE):
 			acc += [ np.dot(A_damaged,acc[-1]) + np.dot(B_damaged,f_damaged[i]) ]
-			measurement_damaged += [ np.dot(C,acc[-2]) + np.dot(D,f_damaged[i]) ]
+			measurement_damaged += [ np.dot(C_damaged,acc[-2]) + np.dot(D_damaged,f_damaged[i]) ]
 		return measurement_damaged, f_damaged, acc
 
 	

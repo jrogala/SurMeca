@@ -7,9 +7,11 @@ DAMAGED_SENSOR = 7
 #NOISE = 0.05
 #error = [0,2,3,4,5,6,8,10,20]
 
-NOISE = 0.1
-error = [2,3,4,5,7,8,9,10,12,14,15,20]
+#NOISE = 0.1
+#error = [2,3,4,5,7,8,9,10,12,14,15,20]
 
+NOISE = 0.04
+error = [5,10,15,20,25,30]
 
 def tp(t):
 	return max(t[DAMAGED_SENSOR-1], t[DAMAGED_SENSOR])

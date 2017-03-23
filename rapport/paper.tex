@@ -167,6 +167,16 @@ This method is presented in \cite{dilena2015damage}.
 The main hypothesis underlying the method is that a concentrated damage reflects in a loss of spatial regularity of the
 vibrational profile of a structure, compared with the reference (undamaged) state.
 
+Figure (\ref{theo}) shows this loss of spatial regularity on the theoretical FRF, for a damage at the position 7.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/theo60.png}
+  \caption{Theoretical FRF for undamaged and damage states}
+  \label{theo}
+\end{figure}
+
+
 In this section, we suppose that we have $n$ sensors, which are located along an axis $z$, and we denote them by
 $\{z_l\}, l\in \{1 ... n\}$. We also suppose we have $N$ measurements for each sensor.
 
@@ -210,24 +220,6 @@ degradation at location $z_l$:
 An increase in the interpolation error between the reference configuration and the current configuration at a station $z_l$ , i.e.
 $ \Delta E(z_l) > 0$, highlights a localized reduction of smoothness in the vibrational amplitude profile and, therefore, it is assumed
 to be a symptom of a local variation of stiffness at $z_l$ associated with the occurrence of damage.
-
-The above analysis has been developed in a deterministic context. Several sources, such as temperature, nonlinear
-behavior, soil structure interaction and noise in recorded data, can induce variations of the interpolation error even if no
-damage occurs.
-
-Thus, once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be taller than $E_T$ to have a high probability of identification of a damage at location $z_l$. Indeed, as we can see in the Figure (\ref{proba}), the curves which represent the fact to have a damage or not have a share area: if the interpolation error $ \Delta E(z_l)$ is in this area, one can commit two errors:
-\begin{itemize}
-\item if it is in the area $P_f(z_l)$ under the graph of $p_{E,0}(z_l)$, once can detect a damage since there isn't one (false alarm).
-\item if it is in the area $P_m(z_l)$ under the graph of $p_{E,d}(z_l)$, once can not detect a damage since there is one (missing alarm).
-\end{itemize}
-
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/gaussiennes.png}
-  \caption{Probabilities of false and missing alarm, from \cite{dilena2015damage}}
-  \label{proba}
-\end{figure}
 
 \subsection{Frequency Response Function}
 
@@ -287,6 +279,26 @@ Cubic polynomial spline interpolations produce an interpolated function that is 
 With this interpolation, we can calculate the error as it is described in the section IV.
 
 
+\subsection{False and missing alarm}
+
+The above analysis has been developed in a deterministic context. Several sources, such as temperature, nonlinear
+behavior, soil structure interaction and noise in recorded data, can induce variations of the interpolation error even if no
+damage occurs.
+
+Thus, once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be taller than $E_T$ to have a high probability of identification of a damage at location $z_l$. Indeed, as we can see in the Figure (\ref{proba}), the curves which represent the fact to have a damage or not have a share area: if the interpolation error $ \Delta E(z_l)$ is in this area, one can commit two errors:
+\begin{itemize}
+\item if it is in the area $P_f(z_l)$ under the graph of $p_{E,0}(z_l)$, once can detect a damage since there isn't one (false alarm).
+\item if it is in the area $P_m(z_l)$ under the graph of $p_{E,d}(z_l)$, once can not detect a damage since there is one (missing alarm).
+\end{itemize}
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/gaussiennes.png}
+  \caption{Probabilities of false and missing alarm, from \cite{dilena2015damage}}
+  \label{proba}
+\end{figure}
+
 
 \subsection{A variant of the method}
 
@@ -295,6 +307,16 @@ We propose here a variant of the FRF interpolation method. While we have worked 
 \item first, compute the difference between the eigenvectors
 \item second, compute the interpolation error on this difference
 \end{itemize}
+
+Figure(\ref{theodiff}) shows the difference betweem the two FRF, and we can see the loss of spatial regularity (damage at position 7).
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/theodiff60.png}
+  \caption{Difference betweem theoretical FRF of undamaged and damage states}
+  \label{theodiff}
+\end{figure}
+
 
 Thus, we also study in this paper a variant of the FRF interpolation method . The only difference with the original method is the order of the steps:
 \begin{itemize}
@@ -480,12 +502,16 @@ Now, we have the sampling period:
 So we can calculate the matrices $A, B$ and make the simulation with the discrete-time state-space model (Equation (\ref{discrete})). To simulate the forces $f_k$, we use a white noise.
 
 
-\section{Results}
+We can also use our simulation with other structures, like a beam, if we know the matrices $M$, $K$, $C$ and the impact of a damage on these matrices.
+We will also validate the FRF interpolation method with a beam in this paper, but we don't detail the matrices $M$, $K$, $C$.
+
+
+\section{Analysis}
 
 For the following simulation results, we consider a system with 10 masses. We put a sensor on each mass. For the damaged state, we lower the stifness of the spring between sensors 6 and 7. The values of the FRF on the figures are the norm of the FRF values.
 
 
-\subsection{FRF results}
+\subsection{Data presentation}
 
 Figure (\ref{frf_freq}) presents results of the FRF on the simulation datas: here is the curve of the FRF of one sensor, against frequencies. We can see peaks which are at the natural frequencies of the system, but there is one of these frequencies which not present a peak.
 
@@ -499,11 +525,13 @@ Remake figure.
 \end{figure}
 
 
+
+\subsection{FRF interpolation method results}
+
 To test the localization, we have to make a thresold for each sensor. We want that a computed error taller than the threshold on one sensor is equivalent to have a damage on this sensor. With the FRF interpolation method, we have compute two thresholds from 100 experiments with the undameged state. The first is the maximum of the 100 errors computed. The second is computed from the statistics of the 100 errors computed: we suppose that the probability of the error follow a normal distribution, and we choose the threshold at 95\% of this distribution. 
 
 
-\subsection{Without noise}
-
+\subsubsection{Without noise}
 
 Figure() presents the results of the localization of a damage on sensor 7, without noise.
 
@@ -525,7 +553,7 @@ Figure() presents the results of the localization of a damage on sensor 7, witho
 
 
 
-\subsection{With noise}
+\subsubsection{With noise}
 
 
 
@@ -566,8 +594,16 @@ Figure (\ref{itp_error_noise}) presents the results of the localization of a dam
 \end{figure}
 
 
-\subsection{Eliminate the false positives}
+\subsection{Eliminate the false positives to improve the efficiency}
 
+We have seen that there are too many false positives. We try to remove them with the next idea: the difference between the threshold and the computed values is larger on the damage than on other sensors. As the damage is localized on one spring, so between two sensors, we apply the next algorithm to determine where is the damage:
+\begin{itemize}
+\item We compute the error values
+\item We make the difference with the threshold
+\item We keep only the two highest values, and we detect a damage only if they are positives
+\end{itemize}
+
+Figure (\ref{detect_max}) shows the results of this method.
 
 \begin{figure}[h!]
   \centering
@@ -577,7 +613,7 @@ Figure (\ref{itp_error_noise}) presents the results of the localization of a dam
 \end{figure}
 
 
-\subsection{Beam}
+\subsection{FRF interpolation method on a beam}
 
 We test our localization on another structure: a beam. We don't detail this model in this paper, we just use it to verify our methods. The damage is localized between the sensors 4 and 5.
 
@@ -604,6 +640,9 @@ Figure (\ref{beam_error}) shows the computed error. We can see that there are on
 
 \subsection{Quantification}
 
+We think we can use the FRF method interpolation for a quantification of the damage. For that, we have compared the threshold and the difference between it and the computed error.
+
+We shows in Figure(\ref{quant}) the computed error, in percent of the threshold.
 
 \begin{figure}[h!]
   \centering

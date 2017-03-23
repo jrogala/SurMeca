@@ -25,7 +25,7 @@ SAMPLVALUE = 10000
 MAKEREF = 100
 DAMAGED_SENSOR = [7]#must be a list
 EXCITED_SENSOR = 0
-DAMAGE = 100# % of damage
+DAMAGE = 15# % of damage
 
 pos = [ k for k in range(CAPTVALUE) ]
 z = [ 0 for k in range(CAPTVALUE) ]
@@ -187,7 +187,7 @@ A, B, C, D, sampling_freq = make_matrices(mass, stiffness_undamaged)
 for x in DAMAGED_SENSOR:
 	stiffness_damaged[x] = int(float(stiffness_undamaged[x])*float(100-DAMAGE)/100)
 
-A_damaged, B_damaged, C_useless, D_useless, freq_useless = make_matrices(mass, stiffness_damaged)
+A_damaged, B_damaged, C_damaged, D_damaged, freq_useless = make_matrices(mass, stiffness_damaged)
 
 #acc = [ [0 for k in range(2*n) ] ]
 
@@ -214,7 +214,7 @@ def simulation(typ,acc):
 		f_damaged = white_noise(SAMPLVALUE,n)
 		for i in range(SAMPLVALUE):
 			acc += [ np.dot(A_damaged,acc[-1]) + np.dot(B_damaged,f_damaged[i]) ]
-			measurement_damaged += [ np.dot(C,acc[-2]) + np.dot(D,f_damaged[i]) ]
+			measurement_damaged += [ np.dot(C_damaged,acc[-2]) + np.dot(D_damaged,f_damaged[i]) ]
 		return measurement_damaged, f_damaged, acc
 
 	
@@ -296,37 +296,37 @@ def experience():
 		error_damaged_inv = itp.global_error(minus_list(frf_ref,frf_damaged))
 		diff = minus_list(error_damaged, error_ref)
 		#threshold1
-		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(diff,threshold1))
-		if ind_max1 > 0:
-			detect_damage1[ind_max1] = detect_damage1[ind_max1] + 1
-			quantification1[ind_max1] = quantification1[ind_max1] + max1
-		if ind_max2 > 0:
-			detect_damage1[ind_max2] = detect_damage1[ind_max2] + 1
-			quantification1[ind_max2] = quantification1[ind_max2] + max2
+		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(diff,threshold1)[1:-1])
+		ind_max1 += 1;
+		ind_max2 += 1;#du au [1:-1]
+		detect_damage1[ind_max1] = detect_damage1[ind_max1] + 1
+		quantification1[ind_max1] = quantification1[ind_max1] + max1
+		detect_damage1[ind_max2] = detect_damage1[ind_max2] + 1
+		quantification1[ind_max2] = quantification1[ind_max2] + max2
 		#threshold2
-		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(diff,threshold2))
-		if ind_max1 > 0:
-			detect_damage2[ind_max1] = detect_damage2[ind_max1] + 1
-			quantification2[ind_max1] = quantification2[ind_max1] + max1
-		if ind_max2 > 0:
-			detect_damage2[ind_max2] = detect_damage2[ind_max2] + 1
-			quantification2[ind_max2] = quantification2[ind_max2] + max2
+		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(diff,threshold2)[1:-1])
+		ind_max1 += 1;
+		ind_max2 += 1;
+		detect_damage2[ind_max1] = detect_damage2[ind_max1] + 1
+		quantification2[ind_max1] = quantification2[ind_max1] + max1
+		detect_damage2[ind_max2] = detect_damage2[ind_max2] + 1
+		quantification2[ind_max2] = quantification2[ind_max2] + max2
 		#threshold_inv1
-		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(error_damaged_inv,threshold1_inv))
-		if ind_max1 > 0:
-			detect_damage1_inv[ind_max1] = detect_damage1_inv[ind_max1] + 1
-			quantification1_inv[ind_max1] = quantification1_inv[ind_max1] + max1
-		if ind_max2 > 0:
-			detect_damage1_inv[ind_max2] = detect_damage1_inv[ind_max2] + 1
-			quantification1_inv[ind_max2] = quantification1_inv[ind_max2] + max2
+		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(error_damaged_inv,threshold1_inv)[1:-1])
+		ind_max1 += 1;
+		ind_max2 += 1;
+		detect_damage1_inv[ind_max1] = detect_damage1_inv[ind_max1] + 1
+		quantification1_inv[ind_max1] = quantification1_inv[ind_max1] + max1
+		detect_damage1_inv[ind_max2] = detect_damage1_inv[ind_max2] + 1
+		quantification1_inv[ind_max2] = quantification1_inv[ind_max2] + max2
 		#threshold_inv2
-		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(error_damaged_inv,threshold2_inv))
-		if ind_max1 > 0:
-			detect_damage2_inv[ind_max1] = detect_damage2_inv[ind_max1] + 1
-			quantification2_inv[ind_max1] = quantification2_inv[ind_max1] + max1
-		if ind_max2 > 0:
-			detect_damage2_inv[ind_max2] = detect_damage2_inv[ind_max2] + 1
-			quantification2_inv[ind_max2] = quantification2_inv[ind_max2] + max2
+		ind_max1, ind_max2, max1, max2 = two_max_ind(minus_list(error_damaged_inv,threshold2_inv)[1:-1])
+		ind_max1 += 1;
+		ind_max2 += 1;
+		detect_damage2_inv[ind_max1] = detect_damage2_inv[ind_max1] + 1
+		quantification2_inv[ind_max1] = quantification2_inv[ind_max1] + max1
+		detect_damage2_inv[ind_max2] = detect_damage2_inv[ind_max2] + 1
+		quantification2_inv[ind_max2] = quantification2_inv[ind_max2] + max2
 	
 	parser.writeValues3("data/detect_damage_1_"+str(DAMAGE)+"percent_max.txt",detect_damage1)
 	parser.writeValues3("data/detect_damage_2_"+str(DAMAGE)+"percent_max.txt",detect_damage2)
