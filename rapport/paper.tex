@@ -98,7 +98,7 @@ These techniques may be costly, taking a long time to be performed and impractic
 The purpose of this work is the analysis of a particular data-driven damage localization method,
  namely the FRF interpolation method \cite{dilena2015damage}. Our contribution is the development of a simulation to obtain acceleration measurement (which can run on several structures), a proposition of a variant of the FRF interpolation method, and the statistical analysis of the two methods.
 This paper is organized as follows. In section II we  present the existing methods (model-based and data driven methods), 
-then in section III we talk about the localization using FRF interpolation method, in section IV we detail the different models of vibrating structures used to obtain data and, finally, the experiences and its results in section V.
+then in section III we present different models of vibrating structures required for what happens next. In section IV,  we talk about the localization using FRF interpolation method, in section V we detail our simulation used to obtain data and, finally, the experiences and its results in section VI.
 
 
 
@@ -157,191 +157,18 @@ A third group of methods for damage localization and quantification lies between
 % Maria Pina Limongelli, Eleni Chatzi, Michael D¨ohler, Geert Lombaert, Edwin Reynders
 % https://hal.inria.fr/hal-01344178/document
 
+\section{Vibration modeling}
 
+In this section, we present the physical models that we use to obtain data for our experiences, and the Frequency Response Function (FRF) which is the base of the FRF interpolation method. 
 
-\section{Localization using FRF interpolation method}
-
-\subsection{The FRF interpolation method}
-
-This method is presented in \cite{dilena2015damage}.
-The main hypothesis underlying the method is that a concentrated damage reflects in a loss of spatial regularity of the
-vibrational profile of a structure, compared with the reference (undamaged) state.
-
-Figure (\ref{theo}) shows this loss of spatial regularity on the theoretical FRF, for a damage at the position 7.
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.3\textwidth]{images/theo60.png}
-  \caption{Theoretical FRF for undamaged and damage states}
-  \label{theo}
-\end{figure}
-
-
-In this section, we suppose that we have $n$ sensors, which are located along an axis $z$, and we denote them by
-$\{z_l\}, l\in \{1 ... n\}$. We also suppose we have $N$ measurements for each sensor.
-
-For each sensor, we calculate the Frequency Response Function (FRF) from the acceleration's measures, at certain frequencies 
-(which are $\frac{k}{N}, k \in \{0 ... N-1\}$).
-
-Thus, for each frequency and each sensor, we have the transfer function value. Let us denote $H_R(z_l,f_i)$ the value of the transfer function for  the sensor $z_l$ at the frequency $f_i$.
-
-Then, we calculate for each sensor $z_l$ the cubic polynomial spline interpolation of the transfer functions $H_R(z_k,f_i)$ measured at all 
-the other instrumented locations $\{z_k\}, k\in \{1 ... n\}, k \neq l$: we denote it $H_S(z_l,f_i)$.
-
-For these two transfer functions, we define the interpolation error $E(z_l,f_i)$ as the absolute value of the difference between recorded and interpolated FRFs:
-\begin{equation}
-E(z_l,f_i) = | H_R(z_l,f_i) - H_S(z_l,f_i) |
-\end{equation}
-
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/interpolation.png}
-  \caption{Interpolation error, from \cite{dilena2015damage}}
-  \label{interpolation_error}
-\end{figure}
-
-Since we want to characterize each location $z_l$ with a scalar-valued error index, we introduce the norm of the error on the whole range of
-frequencies:
-\begin{equation}
-E(z_l) = \sqrt{  \sum\limits_{i=1}^N  E^2(z_l,f_i) }
-\label{error}
-\end{equation}
-
-
-Transfer function values obviously depend on the state of the structure. Hence, if the estimation of the error function
-through Equation (\ref{error}) is repeated in the baseline (undamaged) and in the inspection (possibly damaged) configuration, then the
-difference between the two values, denoted respectively by $E_0(z_l)$ and $E_d(z_l)$, can provide an indication about the existence of
-degradation at location $z_l$:
-\begin{equation}
-\Delta E(z_l) = E_d(z_l) - E_0(z_l)
-\end{equation}
-
-An increase in the interpolation error between the reference configuration and the current configuration at a station $z_l$ , i.e.
-$ \Delta E(z_l) > 0$, highlights a localized reduction of smoothness in the vibrational amplitude profile and, therefore, it is assumed
-to be a symptom of a local variation of stiffness at $z_l$ associated with the occurrence of damage.
-
-\subsection{Frequency Response Function}
-
-The FRF correspond to the transfer function of the system. In frequency domain, if $F$ is the force that is apply on the system and $S$ is the response of this force, the FRF is given by:
-\begin{equation}
-H = \frac{S}{F}
-\end{equation} 
-
-We want to calculate the FRF of the system, for each sensor localization. Here, we calculate an estimation of the FRF, called $H_1$ estimator \cite{cauberghe2004applied}. We suppose we have a vector of the forces $\{ f_k\}_{k=1}^N$ and a vector of the accelerations $\{ y_k\}_{k=1}^N$ for each sensor (the two vectors are size $N$). We need to be in frequency domain, so we calculate the discrete Fourier transform:
-\begin{equation}
-\begin{array}{ll}
-F_n = \sum\limits_{k=1}^N f_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\} \\
-Y_n = \sum\limits_{k=1}^N y_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\}
-\end{array}
-\end{equation}
-
-Then we calculate the power spectra, i.e. the Auto Power spectra of the inputs and the outputs
-and the Cross Power spectra between the inputs and outputs respectively given by:
-
-\begin{equation}
-\begin{array}{ll}
-S_{ff}(n) = F_n F_n^H \ \ \ \ \ n \in \{1 ... N\} \\
-S_{yf}(n) = Y_n F_n^H \ \ \ \ \ n \in \{1 ... N\}
-\end{array}
-\end{equation}
-where $M^H$ is the Hermitian of the matrix $M$. Thus, the FRF is given by:
-\begin{equation}
-H_1(n) = S_{yf}(n) S_{ff}(n)^{-1}
-\end{equation}
-
-\begin{remark}
-If we consider each sensor separately, $F_n$ and $Y_n$ are scalars, so we have:
-\begin{equation}
-\begin{array}{lll}
-H_1(n) & = & S_{yf}(n) S_{ff}(n)^{-1} \\
-& = & Y_n F_n^H (F_n F_n^H)^{-1} \\
-& = & Y_n / F_n
-\end{array}
-\end{equation}
-\end{remark}
-
-\subsection{Interpolation}
-
-We have to calculate for each sensor $z_l$ and for each considered frequency $f_i$ the cubic polynomial spline interpolation of the transfer function $H_R(z_k,f_i)$.
-The cubic spline interpolation is a piecewise continuous curve, passing through each of the values.
-There is a separate cubic polynomial interpolation for each interval, each with its own coefficients.
-Cubic polynomial spline interpolations produce an interpolated function that is continuous through to the second derivative.
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.25\textwidth]{images/interpolation_spline.png}
-  \caption{Cubic spline interpolation}
-  \label{spline}
-\end{figure}
-
-
-With this interpolation, we can calculate the error as it is described in the section IV.
-
-
-\subsection{False and missing alarm}
-
-The above analysis has been developed in a deterministic context. Several sources, such as temperature, nonlinear
-behavior, soil structure interaction and noise in recorded data, can induce variations of the interpolation error even if no
-damage occurs.
-
-Thus, once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be taller than $E_T$ to have a high probability of identification of a damage at location $z_l$. Indeed, as we can see in the Figure (\ref{proba}), the curves which represent the fact to have a damage or not have a share area: if the interpolation error $ \Delta E(z_l)$ is in this area, one can commit two errors:
-\begin{itemize}
-\item if it is in the area $P_f(z_l)$ under the graph of $p_{E,0}(z_l)$, once can detect a damage since there isn't one (false alarm).
-\item if it is in the area $P_m(z_l)$ under the graph of $p_{E,d}(z_l)$, once can not detect a damage since there is one (missing alarm).
-\end{itemize}
-
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/gaussiennes.png}
-  \caption{Probabilities of false and missing alarm, from \cite{dilena2015damage}}
-  \label{proba}
-\end{figure}
-
-
-\subsection{A variant of the method}
-
-We propose here a variant of the FRF interpolation method. While we have worked on the implementation of the original method, we have observed the eigenvectors of the matrix $M^{-1}K$ (see part III), which have similar properties than the FRF. We noticed that the following method is better than the interpolation method (compute the interpolation error, then compute a difference) to detect damaged on the eigenvectors:
-\begin{itemize}
-\item first, compute the difference between the eigenvectors
-\item second, compute the interpolation error on this difference
-\end{itemize}
-
-Figure(\ref{theodiff}) shows the difference betweem the two FRF, and we can see the loss of spatial regularity (damage at position 7).
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.3\textwidth]{images/theodiff60.png}
-  \caption{Difference betweem theoretical FRF of undamaged and damage states}
-  \label{theodiff}
-\end{figure}
-
-
-Thus, we also study in this paper a variant of the FRF interpolation method . The only difference with the original method is the order of the steps:
-\begin{itemize}
-\item Compute the FRF
-\item Compute the difference between the FRF of reference and the FRF of the studied state, for each frequency
-\item Compute the interpolation error of these differencies
-\item Compute the sum of the interpolation errors at each frequency
-\end{itemize}
-
-From now on, to tell the difference between the two methods, we shall call our variant the FRF difference method.
-
-
-
-\section{Simulation}
-
-\subsection{Models of vibrating structures}% or Physical models
-
-\subsubsection{Finite element model}
+\subsection{Finite element model}
 
 The dynamic behaviour of a mechanical system consisting of $n$ degrees of freedom (see Figure (\ref{finite_el})) is described by following matrix differential equation:
 \begin{equation}
 M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)
 \label{fondamental}
 \end{equation}
-where $q(t)$ is the displacement vector at a continous time $t$, and $M, C, K \in \mathbb{R}^{n \times n}$, are the mass, damping and stiffness matrices. 
+where $q(t)$ is the displacement vector at a continous time $t$, $f(t)$ is the excitement vector at $t$ and $M, C, K \in \mathbb{R}^{n \times n}$, are the mass, damping and stiffness matrices. 
 
 
 \begin{figure}[h!]
@@ -355,7 +182,7 @@ For civil engineering structures, Equation (\ref{fondamental}) is obtained as th
 The structure is divided in elements, and the global mass matrix $M$ and stiffness matrix $K$ are generated from the geometry and material
 properties of the elements.
 
-\subsubsection{Continous-time state-space model} %(model parameters and reduction):
+\subsection{Continous-time state-space model} %(model parameters and reduction):
 
 From the Equation (\ref{fondamental}) and with the variable change $x =
 \begin{pmatrix}
@@ -405,7 +232,7 @@ y(t) = C_cx(t) + D_cf(t)
 \right.
 \end{equation}
 
-\subsubsection{Discrete-time state-space model} %(impulses response)
+\subsection{Discrete-time state-space model} %(impulses response)
 
 Up to now all equations were expressed in continuous time, whereas in reality
 measurements are taken at discrete time instants.
@@ -435,9 +262,219 @@ D_d = D_c
 \end{array}
 \end{equation}
 
-\subsection{Obtaining acceleration measures}
+\subsection{Frequency Response Function}
 
-We have implemented a simulation to check this method of localization. We made this on the following system: $n$ masses, connected
+The FRF correspond to the transfer function of the system. In frequency domain, if $F$ is the force that is apply on the system and $X$ is the response of this force, the FRF is given by:
+\begin{equation}
+H = \frac{X}{F}
+\end{equation} 
+
+We can express the theoretical FRF with the matrices $M, C, K$. Indeed, in the frequency domain, we have
+\begin{equation}
+s^2 M x + s C x + K x = f
+\end{equation}
+where s is $i\omega$, with $\omega$ the pulsation.
+Thus, the FRF $H$ is:
+\begin{equation}
+H = \frac{x}{f} = (s^2 M + s C + K)^{-1}
+\end{equation}
+
+
+In practice, we want to calculate the FRF of the system, for each sensor localization. Here, we calculate an estimation of the FRF, called $H_1$ estimator \cite{cauberghe2004applied}. We suppose we have a vector of the forces $\{ f_k\}_{k=1}^N$ and a vector of the accelerations $\{ y_k\}_{k=1}^N$ for each sensor (the two vectors are size $N$). We need to be in frequency domain, so we calculate the discrete Fourier transform:
+\begin{equation}
+\begin{array}{ll}
+F_n = \sum\limits_{k=1}^N f_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\} \\
+Y_n = \sum\limits_{k=1}^N y_k e^{-2i\pi kn/N} \ \ \ \ \ n \in \{1 ... N\}
+\end{array}
+\end{equation}
+
+Then we calculate the power spectra, i.e. the Auto Power spectra of the inputs and the outputs
+and the Cross Power spectra between the inputs and outputs respectively given by:
+
+\begin{equation}
+\begin{array}{ll}
+S_{ff}(n) = F_n F_n^H \ \ \ \ \ n \in \{1 ... N\} \\
+S_{yf}(n) = Y_n F_n^H \ \ \ \ \ n \in \{1 ... N\}
+\end{array}
+\end{equation}
+where $M^H$ is the Hermitian of the matrix $M$. Thus, the FRF is given by:
+\begin{equation}
+H_1(n) = S_{yf}(n) S_{ff}(n)^{-1}
+\end{equation}
+
+\begin{remark}
+If we consider each sensor separately, $F_n$ and $Y_n$ are scalars, so we have:
+\begin{equation}
+\begin{array}{lll}
+H_1(n) & = & S_{yf}(n) S_{ff}(n)^{-1} \\
+& = & Y_n F_n^H (F_n F_n^H)^{-1} \\
+& = & Y_n / F_n
+\end{array}
+\end{equation}
+\end{remark}
+
+\section{Localization using FRF interpolation method}
+
+\subsection{The FRF interpolation method}
+
+This method is presented in \cite{dilena2015damage}.
+The main hypothesis underlying the method is that a concentrated damage reflects in a loss of spatial regularity of the
+vibrational profile of a structure, compared with the reference (undamaged) state.
+
+Figure (\ref{theo}) shows this loss of spatial regularity on the theoretical FRF, for a damage at the position 7.
+We can see there is a loss of regularity at the position 7 for the damaged state. We can also see there is an iregularity at the position 2, but here the two states have the same iregularity, so it's not a loss of regularity.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/theo60.png}
+  \caption{Theoretical FRF for undamaged and damage states}
+  \label{theo}
+\end{figure}
+
+
+In this section, we suppose that we have $n$ sensors, which are located along an axis $z$, and we denote them by
+$\{z_l\}, l\in \{1 ... n\}$ (that is their position on the axis $z$). We also suppose we have $N$ measurements for each sensor.
+
+For each sensor, we calculate the Frequency Response Function (FRF) from the acceleration's measures, at certain frequencies 
+(which are $\frac{k}{N}, k \in \{0 ... N-1\}$ with $N$ the size of the input and output vectors).
+
+Thus, for each frequency and each sensor, we have the transfer function value. Let us denote $H_R(z_l,f_i)$ the value of the transfer function for  the sensor $z_l$ at the frequency $f_i$.
+
+Then, we calculate for each sensor $z_l$ the cubic polynomial spline interpolation of the transfer functions $H_R(z_k,f_i)$ measured at all 
+the other instrumented locations $\{z_k\}, k\in \{1 ... n\}, k \neq l$: we denote it $H_S(z_l,f_i)$.
+
+For these two transfer functions, we define the interpolation error $E(z_l,f_i)$ as the absolute value of the difference between recorded and interpolated FRFs:
+\begin{equation}
+E(z_l,f_i) = | H_R(z_l,f_i) - H_S(z_l,f_i) |
+\end{equation}
+
+We can see this error on the Figure(\ref{interpolation_error}).
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/interpolation.png}
+  \caption{Interpolation error, from \cite{dilena2015damage}}
+  \label{interpolation_error}
+\end{figure}
+
+Since we want to characterize each location $z_l$ with a scalar-valued error index, we introduce the norm of the error on the whole range of
+frequencies:
+\begin{equation}
+E(z_l) = \sqrt{  \sum\limits_{i=1}^N  E^2(z_l,f_i) }
+\label{error}
+\end{equation}
+
+
+Transfer function values obviously depend on the state of the structure. Hence, if the estimation of the error function
+through Equation (\ref{error}) is repeated in the baseline (undamaged) and in the inspection (possibly damaged) configuration, then the
+difference between the two values, denoted respectively by $E_0(z_l)$ and $E_d(z_l)$, can provide an indication about the existence of
+degradation at location $z_l$:
+\begin{equation}
+\Delta E(z_l) = E_d(z_l) - E_0(z_l)
+\end{equation}
+
+An increase in the interpolation error between the reference configuration and the current configuration at a station $z_l$ , i.e.
+$ \Delta E(z_l) > 0$, highlights a localized reduction of smoothness in the vibrational amplitude profile and, therefore, it is assumed
+to be a symptom of a local variation of stiffness at $z_l$ associated with the occurrence of damage.
+
+\subsection{Interpolation}
+
+We have to calculate for each sensor $z_l$ and for each considered frequency $f_i$ the cubic polynomial spline interpolation of the transfer function $H_R(z_k,f_i)$.
+The cubic spline interpolation is a piecewise continuous curve, passing through each of the values.
+There is a separate cubic polynomial interpolation for each interval, each with its own coefficients.
+This is for this local aspect that we use this interpolation, since we want to detect local iregularities.
+Cubic polynomial spline interpolations produce an interpolated function that is continuous through to the second derivative.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.25\textwidth]{images/interpolation_spline.png}
+  \caption{Cubic spline interpolation}
+  \label{spline}
+\end{figure}
+
+
+With this interpolation, we can calculate the error as it is described previously.
+
+
+\subsection{Threshold}
+
+The above analysis has been developed in a deterministic context. Several sources, such as temperature, nonlinear
+behavior, soil structure interaction and noise in recorded data, can induce variations of the interpolation error even if no
+damage occurs.
+
+Thus, we can have different values of the error interpolation for a same state. Heowever, the distributions of the erros for a same state is close to a gaussian distribution. The problem is that the distributions for a undamaged and a damaged states can be near.
+
+So that means once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be taller than $E_T$ to have a high probability of identification of a damage at location $z_l$. Indeed, as we can see in the Figure (\ref{proba}), the curves which represent the fact to have a damage or not have a share area: if the interpolation error $ \Delta E(z_l)$ is in this area, one can commit two errors:
+\begin{itemize}
+\item if it is in the area $P_f(z_l)$ under the graph of $p_{E,0}(z_l)$, once can detect a damage since there isn't one (false alarm).
+\item if it is in the area $P_m(z_l)$ under the graph of $p_{E,d}(z_l)$, once can not detect a damage since there is one (missing alarm).
+\end{itemize}
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/explication_FP.png}
+  \caption{Probabilities of false and missing alarm, from \cite{dilena2015damage}}
+  \label{proba}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\ & Damaged & Undamaged \\ \hline
+Detected & TP & FP \\ \hline
+No detected & FN & TN \\ \hline
+\end{tabular}
+\end{center}
+\caption{True/False positives and negatives}
+\label{TFPN}
+\end{figure}
+
+Now, to denote corect detection (or no detection), we will use the terms true positives and negatives, to denote missing alarms we will use false negatives and for false alarms, we will use false positives.
+
+In our experiences, we measure the number of true/false positives and negatives. The figure(\ref{TFPN}) present the notations used for the number of true/false positives and negatives.
+
+To evaluate the two methods, we use the specificity predictive factors, which are 
+$\frac{TP}{TP + FP}$ and $\frac{TN}{TN + FN}$. The first correspond to the probability that there is a damage when we detect one, and the second correspond to the probability there isn't any damage when we detect nothing. A good method has the two factors near to 1.
+
+
+\subsection{A variant of the method}
+
+We propose here a variant of the FRF interpolation method. While we have worked on the implementation of the original method, we have observed the theoretical FRF to see if the FRF interpolation method worked on that. We noticed that the following method is better than the interpolation method (compute the interpolation error, then compute a difference) to detect damaged on the eigenvectors:
+\begin{itemize}
+\item first, compute the difference between the eigenvectors
+\item second, compute the interpolation error on this difference
+\end{itemize}
+
+Figure(\ref{theodiff}) shows the difference betweem the two FRF, and we can see the loss of spatial regularity (damage at position 7).
+In comparaison with the Figure(\ref{theo}), we can see here there is only one iregularity: the fact to compute the difference before the interpolation erase iregularity when they are in the two states. With the initial method, they are also erase when we compute the difference between the interpolation errors.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/theodiff60.png}
+  \caption{Difference betweem theoretical FRF of undamaged and damage states}
+  \label{theodiff}
+\end{figure}
+
+
+Thus, we also study in this paper a variant of the FRF interpolation method . The only difference with the original method is the order of the steps:
+\begin{itemize}
+\item Compute the FRF
+\item Compute the difference between the FRF of reference and the FRF of the studied state, for each frequency
+\item Compute the interpolation error of these differencies
+\item Compute the sum of the interpolation errors at each frequency
+\end{itemize}
+
+From now on, to tell the difference between the two methods, we shall call our variant the FRF difference method.
+
+
+
+\section{Simulation}
+
+
+We have implemented a simulation to obtain the data used to check the methods of localization. To explain it, we detil here the following system we used for our experiences: $n$ masses, connected
 through springs and dampers. We denote the masses $\{m_i\}_{i=1}^n$, the springs stifness $\{k_i\}_{i=1}^n$ and the dampers $\{c_i\}_{i=1}^n$ (see Figure (\ref{springs})).
 
 \begin{figure}[h!]
@@ -508,7 +545,7 @@ We will also validate the FRF interpolation method with a beam in this paper, bu
 
 \section{Analysis}
 
-For the following simulation results, we consider a system with 10 masses. We put a sensor on each mass. For the damaged state, we lower the stifness of the spring between sensors 6 and 7. The values of the FRF on the figures are the norm of the FRF values.
+For the following simulation results, we consider a system with 20 masses. We put a sensor on each mass. For the damaged state, we lower the stifness of the spring between sensors 6 and 7. The values of the FRF on the figures are the norm of the complex FRF values.
 
 
 \subsection{Data presentation}
@@ -538,7 +575,7 @@ Figure() presents the results of the localization of a damage on sensor 7, witho
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.4\textwidth]{images/detect_curve_without_noise.png}
+  \includegraphics[width=0.4\textwidth]{images/detect004.png}
   \caption{Damage detection rate against damage (without noise)}
   \label{detect}
 \end{figure}
@@ -572,7 +609,7 @@ Figure (\ref{itp_error_noise}) presents the results of the localization of a dam
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.4\textwidth]{images/detect_curve_with_005noise.png}
+  \includegraphics[width=0.4\textwidth]{images/detect_noise004.png}
   \caption{}
   \label{detect_5noise}
 \end{figure}
@@ -613,6 +650,16 @@ Figure (\ref{detect_max}) shows the results of this method.
 \end{figure}
 
 
+Figure (\ref{pred_max}) shows the predicitve factor with this method.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/pred_max.png}
+  \caption{Predictive factor}
+  \label{pred_max}
+\end{figure}
+
+
 \subsection{FRF interpolation method on a beam}
 
 We test our localization on another structure: a beam. We don't detail this model in this paper, we just use it to verify our methods. The damage is localized between the sensors 4 and 5.
@@ -646,7 +693,7 @@ We shows in Figure(\ref{quant}) the computed error, in percent of the threshold.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.4\textwidth]{images/quantification_without_noise_100.png}
+  \includegraphics[width=0.4\textwidth]{images/quantification.png}
   \caption{}
   \label{quant}
 \end{figure}

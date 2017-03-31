@@ -24,7 +24,7 @@ CAPTVALUE = 20
 SAMPLVALUE = 10000
 MAKEREF = 100
 DAMAGED_SENSOR = [7]#must be a list
-DAMAGE = 5# % of damage
+DAMAGE = 33# % of damage
 
 pos = [ k for k in range(CAPTVALUE) ]
 z = [ 0 for k in range(CAPTVALUE) ]

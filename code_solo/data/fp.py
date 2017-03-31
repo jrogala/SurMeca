@@ -1,7 +1,8 @@
 import parser as pa
 import matplotlib.pyplot as plt
 
-error = [1, 2, 3, 4, 5, 10, 20, 30]
+error = [1, 2, 3, 4, 5, 10, 20, 30,40,50,60,70]
+error = [1,5,10,15,20,30,40,50,60,70]
 
 DAMAGED_SENSOR = 7
 
