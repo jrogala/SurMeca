@@ -550,7 +550,7 @@ For the following simulation results, we consider a system with 20 masses. We pu
 
 \subsection{Data presentation}
 
-Figure (\ref{frf_freq}) presents results of the FRF on the simulation datas: here is the curve of the FRF of one sensor, against frequencies. We can see peaks which are at the natural frequencies of the system, but there is one of these frequencies which not present a peak.
+Figure (\ref{frf_freq}) presents results of the FRF on the simulation data: here is the curve of the FRF of one sensor, against frequencies. We can see peaks which are at the natural frequencies of the system, but there is one of these frequencies which not present a peak.
 
 Remake figure.
 
@@ -565,20 +565,43 @@ Remake figure.
 
 \subsection{FRF interpolation method results}
 
-To test the localization, we have to make a thresold for each sensor. We want that a computed error taller than the threshold on one sensor is equivalent to have a damage on this sensor. With the FRF interpolation method, we have compute two thresholds from 100 experiments with the undameged state. The first is the maximum of the 100 errors computed. The second is computed from the statistics of the 100 errors computed: we suppose that the probability of the error follow a normal distribution, and we choose the threshold at 95\% of this distribution. 
+To test the localization, we have to make a thresold for each sensor. We want that a computed error taller than the threshold on one sensor is equivalent to have a damage on this sensor. With the FRF interpolation method, we have compute two thresholds from 100 experiments with the undameged state. The first is the error just below the maximum of the 100 errors computed. The second is computed from the statistics of the 100 errors computed: we suppose that the probability of the error follow a normal distribution, and we choose the threshold at 95\% of this distribution. 
 
+From now on, the majority of the figures will show four curves:
+\begin{itemize}
+\item in blue (deep): results for the FRF interpolation method with a threshold at 99\% of the reference errors
+\item in green: results for the FRF interpolation method with a threshold at 95\% of the reference distribution
+\item in red: results for the FRF difference method with a threshold at 99\% of the reference errors
+\item in blue (light): results for the FRF difference method with a threshold at 95\% of the reference distribution
+\end{itemize}
+
+To disting the two methods with the two thresholds, we denote them with the color initials: the first one BD, the second one G, the third one R and the last one BL.
 
 \subsubsection{Without noise}
 
-Figure() presents the results of the localization of a damage on sensor 7, without noise.
-
+Figure(\ref{damage30}) presents the results of the localization of a damage of 30\% between sensors 6 and 7, without noise.
+It shows the percent of detection of a damage against its position.
+We can see that the damage between sensors 6 and 7 are always detected, but there is also detection on other sensors (that is false positives).
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.4\textwidth]{images/detect004.png}
+  \includegraphics[width=0.4\textwidth]{images/damage30percent.png}
+  \caption{Damage detection rate for a damage between sensors 6 and 7 (without noise)}
+  \label{damage30}
+\end{figure}
+
+
+Figure(\ref{detect}) presents the percent of detection of a damage between sensors 6 and 7 against the damage percent (a single damage is always simulated on sensor 7). We can see here that below 5\% of damage, none of the methods detect the damage more than 50\% of the time, but we can see that BL is the best: at 10\% of damage, it reach 90\% of detection, while the others are below 30\%. However, at 15\% of damage, it's BD and G which are the best, with 100\% of detection. BL reaches 100\% of detection at 20\% of damage, and R reaches it at 30\% of damage. Here, R seems to be the worst.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/detect.png}
   \caption{Damage detection rate against damage (without noise)}
   \label{detect}
 \end{figure}
+
+
+Figure(\ref{fp}) presents the percent of false positives against the damage percent. Here, R is the best: around 2\% of false positives regardless of the percent of damage, while the others are between 5\% and 25\%.
 
 
 \begin{figure}[h!]
