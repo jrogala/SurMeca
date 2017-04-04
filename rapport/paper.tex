@@ -591,7 +591,7 @@ We can see that the damage between sensors 6 and 7 are always detected, but ther
 \end{figure}
 
 
-Figure(\ref{detect}) presents the percent of detection of a damage between sensors 6 and 7 against the damage percent (a single damage is always simulated on sensor 7). We can see here that below 5\% of damage, none of the methods detect the damage more than 50\% of the time, but we can see that BL is the best: at 10\% of damage, it reach 90\% of detection, while the others are below 30\%. However, at 15\% of damage, it's BD and G which are the best, with 100\% of detection. BL reaches 100\% of detection at 20\% of damage, and R reaches it at 30\% of damage. Here, R seems to be the worst.
+Figure(\ref{detect}) presents the percent of detection of a damage between sensors 6 and 7 against the damage percent (a single damage is always simulated between sensors 6 and 7). We can see here that below 5\% of damage, none of the methods detect the damage more than 50\% of the time, but we can see that BL is the best: at 10\% of damage, it reach 90\% of detection, while the others are below 30\%. However, at 15\% of damage, it's BD and G which are the best, with 100\% of detection. BL reaches 100\% of detection at 20\% of damage, and R reaches it at 30\% of damage. Here, R seems to be the worst.
 
 \begin{figure}[h!]
   \centering
@@ -617,53 +617,67 @@ Figure(\ref{fp}) presents the percent of false positives against the damage perc
 
 
 
-Figure (\ref{itp_error_noise}) presents the results of the localization of a damage on sensor 7, where noise (5\%) has been add at the measurement.
+Figure (\ref{damage30noise}) presents the results of the localization of a damage of 30\% between sensors 6 and 7, where noise (5\%) has been add at the measurement. We can see that results are similar that without noise.
 
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.4\textwidth]{images/damage_noise_10percent.png}
-  \caption{Error computed for a damage of 10\% on sensor 7}
-  \label{itp_error_noise}
+  \includegraphics[width=0.4\textwidth]{images/damage30percent004noise.png}
+  \caption{Damage detection rate for a damage between sensors 6 and 7 (with 5\% of noise)}
+  \label{damage30noise}
 \end{figure}
 
-
+However, we can see on Figure(\ref{detect_noise}) that the rate of true positives is impacted by the noise: the G and BD methods reach 100\% of detection at 20\% of damage and the R and BL methods reach it at 40\% of damage.
 
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{images/detect_noise004.png}
-  \caption{}
-  \label{detect_5noise}
+  \caption{Damage detection rate against damage (with 5\% of noise)}
+  \label{detect_noise}
 \end{figure}
+
+For the false positives rate, we can notice that the R method is always the best, but the BL method is better than without noise.
 
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.4\textwidth]{images/detect_curve_with_01noise.png}
-  \caption{}
-  \label{detect_10noise}
+  \includegraphics[width=0.4\textwidth]{images/fp004.png}
+  \caption{False positives rate with 5\% of noise}
+  \label{fp_noise}
 \end{figure}
 
 
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/fp_noise005.png}
-  \caption{}
-  \label{fp_5noise}
-\end{figure}
+With the noise, we can so do two observations: first, the FRF interpolation method has a better localization for small damages than the FRF difference method, second,  the FRF difference method has a better false positives rate than the FRF interpolation method.
 
 
 \subsection{Eliminate the false positives to improve the efficiency}
 
-We have seen that there are too many false positives. We try to remove them with the next idea: the difference between the threshold and the computed values is larger on the damage than on other sensors. As the damage is localized on one spring, so between two sensors, we apply the next algorithm to determine where is the damage:
+First, we present here the the predictive factors for our methods.
+
+Figure (\ref{pred}) shows the predictive positive factor. We can see that the R method is the best.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/pred.png}
+  \caption{Predictive factor}
+  \label{pred}
+\end{figure}
+
+Figure (\ref{pred_neg}) shows the predictive negative factor with this method. We can see that all the method reach 1 at 30\% of damage, and are a factor higher than 0.9 for small damages.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/pred_neg.png}
+  \caption{Predictive negative factor}
+  \label{pred_neg}
+\end{figure}
+
+We can see that the predictive negative factor isn't bad, but the positive one can be better. To improve it, we must have less false positives. We try to remove them with the next idea: the difference between the threshold and the computed values is larger on the damage than on other sensors. As the damage is localized on one spring, so between two sensors, we apply the next algorithm to determine where is the damage:
 \begin{itemize}
 \item We compute the error values
 \item We make the difference with the threshold
 \item We keep only the two highest values, and we detect a damage only if they are positives
 \end{itemize}
-
-Figure (\ref{detect_max}) shows the results of this method.
 
 \begin{figure}[h!]
   \centering
@@ -672,8 +686,10 @@ Figure (\ref{detect_max}) shows the results of this method.
   \label{detect_max}
 \end{figure}
 
+Figure (\ref{detect_max}) shows the results of this method. We can see that all the false positives are eliminated.
 
-Figure (\ref{pred_max}) shows the predicitve factor with this method.
+
+Figure (\ref{pred_max}) shows the predictive factor with this method. We can see that all the method reach 1 at 30\% of damage. That is what you wanted to obtain with this method.
 
 \begin{figure}[h!]
   \centering
@@ -682,6 +698,16 @@ Figure (\ref{pred_max}) shows the predicitve factor with this method.
   \label{pred_max}
 \end{figure}
 
+Figure (\ref{pred_neg_max}) shows the predictive negative factor with this method. We can see that this factor is similar at the factor for the initial methods. It could be worst, but it's not the case.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{images/pred_neg_max.png}
+  \caption{Predictive negative factor}
+  \label{pred_neg_max}
+\end{figure}
+
+We have here improved the methods, because we eliminate the false positives. The only requirement is to have a detection method.
 
 \subsection{FRF interpolation method on a beam}
 
@@ -712,7 +738,8 @@ Figure (\ref{beam_error}) shows the computed error. We can see that there are on
 
 We think we can use the FRF method interpolation for a quantification of the damage. For that, we have compared the threshold and the difference between it and the computed error.
 
-We shows in Figure(\ref{quant}) the computed error, in percent of the threshold.
+We shows in Figure(\ref{quant}) the computed error, in percent of the threshold. We can see that its evolution is linear against the damage percent.
+It could permit to quantify the damage.
 
 \begin{figure}[h!]
   \centering

@@ -7,7 +7,7 @@ DAMAGED_SENSOR = 7
 #NOISE = 0.05
 
 NOISE = 0.04
-error = [5,10,15,20,25,30]
+error = [5,10,15,20,30,40]
 
 
 def fp(t):
