@@ -60,12 +60,12 @@ Damage, Localization, Vibration, Health monitoring
 The process of implementing a damage identification strategy for aerospace,
  civil and mechanical engineering infrastructure is referred as a structural health monitoring (SHM) \cite{farrar2007introduction}.
 
-In the most general terms, damage can be defined as changes in a system that negatively affect its current or future performance. 
+In the most general terms, damage can be defined as changes in a system that negatively affect its current or future performance.
 In general, a damage can be observed by comparing two different states of the system,
  one of which is supposed to represent the initial, and often undamaged, state.
 
 
-Almost all industries want to detect damage in their infrastructure as quickly as possible whether 
+Almost all industries want to detect damage in their infrastructure as quickly as possible whether
  for the potential life-safety or economic impact.
 Such detection requires these industries to perform some form of SHM.
 
@@ -88,7 +88,7 @@ Generally, the damage identification can be divided into four levels \cite{peete
 \vspace{2mm}
 
 Traditional methods of damage detection based on visual inspections or experimental techniques such as radiography
- or ultrasound allow to obtain detailed information about a local damage state but requires to know area where it is located (and hope for easy access). 
+ or ultrasound allow to obtain detailed information about a local damage state but requires to know area where it is located (and hope for easy access).
 These techniques may be costly, taking a long time to be performed and impractical to detect damage in large urban areas.
  Furthermore, they may fail if damage is not visibly evident. This is why other global methods automated
  and based on sensor measurements were developed.
@@ -96,16 +96,17 @@ These techniques may be costly, taking a long time to be performed and impractic
 
 
 The purpose of this work is the analysis of a particular data-driven damage localization method,
- namely the FRF interpolation method \cite{dilena2015damage}. Our contribution is the development of a simulation to obtain acceleration measurement (which can run on several structures), a proposition of a variant of the FRF interpolation method, and the statistical analysis of the two methods.
-This paper is organized as follows. In section II we  present the existing methods (model-based and data driven methods), 
+ namely the FRF interpolation method \cite{dilena2015damage}. Our contribution is the development of a simulator to obtain acceleration measurement of different structures, a proposition of a variant of the FRF interpolation method, and a statistical analysis of the two methods.
+
+This paper is organized as follows: In section II we  present the existing methods (model-based and data driven methods),
 then in section III we present different models of vibrating structures required for what happens next. In section IV,  we talk about the localization using FRF interpolation method, in section V we detail our simulation used to obtain data and, finally, the experiences and its results in section VI.
 
 
 
 \section{State of the art}
 
-The use of methods based on recorded responses proved to perform as valuable alternatives. 
-The general idea for vibration-based damage identification is that the damage affects the physical properties (mass, damping, and stiffness) of the structure, and this will cause detectable changes in modal properties (natural frequencies, modal damping, and mode shapes). 
+The use of methods based on recorded responses proved to perform as valuable alternatives.
+The general idea for vibration-based damage identification is that the damage affects the physical properties (mass, damping, and stiffness) of the structure, and this will cause detectable changes in modal properties (natural frequencies, modal damping, and mode shapes).
 For instance, cracks cause reductions in stiffness. Therefore, by analyzing the physical properties of the structure a damage can be detected.
 \\
 
@@ -114,12 +115,12 @@ Most of the different vibration based damage identification methods can be class
  On another side, data-driven methods are based solely on the recorded response. These methods are interesting for a real-time damage identification but unavailability of a numerical model often hinders the estimation of damage severity.
  A third group includes data-driven methods that use finite element (FE) information without model updating.
 
-\subsection{Model-based methods}  
+\subsection{Model-based methods}
 
 In model-based methods, damage is identified through the updating of a finite element (FE) model.
  Most of the time, modal characteristics is the experimental data used for damage assessment through FE model updating.% which are extracted from measured response time histories using modal analysis techniques.
 Different types of modal data can be used. For changes in structural stiffness, model updating can be performed based only on natural frequencies or eigenvalues which are known to change in this case.
- Detailed informations about model-based methods can be found in references 
+ Detailed informations about model-based methods can be found in references
 \cite{fritzen1998damage},
 \cite{simoen2015dealing} and
 \cite{teughels2005damage}.
@@ -159,7 +160,7 @@ A third group of methods for damage localization and quantification lies between
 
 \section{Vibration modeling}
 
-In this section, we present the physical models that we use to obtain data for our experiences, and the Frequency Response Function (FRF) which is the base of the FRF interpolation method. 
+In this section, we present the physical models that we use to obtain data for our experiences, and the Frequency Response Function (FRF) which is the base of the FRF interpolation method.
 
 \subsection{Finite element model}
 
@@ -168,7 +169,7 @@ The dynamic behaviour of a mechanical system consisting of $n$ degrees of freedo
 M \ddot{q}(t) + C \dot{q}(t) + K q(t) = f(t)
 \label{fondamental}
 \end{equation}
-where $q(t)$ is the displacement vector at a continous time $t$, $f(t)$ is the excitement vector at $t$ and $M, C, K \in \mathbb{R}^{n \times n}$, are the mass, damping and stiffness matrices. 
+where $q(t)$ is the displacement vector at a continous time $t$, $f(t)$ is the excitement vector at $t$ and $M, C, K \in \mathbb{R}^{n \times n}$, are the mass, damping and stiffness matrices.
 
 
 \begin{figure}[h!]
@@ -267,7 +268,7 @@ D_d = D_c
 The FRF correspond to the transfer function of the system. In frequency domain, if $F$ is the force that is apply on the system and $X$ is the response of this force, the FRF is given by:
 \begin{equation}
 H = \frac{X}{F}
-\end{equation} 
+\end{equation}
 
 We can express the theoretical FRF with the matrices $M, C, K$. Indeed, in the frequency domain, we have
 \begin{equation}
@@ -335,12 +336,12 @@ We can see there is a loss of regularity at the position 7 for the damaged state
 In this section, we suppose that we have $n$ sensors, which are located along an axis $z$, and we denote them by
 $\{z_l\}, l\in \{1 ... n\}$ (that is their position on the axis $z$). We also suppose we have $N$ measurements for each sensor.
 
-For each sensor, we calculate the Frequency Response Function (FRF) from the acceleration's measures, at certain frequencies 
+For each sensor, we calculate the Frequency Response Function (FRF) from the acceleration's measures, at certain frequencies
 (which are $\frac{k}{N}, k \in \{0 ... N-1\}$ with $N$ the size of the input and output vectors).
 
 Thus, for each frequency and each sensor, we have the transfer function value. Let us denote $H_R(z_l,f_i)$ the value of the transfer function for  the sensor $z_l$ at the frequency $f_i$.
 
-Then, we calculate for each sensor $z_l$ the cubic polynomial spline interpolation of the transfer functions $H_R(z_k,f_i)$ measured at all 
+Then, we calculate for each sensor $z_l$ the cubic polynomial spline interpolation of the transfer functions $H_R(z_k,f_i)$ measured at all
 the other instrumented locations $\{z_k\}, k\in \{1 ... n\}, k \neq l$: we denote it $H_S(z_l,f_i)$.
 
 For these two transfer functions, we define the interpolation error $E(z_l,f_i)$ as the absolute value of the difference between recorded and interpolated FRFs:
@@ -436,7 +437,7 @@ Now, to denote corect detection (or no detection), we will use the terms true po
 
 In our experiences, we measure the number of true/false positives and negatives. The figure(\ref{TFPN}) present the notations used for the number of true/false positives and negatives.
 
-To evaluate the two methods, we use the specificity predictive factors, which are 
+To evaluate the two methods, we use the specificity predictive factors, which are
 $\frac{TP}{TP + FP}$ and $\frac{TN}{TN + FN}$. The first correspond to the probability that there is a damage when we detect one, and the second correspond to the probability there isn't any damage when we detect nothing. A good method has the two factors near to 1.
 
 
@@ -474,7 +475,7 @@ From now on, to tell the difference between the two methods, we shall call our v
 \section{Simulation}
 
 
-We have implemented a simulation to obtain the data used to check the methods of localization. To explain it, we detil here the following system we used for our experiences: $n$ masses, connected
+We have implemented a simulation to obtain the data used to check the methods of localization. To explain it, we detail here the following system we used for our experiences: $n$ masses, connected
 through springs and dampers. We denote the masses $\{m_i\}_{i=1}^n$, the springs stifness $\{k_i\}_{i=1}^n$ and the dampers $\{c_i\}_{i=1}^n$ (see Figure (\ref{springs})).
 
 \begin{figure}[h!]
@@ -487,21 +488,21 @@ through springs and dampers. We denote the masses $\{m_i\}_{i=1}^n$, the springs
 For the simulation, we use the discrete-time state-space model (Equation (\ref{discrete})). First, we needed the matrices $M, C, K$. In this case, the matrices $M$ and $K$ are given by:
 \begin{equation}
 \begin{array}{l}
-M = 
-\begin{pmatrix} 
-m_1\\ 
-&\ddots\\ 
+M =
+\begin{pmatrix}
+m_1\\
+&\ddots\\
 &&m_n
-\end{pmatrix} 
+\end{pmatrix}
 \\
-K = 
-\begin{pmatrix} 
-k_1 + k_2 & - k_1 \\ 
-- k_1 &\ddots\\ 
+K =
+\begin{pmatrix}
+k_1 + k_2 & - k_1 \\
+- k_1 &\ddots\\
 & -k_i & k_i + k_{i+1} & -k_{i+1} \\
 &&&\ddots& -k_n\\
 &&& -k_n & k_n
-\end{pmatrix} 
+\end{pmatrix}
 \end{array}
 \end{equation}
 
@@ -514,7 +515,7 @@ Thus, we do the same thing that in practical situations: we consider that we are
 C = \alpha M + \beta K,\ \ \ \ \ \alpha, \beta \in \mathbb{R}_+
 \end{equation}
 
-With this matrices, we can calculate the matrices $A_c, B_c, C_c$ and $D_c$. To calculate the matrices $A, B$, we have to know the 
+With this matrices, we can calculate the matrices $A_c, B_c, C_c$ and $D_c$. To calculate the matrices $A, B$, we have to know the
 sampling period $\Delta t$. We need the frequencies of the system, because we have to respect the Nyquist–Shannon sampling theorem.
 To determine the Nyquist frequency (here, it is the taller frequency of the system), we calculate the eigenvalues of $A_c$. Indeed, we have the link between the eigenvalues $\{\lambda_i\}_{i=1}^n$ and the frequencies of the system $\{f_i\}_{i=1}^n$:
 \begin{equation}
@@ -528,7 +529,7 @@ $|\lambda_i| = \sqrt{\omega_i^2 \xi_i^2 + \omega_i^2 (1 - \xi_i^2)} = \omega_i$
 \end{remark}
 
 \begin{remark}
-The matrix $A_c$ has $2 \times n$ eigenvalues, but we obtain $n$ frequencies (for each eigenvalues, another one is its conjugated complex). 
+The matrix $A_c$ has $2 \times n$ eigenvalues, but we obtain $n$ frequencies (for each eigenvalues, another one is its conjugated complex).
 \end{remark}
 
 Now, we have the sampling period:
@@ -565,17 +566,17 @@ Remake figure.
 
 \subsection{FRF interpolation method results}
 
-To test the localization, we have to make a thresold for each sensor. We want that a computed error taller than the threshold on one sensor is equivalent to have a damage on this sensor. With the FRF interpolation method, we have compute two thresholds from 100 experiments with the undameged state. The first is the error just below the maximum of the 100 errors computed. The second is computed from the statistics of the 100 errors computed: we suppose that the probability of the error follow a normal distribution, and we choose the threshold at 95\% of this distribution. 
+To test the localization, we have to make a threshold for each sensor. We want that a computed error bigger than the threshold on one sensor is equivalent to have a damage on this sensor. With the FRF interpolation method, we have compute two thresholds from 100 experiments with the undamaged state. The first is the error just below the maximum of the 100 errors computed. The second is computed from the statistics of the 100 errors computed: we suppose that the probability of the error follow a normal distribution, and we choose the threshold at 95\% of this distribution.
 
 From now on, the majority of the figures will show four curves:
 \begin{itemize}
-\item in blue (deep): results for the FRF interpolation method with a threshold at 99\% of the reference errors
-\item in green: results for the FRF interpolation method with a threshold at 95\% of the reference distribution
-\item in red: results for the FRF difference method with a threshold at 99\% of the reference errors
-\item in blue (light): results for the FRF difference method with a threshold at 95\% of the reference distribution
+\item in dark blue: results of the FRF interpolation method with a threshold at 99\% of the reference errors
+\item in green: results of the FRF interpolation method with a threshold at 95\% of the reference distribution
+\item in red: results of the FRF difference method with a threshold at 99\% of the reference errors
+\item in blue : results of the FRF difference method with a threshold at 95\% of the reference distribution
 \end{itemize}
 
-To disting the two methods with the two thresholds, we denote them with the color initials: the first one BD, the second one G, the third one R and the last one BL.
+To disting the two methods with the two thresholds, we denote them with the color initials: the first one DB, the second one G, the third one R and the last one B.
 
 \subsubsection{Without noise}
 
@@ -591,7 +592,7 @@ We can see that the damage between sensors 6 and 7 are always detected, but ther
 \end{figure}
 
 
-Figure(\ref{detect}) presents the percent of detection of a damage between sensors 6 and 7 against the damage percent (a single damage is always simulated on sensor 7). We can see here that below 5\% of damage, none of the methods detect the damage more than 50\% of the time, but we can see that BL is the best: at 10\% of damage, it reach 90\% of detection, while the others are below 30\%. However, at 15\% of damage, it's BD and G which are the best, with 100\% of detection. BL reaches 100\% of detection at 20\% of damage, and R reaches it at 30\% of damage. Here, R seems to be the worst.
+Figure(\ref{detect}) presents the percent of detection of a damage between sensors 6 and 7 against the damage percent (a single damage is always simulated on sensor 7). We can see here that below 5\% of damage, none of the methods detect the damage more than 50\% of the time, but we can see that B is the best: at 10\% of damage, it reach 90\% of detection, while the others are below 30\%. However, at 15\% of damage, it's DB and G which are the best, with 100\% of detection. B reaches 100\% of detection at 20\% of damage, and R reaches it at 30\% of damage. Here, R seems to be the worst.
 
 \begin{figure}[h!]
   \centering
@@ -748,6 +749,3 @@ In this paper, we presented the structure heatlh monitoring and a state of the a
 \printbibliography
 
 \end{document}
-
-
-
