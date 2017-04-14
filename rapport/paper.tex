@@ -461,8 +461,8 @@ From now on, to tell the difference between the two methods, we shall call our v
 \section{Simulation}
 
 
-We have implemented a simulation to obtain the data used to check the methods of localization. To explain it, we detail here the following system we used for our experiences: $n$ masses, connected
-through springs and dampers. We denote the masses $\{m_i\}_{i=1}^n$, the springs stifness $\{k_i\}_{i=1}^n$ and the dampers $\{c_i\}_{i=1}^n$ (see Figure \ref{springs}).
+We have implemented a simulation to obtain the data used to analyse the methods of localization. To explain it, we detail here the following system we used for our experiments: $n$ masses, connected
+through springs and dampers. We denote the masses $\{m_i\}_{i=1}^n$, the springs stiffness $\{k_i\}_{i=1}^n$ and the dampers $\{c_i\}_{i=1}^n$ (see Figure \ref{springs}).
 
 \begin{figure}[h!]
   \centering
@@ -471,7 +471,7 @@ through springs and dampers. We denote the masses $\{m_i\}_{i=1}^n$, the springs
   \label{springs}
 \end{figure}
 
-For the simulation, we use the discrete-time state-space model (Equation (\ref{discrete})). First, we needed the matrices $M, C, K$. In this case, the matrices $M$ and $K$ are given by:
+For the simulation, we use the discrete-time state-space model (Equation (\ref{discrete})). First, we establish the matrices $M, C, K$. In this case, the matrices $M$ and $K$ are given by:
 \begin{equation}
 \begin{array}{l}
 M =
@@ -496,22 +496,22 @@ k_1 + k_2 & - k_1 \\
 Due to the lack of identifiable or measurable material
 constants that govern the global damping behaviour of a structure, it is generally
 impossible to assemble the damping matrix C in the same way as M and K.
-Thus, we do the same thing that in practical situations: we consider that we are in the case of Rayleigh, i.e. a linear combination of the mass and stiffness matrix:
+Thus,we consider Rayleigh damping, i.e. a linear combination of the mass and stiffness matrix:
 \begin{equation}
 C = \alpha M + \beta K,\ \ \ \ \ \alpha, \beta \in \mathbb{R}_+
 \end{equation}
 
-With this matrices, we can calculate the matrices $A_c, B_c, C_c$ and $D_c$. To calculate the matrices $A, B$, we have to know the
+With these matrices, we can calculate the matrices $A_c, B_c, C_c$ and $D_c$. To calculate the matrices $A_d, B_d$, we have to define the
 sampling period $\Delta t$. We need the frequencies of the system, because we have to respect the Nyquist–Shannon sampling theorem.
-To determine the Nyquist frequency (here, it is the taller frequency of the system), we calculate the eigenvalues of $A_c$. Indeed, we have the link between the eigenvalues $\{\lambda_i\}_{i=1}^n$ and the frequencies of the system $\{f_i\}_{i=1}^n$:
+To determine the Nyquist frequency which needs to be larger than the frequencies of the system, we calculate the eigenvalues of $A_c$. Indeed, we have the link between the eigenvalues $\{\lambda_j\}_{j=1}^n$ and the frequencies of the system $\{f_j\}_{j=1}^n$:
 \begin{equation}
-\lambda_i = - \omega_i \xi_i \pm i \omega_i \sqrt{1 - \xi_i^2}
+\lambda_j = - \omega_j \xi_j \pm i \omega_j \sqrt{1 - \xi_j^2}
 \end{equation}
-where $\omega_i = 2 \pi f_i$ and $\xi_i$ is the damping ratio.
+where $\omega_j = 2 \pi f_j$ and $\xi_j$ is the damping ratio.
 
 \begin{remark}
 We can see that:\\
-$|\lambda_i| = \sqrt{\omega_i^2 \xi_i^2 + \omega_i^2 (1 - \xi_i^2)} = \omega_i$
+$|\lambda_j| = \sqrt{\omega_j^2 \xi_j^2 + \omega_j^2 (1 - \xi_j^2)} = \omega_j$
 \end{remark}
 
 \begin{remark}
@@ -520,10 +520,10 @@ The matrix $A_c$ has $2 \times n$ eigenvalues, but we obtain $n$ frequencies (fo
 
 Now, we have the sampling period:
 \begin{equation}
-\Delta t = 2 \times max_{i \in \{1 ... n\} } f_i
+\Delta t = 2 \times max_{j \in \{1 ... n\} } f_j
 \end{equation}
 
-So we can calculate the matrices $A, B$ and make the simulation with the discrete-time state-space model (Equation (\ref{discrete})). To simulate the forces $f_k$, we use a white noise.
+So we can calculate the matrices $A_d, B_d$ and make the simulation with the discrete-time state-space model (Equation (\ref{discrete})). To simulate the forces $f_k$, we use a white noise.
 
 
 We can also use our simulation with other structures, like a beam, if we know the matrices $M$, $K$, $C$ and the impact of a damage on these matrices.
@@ -532,7 +532,7 @@ We will also validate the FRF interpolation method with a beam in this paper, bu
 
 \section{Analysis}
 
-For the following simulation results, we consider a system with 20 masses. We put a sensor on each mass. For the damaged state, we lower the stifness of the spring between sensors 6 and 7. The values of the FRF on the figures are the norm of the complex FRF values.
+For the following simulation results, we consider a system with 20 masses. We put a sensor on each mass. For the damaged state, we lower the stiffness of the spring between sensors 6 and 7. The values of the FRF on the figures are the norm of the complex FRF values.
 
 
 \subsection{Data presentation}
@@ -552,7 +552,7 @@ Remake figure.
 
 \subsection{FRF interpolation method results}
 
-To test the localization, we have to make a threshold for each sensor. We want that a computed error bigger than the threshold on one sensor is equivalent to have a damage on this sensor. With the FRF interpolation method, we have compute two thresholds from 100 experiments with the undamaged state. The first is the error just below the maximum of the 100 errors computed. The second is computed from the statistics of the 100 errors computed: we suppose that the probability of the error follow a normal distribution, and we choose the threshold at 95\% of this distribution.
+To test the localization, we compute a threshold for each sensor. Then, an interpolation error above this threshold indicates damage. With the FRF interpolation method, we have computed two thresholds from 100 experiments with the undamaged state. The first is the error just below the maximum of the 100 errors computed. The second is computed from the statistics of the 100 errors computed: we suppose that the error follows a normal distribution, and we choose the threshold at 95\% of this distribution.
 
 From now on, the majority of the figures will show four curves:
 \begin{itemize}
@@ -562,7 +562,7 @@ From now on, the majority of the figures will show four curves:
 \item in blue : results of the FRF difference method with a threshold at 95\% of the reference distribution
 \end{itemize}
 
-To disting the two methods with the two thresholds, we denote them with the color initials: the first one DB, the second one G, the third one R and the last one B.
+To distinguish the two methods with the two thresholds, we denote them with the color initials: the first one DB, the second one G, the third one R and the last one B.
 
 \subsubsection{Without noise}
 
@@ -579,7 +579,7 @@ We can see that the damage between sensors 6 and 7 are always detected, but ther
 
 
 
-Figure \ref{detect} presents the percent of detection of a damage between sensors 6 and 7 against the damage percent (a single damage is always simulated on sensor 7). We can see here that below 5\% of damage, none of the methods detect the damage more than 50\% of the time, but we can see that B is the best: at 10\% of damage, it reach 90\% of detection, while the others are below 30\%. However, at 15\% of damage, it's DB and G which are the best, with 100\% of detection. B reaches 100\% of detection at 20\% of damage, and R reaches it at 30\% of damage. Here, R seems to be the worst.
+Figure \ref{detect} presents the percent of detection of a damage between sensors 6 and 7 against the damage extent (a single damage is always simulated on sensor 7). We can see here that below 5\% of damage, none of the methods detect the damage more than 50\% of the time, but we can see that B is the best: at 10\% of damage, it reach 90\% of detection, while the others are below 30\%. However, at 15\% of damage, it's DB and G which are the best, with 100\% of detection. B reaches 100\% of detection at 20\% of damage, and R reaches it at 30\% of damage. Here, R seems to be the worst.
 
 \begin{figure}[h!]
   \centering
