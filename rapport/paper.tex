@@ -537,17 +537,25 @@ For the following simulation results, we consider a system with 20 masses. We pu
 
 \subsection{Data presentation}
 
-Figure \ref{frf_freq} presents results of the FRF on the simulation data: here is the curve of the FRF of one sensor, against frequencies. We can see peaks which are at the natural frequencies of the system, but there is one of these frequencies which not present a peak.
+Figure \ref{frf_freq} presents results of the FRF on the simulation data: here is the curve of the FRF of one sensor, against frequencies. We can see peaks which are at the natural frequencies of the system.
 
-Remake figure.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.3\textwidth]{images/persensor1.png}
-  \caption{FRF of one sensor (ten in total), against frequencies}
+  \includegraphics[width=0.3\textwidth]{images/frf_one_sensor.png}
+  \caption{FRF of one sensor against frequencies}
   \label{frf_freq}
 \end{figure}
 
+Figure \ref{frf_sensors} presents results of the FRF for all the sensors at one frenquency. Curves aren't as regular as the theoretical FRF, but we can see clearly the iregularity between sensors 6 and 7 (there is 10\% of damage here).
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.3\textwidth]{images/frf_one_frequency.png}
+  \caption{FRF for one frequency against sensors}
+  \label{frf_sensors}
+\end{figure}
 
 
 \subsection{FRF interpolation method results}
@@ -643,22 +651,22 @@ With the noise, we can so do two observations: first, the FRF interpolation meth
 
 First, we present here the the predictive factors for our methods.
 
-Figure \ref{pred} shows the predictive positive factor. We can see that the R method is the best.
+Figure \ref{pred} shows the predictive positive and negative factors. For the positive one, we can see that the R method is the best. For the negative one, we can see that all the method reach 1 at 30\% of damage, and are a factor higher than 0.9 for small damages.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{images/pred.png}
-  \caption{Predictive factor}
+  \includegraphics[width=0.4\textwidth]{images/pred_neg.png}
+  \caption{Predictive positive and negative factors}
   \label{pred}
 \end{figure}
 
-Figure \ref{pred_neg} shows the predictive negative factor with this method. We can see that all the method reach 1 at 30\% of damage, and are a factor higher than 0.9 for small damages.
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/pred_neg.png}
-  \caption{Predictive negative factor}
-  \label{pred_neg}
-\end{figure}
+%Figure \ref{pred_neg} shows the predictive negative factor with this method. 
+%\begin{figure}[h!]
+%  \centering
+%  \caption{Predictive negative factor}
+%  \label{pred_neg}
+%\end{figure}
 
 We can see that the predictive negative factor isn't bad, but the positive one can be better. To improve it, we must have less false positives. We try to remove them with the next idea: the difference between the threshold and the computed values is larger on the damage than on other sensors. As the damage is localized on one spring, so between two sensors, we apply the next algorithm to determine where is the damage:
 \begin{itemize}
@@ -677,25 +685,17 @@ We can see that the predictive negative factor isn't bad, but the positive one c
 Figure \ref{detect_max} shows the results of this method. We can see that all the false positives are eliminated.
 
 
-Figure \ref{pred_max} shows the predictive factor with this method. We can see that all the method reach 1 at 30\% of damage. That is what you wanted to obtain with this method.
-
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{images/pred_max.png}
-  \caption{Predictive factor}
+  \includegraphics[width=0.4\textwidth]{images/pred_neg_max.png}
+  \caption{Predictive positive and negative factors with elimination of false positives}
   \label{pred_max}
 \end{figure}
 
-Figure \ref{pred_neg_max} shows the predictive negative factor with this method. We can see that this factor is similar at the factor for the initial methods. It could be worst, but it's not the case.
+Figure \ref{pred_max} shows the predictive factors with this method. For the positive one, we can see that all the method reach 1 at 30\% of damage. That is what you wanted to obtain with the elimination of the false positives. For the negative one, we can see that this factor is similar at the factor for the initial methods.
 
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/pred_neg_max.png}
-  \caption{Predictive negative factor}
-  \label{pred_neg_max}
-\end{figure}
-
-We have here improved the methods, because we eliminate the false positives. The only requirement is to have a detection method.
+We have here improved the methods, because we eliminate the false positives. The only requirement is to have a detection method. We can notice that all the methods are perfect with damage extent higher than 30\%: in this case, the methods always have a correct localization.
 
 \subsection{FRF interpolation method on a beam}
 
@@ -739,27 +739,14 @@ It could permit to quantify the damage.
 
 \section{Conclusion}
 
-In this paper, we presented the structure heatlh monitoring and a state of the art for this. Then we detailed one of the methods, the FRF interpolation method, and some physical models. Last, we presented our simulation with a sping-mass system and our results with the implementation of the FRF interpolation method.
+In this paper, we presented the structure health monitoring and a state of the art for this. Then we detailed one of the methods, the FRF interpolation method, and some physical models. Last, we presented our simulation and our results with the implementation of the FRF interpolation method, and analized them.
 
+%nombre de capteurs, fréquences à considérer
+We have seen that the FRF interpolation method works, and we proposed a method for eliminate the false positives, and improve its performance. But we have seen that under 10\% of damage, this method doesn't detect damages all the time. To improve the method on that, a study of the considered frequencies could be usefull. Indeed, we have considered all the frequencies under the maximal frequency of the structure here. A selection of the frequencies could permit to detect damages under 10\% extent.
 
-%\appendices
-%\section{One appendix}
-%some text for the appendix.
+Another way to study is the impact of the number of sensors on the efficiency of the method. Here, we were placed in the ideal case where there is a sensor on each mass. For practice cases, the efficiency of the method with less sensors (for example, one sensor for two masses) should be studied.
 
-% use section* for acknowledgement
-%\section*{Acknowledgment}
-%The authors would like to thank...
-
-
-%\begin{thebibliography}{1}
-%
-%\bibitem{IEEEhowto:kopka}
-%H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-%  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-%
-%\end{thebibliography}
-
-\nocite{*}
+%\nocite{*}
 \printbibliography
 
 \end{document}

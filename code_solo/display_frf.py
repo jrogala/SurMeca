@@ -20,10 +20,10 @@ import random
 ################################################
 
 
-CAPTVALUE = 5
+CAPTVALUE = 20
 SAMPLVALUE = 10000
-DAMAGED_SENSOR = []#must be a list
-DAMAGE = 0# % of damage
+DAMAGED_SENSOR = [7]#must be a list
+DAMAGE = 10# % of damage
 
 pos = [ k for k in range(CAPTVALUE) ]
 z = [ 0 for k in range(CAPTVALUE) ]
@@ -239,15 +239,17 @@ def frf_multiple_sensors(typ,acc):
 ###########################     Display   #################################################
 ###########################################################################################
 
-def printPerSensor(res):
+def printPerSensor(res,res2):
     n = len(res)
     for i in range(n):
-        plt.plot(np.absolute(res[i]))
-        plt.xlabel("Frequencies (Hz)")
-        plt.ylabel("FRF")
-        plt.title("Sensor " + str(i))
-        plt.legend()
-        plt.show()
+    	if i > 22:
+		    plt.plot(np.absolute(res[i]),label="Undamaged")
+		    plt.plot(np.absolute(res2[i]), label="Damaged")
+		    plt.xlabel("Frequencies (Hz)")
+		    plt.ylabel("FRF")
+		    plt.title("Frequency " + str(i))
+		    plt.legend()
+		    plt.show()
 
 
 
@@ -258,7 +260,8 @@ def printPerSensor(res):
 def experience():
 	_, _, acc = simulation(0, [ [0 for k in range(2*n) ] ])
 	frf, acc = frf_multiple_sensors(1, acc)
-	printPerSensor(np.transpose(frf))
+	damaged, acc = frf_multiple_sensors(2, acc)
+	printPerSensor(frf,damaged)
 
 
 

@@ -2060,7 +2060,6 @@
     <bcf:citekey order="9">staszewski2007time</bcf:citekey>
     <bcf:citekey order="10">cauberghe2004applied</bcf:citekey>
     <bcf:citekey order="11">dilena2015damage</bcf:citekey>
-    <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global" type="entry" sortscheme="nty" sortnamekeyscheme="global">
   <bcf:sorting>
