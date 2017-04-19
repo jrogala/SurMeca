@@ -39,7 +39,7 @@ For aerospace, civil and mechanical engineering infrastructure, implementing a d
 With the help of accelerometers, a vibration analysis allows monitoring without the needs of human presence.
 The damage identification can be divided into four levels: detection, localization, quantification and prediction.
 We present existing methods for the detection and the localization of damage, and detail one of them, namely the Frequency Response Function interpolating method.
-We analyse this method in a statistical sense and illustrate it with a simulation of a springâ€“mass system and a beam, and discuss the results.
+We analyse this method in a statistical sense and illustrate it with a simulation of a spring–mass system and a beam, and discuss the results.
 
 
 
@@ -65,9 +65,9 @@ In general, a damage can be observed by comparing two different states of the sy
  one of which is supposed to represent the initial, and often undamaged, state.
 
 
-It is of interest to detect damage in infrastructure as quickly as possible whether
- for the potential life-safety or economic impact.
-Such detection requires industries to perform some form of SHM.
+Detecting damage in infrastructure as quickly as possible is needed
+ for potential life-safety or economic impact.
+Such detection requires industries to perform some form of automated SHM.
 
 For instance, there are  no quantifiable methods to
  determine if buildings should be repaired after an earthquake yet.
@@ -86,10 +86,10 @@ Generally, the damage identification can be divided into four levels \cite{peete
 \vspace{2mm}
 
 Traditional methods of damage detection based on visual inspections or experimental techniques such as radiography
- or ultrasound allow to obtain detailed information about a local damage state but requires to know the area where it is located (and hope for easy access).
-These techniques may be costly, taking a long time to be performed and impractical to detect damage in large urban areas.
- Furthermore, they may fail if damage is not visibly evident. This is why other global methods automated
- and based on sensor measurements were developed.
+ or ultrasound allow to obtain detailed information about a local damage state but requires to know the area where it is located (and the hope of an easy access).
+These techniques may be costly, take a long time to be performed and are impractical to detect damage in large urban areas.
+ Furthermore, they may fail if damage is not visible because it is not yet critical. This is why other global automated methods
+ and based on sensor were developed.
 
 
 
@@ -130,8 +130,8 @@ Note that model updating is often an ill-posed problem, requiring engineering ex
 Data driven methods are inverse methods that use models based on response data recorded on the structure instead of physical models
 \cite{limongelli2016towards}.
 Here, a FE model isn't necessary, only recorded data are analyzed.
- In these methods, the damage parameter $D$ is the variation of a damage feature $d$ between the inspection $I$ and the reference $R$ configurations: %Damage-sensitive features are extracted from data and their changes used to identify damage in the structures so the damage parameter D in these method is the variation of the damage feature f between the inspection I and the reference R configurations.
-% rÃ©fÃ©rence TOWARDS EXTRACTION OF VIBRATION-BASED DAMAGE INDICATORS
+ In these methods, the damage parameter $D$ is the variation of a damage $d$ between the inspection $I$ and the reference $R$: %Damage-sensitive features are extracted from data and their changes used to identify damage in the structures so the damage parameter D in these method is the variation of the damage feature f between the inspection I and the reference R configurations.
+% référence TOWARDS EXTRACTION OF VIBRATION-BASED DAMAGE INDICATORS
 % nom pdf : fact sheet template_vibration based_final.pdf
 
 
@@ -142,9 +142,9 @@ D=d_{I} - d_{R}
 Data-driven methods do not require a FE model  and may be applied with a limited number of available signals (both responses and excitations).
 To extract the damage features, different signal-processing tools can be used. Therefore, depending on the tool,  data-driven methods can be classified in Fourier-based methods, Time series method and Time-variant methods.
 A more detailed description of these methods can be found in references %rajouter celles en-dessous
-% Fassois S.D. and Sakellariou J.S. (2007) Time-series methods for fault detection and identification in vibrating structures. Phil. Trans. R. Soc. A. 365, 411â€“448. doi:10.1098/rsta.2006.1929.
+% Fassois S.D. and Sakellariou J.S. (2007) Time-series methods for fault detection and identification in vibrating structures. Phil. Trans. R. Soc. A. 365, 411–448. doi:10.1098/rsta.2006.1929.
 \cite{fassois2007time} and
-% Staszewski W. J.and Robertson A.N. (2007). Timeâ€“frequency and timeâ€“scale analyses for structural health monitoring. Phil. Trans. R. Soc. A. 365, 449â€“477. doi:10.1098/rsta.2006.1936.
+% Staszewski W. J.and Robertson A.N. (2007). Time–frequency and time–scale analyses for structural health monitoring. Phil. Trans. R. Soc. A. 365, 449–477. doi:10.1098/rsta.2006.1936.
 \cite{staszewski2007time}.
 The analyzed method in this paper belongs to this class.
 
@@ -153,10 +153,10 @@ The analyzed method in this paper belongs to this class.
 A third group of methods for damage localization and quantification lies between the data-driven and model-based approaches.
 Damage features are computed from both the data and the FE model, without updating the model.
 % "This class is based on datadriven features from measurements of the reference and damaged states, which are confronted to a FE model of the structure to define damage indicators for the elements of the FE model,
-% without updating its parameters" \cite{limongelli2016towards}. %rajouter rÃ©fÃ©rence au papier
-% rÃ©fÃ©rence TOWARDS EXTRACTION OF VIBRATION-BASED DAMAGE INDICATORS
+% without updating its parameters" \cite{limongelli2016towards}. %rajouter référence au papier
+% référence TOWARDS EXTRACTION OF VIBRATION-BASED DAMAGE INDICATORS
 % nom pdf : fact sheet template_vibration based_final.pdf
-% Maria Pina Limongelli, Eleni Chatzi, Michael DÂ¨ohler, Geert Lombaert, Edwin Reynders
+% Maria Pina Limongelli, Eleni Chatzi, Michael D¨ohler, Geert Lombaert, Edwin Reynders
 % https://hal.inria.fr/hal-01344178/document
 
 \section{Vibration modeling}
@@ -323,7 +323,7 @@ The main hypothesis underlying the method is that a concentrated damage reflects
 vibrational profile of a structure, compared with the reference (undamaged) state.
 
 Figure \ref{theo} shows this loss of spatial regularity on the theoretical FRF, for a damage at the position 7.
-We can see there is a loss of regularity at the position 7 for the damaged state. We can also see there is an iregularity at the position 2, but here the two states have the same iregularity, so it's not a loss of regularity compared to the reference state.
+We can see there is a loss of regularity at the position 7 for the damaged state. We can also see there is an irregularity at the position 2, but here the two states have the same irregularity, so it's not a loss of regularity compared to the reference state.
 
 \begin{figure}[h!]
   \centering
@@ -345,7 +345,7 @@ Then, we calculate for each sensor $z_l$ the cubic polynomial spline interpolati
 the other instrumented locations $\{z_k\}, k\in \{1 ... n\}, k \neq l$: we denote it $H_S(z_l,j)$.
 The cubic spline interpolation is a piecewise continuous curve, passing through each of the values.
 There is a separate cubic polynomial interpolation for each interval, each with its own coefficients.
-This is for this local aspect that we use this interpolation (other interpolations can also be used), since we want to detect local iregularities.
+This is for this local aspect that we use this interpolation (other interpolations can also be used), since we want to detect local irregularities.
 Cubic polynomial spline interpolations produce an interpolated function that is continuous through to the second derivative.
 
 For these two transfer functions, we define the interpolation error $E(z_l,f_i)$ as the absolute value of the difference between recorded and interpolated FRFs:
@@ -390,7 +390,7 @@ The above analysis has been developed in a deterministic context. Several source
 behavior, soil structure interaction and noise in recorded data, can induce variations of the interpolation error even if no
 damage occurs.
 
-Thus, we can have different values of the error interpolation for a same state. The distributions of the erros for a state is close to a gaussian distribution. The problem is that the distributions for an undamaged and a damaged states can be near.
+Thus, we can have different values of the error interpolation for a same state. The distributions of the errors for a state is close to a Gaussian distribution. The problem is that the distributions for an undamaged and a damaged states can be near.
 
 For a decision that an interpolation error belongs to the healthy or damaged state, once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be taller than $E_T$ to have a high probability of identification of a damage at location $z_l$. Indeed, as we can see in the Figure \ref{proba}, the curves which represent the fact to have a damage or not have a share area: if the interpolation error $ \Delta E(z_l)$ is in this area, one can commit two errors:
 \begin{itemize}
@@ -419,7 +419,7 @@ No detected & FN & TN \\ \hline
 \label{TFPN}
 \end{figure}
 
-Now, to denote corect detection (or no detection), we will use the terms true positives and negatives, to denote missing alarms we will use false negatives and for false alarms, we will use false positives.
+Now, to denote correct detection, we will use the terms true positives and negatives, to denote missed alarms we will use false negatives and for false alarms, we will use false positives.
 
 In our experiences, we measure the number of true/false positives and negatives. The Figure \ref{TFPN} present the notations used for the number of true/false positives and negatives.
 
@@ -435,13 +435,13 @@ We propose here a variant of the FRF interpolation method. While we have worked 
 \item second, compute the interpolation error on this difference
 \end{itemize}
 
-Figure \ref{theodiff} shows the difference betweem the two FRF, and we can see the loss of spatial regularity (damage at position 7).
-In comparison with the Figure \ref{theo}, we can see here there is only one iregularity: the fact to compute the difference before the interpolation erase iregularity when they are in the two states. With the initial method, they are also erase when we compute the difference between the interpolation errors.
+Figure \ref{theodiff} shows the difference between the two FRF, and we can see the loss of spatial regularity (damage at position 7).
+In comparison with the Figure \ref{theo}, we can see here there is only one irregularity: the fact to compute the difference before the interpolation erase irregularity when they are in the two states. With the initial method, they are also erase when we compute the difference between the interpolation errors.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.3\textwidth]{images/theodiff60.png}
-  \caption{Difference betweem theoretical FRF of undamaged and damage states}
+  \caption{Difference between theoretical FRF of undamaged and damage states}
   \label{theodiff}
 \end{figure}
 
@@ -450,7 +450,7 @@ Thus, we also study in this paper a variant of the FRF interpolation method . Th
 \begin{itemize}
 \item Compute the FRF
 \item Compute the difference between the FRF of reference and the FRF of the studied state, for each frequency
-\item Compute the interpolation error of these differencies
+\item Compute the interpolation error of these differences
 \item Compute the sum of the interpolation errors at each frequency
 \end{itemize}
 
@@ -502,7 +502,7 @@ C = \alpha M + \beta K,\ \ \ \ \ \alpha, \beta \in \mathbb{R}_+
 \end{equation}
 
 With these matrices, we can calculate the matrices $A_c, B_c, C_c$ and $D_c$. To calculate the matrices $A_d, B_d$, we have to define the
-sampling period $\Delta t$. We need the frequencies of the system, because we have to respect the Nyquistâ€“Shannon sampling theorem.
+sampling period $\Delta t$. We need the frequencies of the system, because we have to respect the Nyquist–Shannon sampling theorem.
 To determine the Nyquist frequency which needs to be larger than the frequencies of the system, we calculate the eigenvalues of $A_c$. Indeed, we have the link between the eigenvalues $\{\lambda_j\}_{j=1}^n$ and the frequencies of the system $\{f_j\}_{j=1}^n$:
 \begin{equation}
 \lambda_j = - \omega_j \xi_j \pm i \omega_j \sqrt{1 - \xi_j^2}
@@ -547,7 +547,7 @@ Figure \ref{frf_freq} presents results of the FRF on the simulation data: here i
   \label{frf_freq}
 \end{figure}
 
-Figure \ref{frf_sensors} presents results of the FRF for all the sensors at one frenquency. Curves aren't as regular as the theoretical FRF, but we can see clearly the iregularity between sensors 6 and 7 (there is 10\% of damage here).
+Figure \ref{frf_sensors} presents results of the FRF for all the sensors at one frequency. Curves aren't as regular as the theoretical FRF, but we can see clearly the irregularity between sensors 6 and 7 (there is 10\% of damage here).
 
 
 \begin{figure}[h!]
@@ -644,7 +644,7 @@ For the false positives rate, we can notice that the R method is always the best
 \end{figure}
 
 
-With the noise, we can so do two observations: first, the FRF interpolation method has a better localization for small damages than the FRF difference method, second,  the FRF difference method has a better false positives rate than the FRF interpolation method.
+With the noise, we can do two observations: first, the FRF interpolation method has a better localization for small damages than the FRF difference method, second,  the FRF difference method has a better false positives rate than the FRF interpolation method.
 
 
 \subsection{Eliminate the false positives to improve the efficiency}
@@ -711,7 +711,7 @@ Figure \ref{beam_curve} shows two FRF, one for the undamaged state and the secon
 \end{figure}
 
 
-Figure \ref{beam_error} shows the computed error. We can see that there are only two sensors with a positiv error, which are the sensors 4 and 5. Thus, the localization is good.
+Figure \ref{beam_error} shows the computed error. We can see that there are only two sensors with a positive error, which are the sensors 4 and 5. Thus, the localization is good.
 
 \begin{figure}[h!]
   \centering
@@ -739,10 +739,10 @@ It could permit to quantify the damage.
 
 \section{Conclusion}
 
-In this paper, we presented the structure health monitoring and a state of the art for this. Then we detailed one of the methods, the FRF interpolation method, and some physical models. Last, we presented our simulation and our results with the implementation of the FRF interpolation method, and analized them.
+In this paper, we presented the structure health monitoring and a state of the art for this. Then we detailed one of the methods, the FRF interpolation method, and some physical models. Last, we presented our simulation and our results with the implementation of the FRF interpolation method, and analyzed them.
 
-%nombre de capteurs, frÃ©quences Ã  considÃ©rer
-We have seen that the FRF interpolation method works, and we proposed a method for eliminate the false positives, and improve its performance. But we have seen that under 10\% of damage, this method doesn't detect damages all the time. To improve the method on that, a study of the considered frequencies could be usefull. Indeed, we have considered all the frequencies under the maximal frequency of the structure here. A selection of the frequencies could permit to detect damages under 10\% extent.
+%nombre de capteurs, fréquences à considérer
+We have seen that the FRF interpolation method works, and we proposed a method for eliminate the false positives, and improve its performance. But we have seen that under 10\% of damage, this method doesn't detect damages all the time. To improve the method on that, a study of the considered frequencies could be useful. Indeed, we have considered all the frequencies under the maximal frequency of the structure here. A selection of the frequencies could permit to detect damages under 10\% extent.
 
 Another way to study is the impact of the number of sensors on the efficiency of the method. Here, we were placed in the ideal case where there is a sensor on each mass. For practice cases, the efficiency of the method with less sensors (for example, one sensor for two masses) should be studied.
 
