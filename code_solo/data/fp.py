@@ -32,10 +32,10 @@ for e in error:
 	gauss_inv += [ fp(t_gauss_inv) ]
 
 
-plt.plot(error, maxi, label = 'Maxi')
-plt.plot(error, gauss, label = 'Gauss')
-plt.plot(error, maxi_inv, label = 'Maxi inv')
-plt.plot(error, gauss_inv, label = 'Gauss inv')
+plt.plot(error,maxi, "b", label = "I99")
+plt.plot(error,gauss, "b--", label = "I95")
+plt.plot(error,maxi_inv, "r", label = "D99")
+plt.plot(error,gauss_inv, "r--", label = "D95")
 plt.xlabel("Percent of damage")
 plt.ylabel("Percent of false positif")
 plt.legend()

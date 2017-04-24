@@ -245,7 +245,7 @@ def printPerSensor(res,res2):
     	if i > 22:
 		    plt.plot(np.absolute(res[i]),label="Undamaged")
 		    plt.plot(np.absolute(res2[i]), label="Damaged")
-		    plt.xlabel("Frequencies (Hz)")
+		    plt.xlabel("Sensors")
 		    plt.ylabel("FRF")
 		    plt.title("Frequency " + str(i))
 		    plt.legend()

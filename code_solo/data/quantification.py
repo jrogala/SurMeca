@@ -25,12 +25,12 @@ for DAMAGE in damage:
 	q1_inv += [max(d1_inv[DAMAGED_SENSOR],d1_inv[DAMAGED_SENSOR-1])]
 	q2_inv += [max(d2_inv[DAMAGED_SENSOR],d2_inv[DAMAGED_SENSOR-1])]
 
-plt.plot(damage, q1, label = 'Maxi')
-plt.plot(damage, q2, label = 'Gauss')
-plt.plot(damage, q1_inv, label = 'Maxi inv')
-plt.plot(damage, q2_inv, label = 'Gauss inv')
+plt.plot(damage, q1, "b", label = "I99")
+plt.plot(damage, q2, "b--", label = "I95")
+plt.plot(damage, q1_inv, "r", label = "D99")
+plt.plot(damage, q2_inv, "r--", label = "D95")
 plt.xlabel("Percent of damage")
-plt.ylabel("difference")
+plt.ylabel("Error divided by the threshold")
 plt.title("Quantification")
 plt.legend()
 plt.show()

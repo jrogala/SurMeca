@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.5)  18 APR 2017 12:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.5)  24 APR 2017 12:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -586,9 +586,7 @@ Package biblatex Info: ... file 'paper.bbl' found.
 Package biblatex Info: Reference section=0 on input line 18.
 Package biblatex Info: Reference segment=0 on input line 18.
 \c@remark=\count321
-Missing character: There is no â in font ptmr7t!
-Missing character: There is no € in font ptmr7t!
-Missing character: There is no “ in font ptmr7t!
+Missing character: There is no – in font ptmr7t!
 LaTeX Font Info:    Try loading font information for U+msa on input line 81.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -598,7 +596,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 81.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 106--110
+Underfull \hbox (badness 10000) in paragraph at lines 108--112
 
  []
 
@@ -609,54 +607,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 106--110
 <images/theo60.png, id=21, 578.16pt x 433.62pt>
 File: images/theo60.png Graphic file (type png)
  <use images/theo60.png>
-Package pdftex.def Info: images/theo60.png used on input line 330.
+Package pdftex.def Info: images/theo60.png used on input line 332.
 (pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
 
-<images/interpolation.png, id=23, 578.16pt x 433.62pt>
-File: images/interpolation.png Graphic file (type png)
+<images/interpolation2.png, id=23, 803.0pt x 602.25pt>
+File: images/interpolation2.png Graphic file (type png)
 
-<use images/interpolation.png>
-Package pdftex.def Info: images/interpolation.png used on input line 361.
-(pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
- [3 <./images/theo60.png> <./images/interpolation.png>] <images/gaussiennes.png
-, id=29, 601.24625pt x 318.18875pt>
+<use images/interpolation2.png>
+Package pdftex.def Info: images/interpolation2.png used on input line 363.
+(pdftex.def)             Requested size: 206.39685pt x 154.79852pt.
+ [3 <./images/theo60.png> <./images/interpolation2.png>] <images/gaussiennes.pn
+g, id=29, 601.24625pt x 318.18875pt>
 File: images/gaussiennes.png Graphic file (type png)
 
 <use images/gaussiennes.png>
-Package pdftex.def Info: images/gaussiennes.png used on input line 404.
+Package pdftex.def Info: images/gaussiennes.png used on input line 406.
 (pdftex.def)             Requested size: 206.39685pt x 109.2266pt.
 
 <images/theodiff60.png, id=30, 578.16pt x 433.62pt>
 File: images/theodiff60.png Graphic file (type png)
 
 <use images/theodiff60.png>
-Package pdftex.def Info: images/theodiff60.png used on input line 443.
+Package pdftex.def Info: images/theodiff60.png used on input line 445.
 (pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
 
 <images/ressorts.png, id=31, 463.7325pt x 173.64874pt>
 File: images/ressorts.png Graphic file (type png)
 
 <use images/ressorts.png>
-Package pdftex.def Info: images/ressorts.png used on input line 469.
+Package pdftex.def Info: images/ressorts.png used on input line 471.
 (pdftex.def)             Requested size: 206.39685pt x 77.28801pt.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 2818) in paragraph at lines 474--475
+Underfull \hbox (badness 2818) in paragraph at lines 476--477
 \OT1/ptm/m/n/10 model (Equa-tion (6[])). First, we es-tab-lish the ma-tri-ces
  []
 
+[4 <./images/gaussiennes.png> <./images/theodiff60.png> <./images/ressorts.png>
+]
+Missing character: There is no – in font ptmr7t!
 
-Underfull \vbox (badness 2680) has occurred while \output is active []
-
- [4 <./images/gaussiennes.png> <./images/theodiff60.png>]
-Missing character: There is no â in font ptmr7t!
-Missing character: There is no € in font ptmr7t!
-Missing character: There is no “ in font ptmr7t!
-
-Underfull \hbox (badness 3323) in paragraph at lines 504--507
+Underfull \hbox (badness 3323) in paragraph at lines 506--509
 []\OT1/ptm/m/n/10 With these ma-tri-ces, we can cal-cu-late the ma-tri-ces
  []
 
@@ -664,37 +654,33 @@ Underfull \hbox (badness 3323) in paragraph at lines 504--507
 File: images/frf_one_sensor.png Graphic file (type png)
 
 <use images/frf_one_sensor.png>
-Package pdftex.def Info: images/frf_one_sensor.png used on input line 545.
+Package pdftex.def Info: images/frf_one_sensor.png used on input line 547.
 (pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
 
 <images/frf_one_frequency.png, id=37, 578.16pt x 433.62pt>
 File: images/frf_one_frequency.png Graphic file (type png)
 
 <use images/frf_one_frequency.png>
-Package pdftex.def Info: images/frf_one_frequency.png used on input line 555.
+Package pdftex.def Info: images/frf_one_frequency.png used on input line 557.
 (pdftex.def)             Requested size: 154.80157pt x 116.09972pt.
- [5 <./images/ressorts.png> <./images/frf_one_sensor.png> <./images/frf_one_fre
-quency.png>]
+ [5 <./images/frf_one_sensor.png> <./images/frf_one_frequency.png>]
 <images/damage30percent.png, id=43, 578.16pt x 433.62pt>
 File: images/damage30percent.png Graphic file (type png)
 
 <use images/damage30percent.png>
-Package pdftex.def Info: images/damage30percent.png used on input line 583.
+Package pdftex.def Info: images/damage30percent.png used on input line 585.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
 
 <images/detect.png, id=44, 578.16pt x 433.62pt>
 File: images/detect.png Graphic file (type png)
  <use images/detect.png>
-Package pdftex.def Info: images/detect.png used on input line 594.
+Package pdftex.def Info: images/detect.png used on input line 596.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <images/fp.png, id=45, 578.16pt x 433.62pt>
 File: images/fp.png Graphic file (type png)
  <use images/fp.png>
-Package pdftex.def Info: images/fp.png used on input line 605.
+Package pdftex.def Info: images/fp.png used on input line 607.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
 
 
@@ -705,93 +691,83 @@ File: images/damage30percent004noise.png Graphic file (type png)
 
 <use images/damage30percent004noise.png>
 Package pdftex.def Info: images/damage30percent004noise.png used on input line 
-621.
+623.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <images/detect_noise004.png, id=47, 578.16pt x 433.62pt>
 File: images/detect_noise004.png Graphic file (type png)
 
 <use images/detect_noise004.png>
-Package pdftex.def Info: images/detect_noise004.png used on input line 631.
+Package pdftex.def Info: images/detect_noise004.png used on input line 633.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<images/fp004.png, id=48, 578.16pt x 433.62pt>
-File: images/fp004.png Graphic file (type png)
- <use images/fp004.png>
-Package pdftex.def Info: images/fp004.png used on input line 641.
-(pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \vbox (badness 1082) has occurred while \output is active []
-
  [6 <./images/damage30percent.png> <./images/detect.png> <./images/fp.png> <./i
-mages/damage30percent004noise.png>] <images/pred.png, id=56, 578.16pt x 433.62p
-t>
+mages/damage30percent004noise.png> <./images/detect_noise004.png>] <images/fp00
+4.png, id=56, 578.16pt x 433.62pt>
+File: images/fp004.png Graphic file (type png)
+
+<use images/fp004.png>
+Package pdftex.def Info: images/fp004.png used on input line 643.
+(pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
+ <images/pred.png, id=57, 578.16pt x 433.62pt>
 File: images/pred.png Graphic file (type png)
 
 <use images/pred.png>
-Package pdftex.def Info: images/pred.png used on input line 658.
+Package pdftex.def Info: images/pred.png used on input line 660.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
- <images/pred_neg.png, id=57, 578.16pt x 433.62pt>
+ <images/pred_neg.png, id=58, 578.16pt x 433.62pt>
 File: images/pred_neg.png Graphic file (type png)
 
 <use images/pred_neg.png>
-Package pdftex.def Info: images/pred_neg.png used on input line 659.
+Package pdftex.def Info: images/pred_neg.png used on input line 661.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/detect_max_10percent.png, id=58, 578.16pt x 433.62pt>
-File: images/detect_max_10percent.png Graphic file (type png)
+<images/detect_max_30percent.png, id=59, 578.16pt x 433.62pt>
+File: images/detect_max_30percent.png Graphic file (type png)
 
-<use images/detect_max_10percent.png>
-Package pdftex.def Info: images/detect_max_10percent.png used on input line 680
+<use images/detect_max_30percent.png>
+Package pdftex.def Info: images/detect_max_30percent.png used on input line 682
 .
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/pred_max.png, id=59, 578.16pt x 433.62pt>
+<images/pred_max.png, id=60, 578.16pt x 433.62pt>
 File: images/pred_max.png Graphic file (type png)
  <use images/pred_max.png>
-Package pdftex.def Info: images/pred_max.png used on input line 690.
+Package pdftex.def Info: images/pred_max.png used on input line 692.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
 
-<images/pred_neg_max.png, id=60, 578.16pt x 433.62pt>
+<images/pred_neg_max.png, id=61, 578.16pt x 433.62pt>
 File: images/pred_neg_max.png Graphic file (type png)
 
 <use images/pred_neg_max.png>
-Package pdftex.def Info: images/pred_neg_max.png used on input line 691.
+Package pdftex.def Info: images/pred_neg_max.png used on input line 693.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[7 <./images/detect_noise004.png> <./images/fp004.png> <./images/pred.png> <./i
-mages/pred_neg.png> <./images/detect_max_10percent.png>]
-<images/poutre_curve2.png, id=70, 578.16pt x 433.62pt>
+<images/poutre_curve2.png, id=62, 578.16pt x 433.62pt>
 File: images/poutre_curve2.png Graphic file (type png)
 
 <use images/poutre_curve2.png>
-Package pdftex.def Info: images/poutre_curve2.png used on input line 708.
+Package pdftex.def Info: images/poutre_curve2.png used on input line 710.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[7 <./images/fp004.png> <./images/pred.png> <./images/pred_neg.png> <./images/d
+etect_max_30percent.png>]
 <images/poutre_error.png, id=71, 578.16pt x 433.62pt>
 File: images/poutre_error.png Graphic file (type png)
 
 <use images/poutre_error.png>
-Package pdftex.def Info: images/poutre_error.png used on input line 718.
+Package pdftex.def Info: images/poutre_error.png used on input line 720.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
 
 
@@ -801,11 +777,15 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: images/quantification.png Graphic file (type png)
 
 <use images/quantification.png>
-Package pdftex.def Info: images/quantification.png used on input line 734.
+Package pdftex.def Info: images/quantification.png used on input line 736.
 (pdftex.def)             Requested size: 206.39685pt x 154.79301pt.
- [8 <./images/pred_max.png> <./images/pred_neg_max.png> <./images/poutre_curve2
-.png> <./images/poutre_error.png> <./images/quantification.png>]
-Underfull \hbox (badness 1430) in paragraph at lines 751--751
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8 <./images/pred_max.png> <./images/pred_neg_max.png> <./images/poutre_curve2.
+png> <./images/poutre_error.png> <./images/quantification.png>]
+Underfull \hbox (badness 1430) in paragraph at lines 753--753
 \OT1/ptm/m/n/10 mon-i-tor-ing". In: \OT1/ptm/m/it/10 Philo-soph-i-cal Trans-ac-
 tions of the
  []
@@ -819,8 +799,8 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  9659 strings out of 493029
- 163119 string characters out of 6136235
- 575255 words of memory out of 5000000
+ 163124 string characters out of 6136235
+ 576255 words of memory out of 5000000
  13058 multiletter control sequences out of 15000+600000
  37969 words of font info for 73 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
@@ -837,7 +817,7 @@ s/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (9 pages, 1244674 bytes).
+Output written on paper.pdf (9 pages, 1163680 bytes).
 PDF statistics:
  124 PDF objects out of 1000 (max. 8388607)
  60 compressed objects within 1 object stream

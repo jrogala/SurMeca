@@ -94,7 +94,9 @@ These techniques may be costly, take a long time to be performed and are impract
 
 
 The purpose of this work is the analysis of a particular data-driven damage localization method,
- namely the FRF interpolation method \cite{dilena2015damage}. Our contribution is the development of a simulator to obtain acceleration measurement of different structures, a proposition of a variant of the FRF interpolation method, and a statistical analysis of the two methods.
+ namely the FRF interpolation method \cite{dilena2015damage}.
+%Our contribution is the development of a simulator to obtain acceleration measurement of different structures, a proposition of a variant of the FRF interpolation method, and a statistical analysis of the two methods.
+Our contribution is a statistical evaluation of the method. This led to a proposition of a variant of the FRF interpolation method, and both methods were analyzed in extensive simulations.
 
 This paper is organized as follows: In section II we  present the existing methods (model-based and data driven methods),
 then in section III we present different models of vibrating structures required for what happens next. In section IV,  we talk about the localization using FRF interpolation method, in section V we detail our simulation used to obtain data and, finally, the experiences and its results in section VI.
@@ -129,7 +131,7 @@ Note that model updating is often an ill-posed problem, requiring engineering ex
 
 Data driven methods are inverse methods that use models based on response data recorded on the structure instead of physical models
 \cite{limongelli2016towards}.
-Here, a FE model isn't necessary, only recorded data are analyzed.
+Here, a FE model is not necessary, only recorded data are analyzed.
  In these methods, the damage parameter $D$ is the variation of a damage $d$ between the inspection $I$ and the reference $R$: %Damage-sensitive features are extracted from data and their changes used to identify damage in the structures so the damage parameter D in these method is the variation of the damage feature f between the inspection I and the reference R configurations.
 % référence TOWARDS EXTRACTION OF VIBRATION-BASED DAMAGE INDICATORS
 % nom pdf : fact sheet template_vibration based_final.pdf
@@ -276,7 +278,7 @@ H(s) = \frac{X(s)}{F(s)} = (s^2 M + s C + K)^{-1}
 \end{equation}
 
 The FRF is evaluated at $s = i \omega$, with $\omega$ the pulsation.
-In practice, we want to calculate the FRF of the system, for each sensor localization.
+In practice, we want to calculate the FRF of the system, for each sensor location.
 The FRF is calculated for each sensor location and each frequency $\omega_j = \frac{2\pi}{\Delta t} \frac{j}{N}$.
 Here, we calculate an estimation of the FRF, called $H_1$ estimator \cite{cauberghe2004applied}. We suppose we have a vector of the forces $\{ f_k\}_{k=1}^N$ and a vector of the accelerations $\{ y_k\}_{k=1}^N$ for each sensor (the two vectors are size $N$). We need to be in frequency domain, so we calculate the discrete Fourier transform:
 \begin{equation}
@@ -323,7 +325,7 @@ The main hypothesis underlying the method is that a concentrated damage reflects
 vibrational profile of a structure, compared with the reference (undamaged) state.
 
 Figure \ref{theo} shows this loss of spatial regularity on the theoretical FRF, for a damage at the position 7.
-We can see there is a loss of regularity at the position 7 for the damaged state. We can also see there is an irregularity at the position 2, but here the two states have the same irregularity, so it's not a loss of regularity compared to the reference state.
+We can see there is a loss of regularity at the position 7 for the damaged state. We can also see there is an irregularity at the position 2, but here the two states have the same irregularity, so it is not a loss of regularity compared to the reference state.
 
 \begin{figure}[h!]
   \centering
@@ -337,11 +339,11 @@ We suppose that we have $n_s$ sensors, which are located along an axis $z$, and 
 $\{z_l\}, l\in \{1 ... n_s\}$ (that is their position on the axis $z$). We also suppose we have $N$ measurements for each sensor.
 
 For each sensor, we calculate the Frequency Response Function (FRF) from the acceleration's measures, at certain frequencies
-(which are $\frac{k}{N}, k \in \{0 ... N-1\}$ with $N$ the size of the input and output vectors).
+(which are $\frac{j}{N}, j \in \{0 ... N-1\}$ with $N$ the length of the input and output vectors).
 
 Thus, for each frequency and each sensor, we have the transfer function value. Let us denote $H_R(z_l,j) = H_1^l(j)$ ($l^{th}$ entry of $H_1$) the value of the transfer function for the sensor $z_l$ at the frequency line $j$, corresponding to $\omega_j$.
 
-Then, we calculate for each sensor $z_l$ the cubic polynomial spline interpolation of the transfer functions $H_R(z_k,j)$ measured at all
+Then, we calculate for each sensor $z_l$ the cubic polynomial spline interpolation from the transfer functions $H_R(z_k,j)$ measured at all
 the other instrumented locations $\{z_k\}, k\in \{1 ... n\}, k \neq l$: we denote it $H_S(z_l,j)$.
 The cubic spline interpolation is a piecewise continuous curve, passing through each of the values.
 There is a separate cubic polynomial interpolation for each interval, each with its own coefficients.
@@ -358,8 +360,8 @@ We can see this error on the Figure \ref{interpolation_error}.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.4\textwidth]{images/interpolation.png}
-  \caption{Interpolation error}
+  \includegraphics[width=0.4\textwidth]{images/interpolation2.png}
+  \caption{Interpolation error E}
   \label{interpolation_error}
 \end{figure}
 
@@ -392,10 +394,10 @@ damage occurs.
 
 Thus, we can have different values of the error interpolation for a same state. The distributions of the errors for a state is close to a Gaussian distribution. The problem is that the distributions for an undamaged and a damaged states can be near.
 
-For a decision that an interpolation error belongs to the healthy or damaged state, once have to determine a threshold $E_T$, such as $ \Delta E(z_l)$ must be taller than $E_T$ to have a high probability of identification of a damage at location $z_l$. Indeed, as we can see in the Figure \ref{proba}, the curves which represent the fact to have a damage or not have a share area: if the interpolation error $ \Delta E(z_l)$ is in this area, one can commit two errors:
+For a decision that an interpolation error belongs to the healthy or damaged state, a threshold $E_T$ has to be determined, such as $ \Delta E(z_l)$ must be taller than $E_T$ to have a high probability of identification of a damage at location $z_l$. Indeed, as we can see in the Figure \ref{proba}, the curves which represent the fact to have a damage or not may share an area: if the interpolation error $ \Delta E(z_l)$ is in this area, one can commit two errors:
 \begin{itemize}
-\item if it is in the red area (FP), once can detect a damage since there isn't one (false alarm).
-\item if it is in the green area (FN), once can not detect a damage since there is one (missing alarm).
+\item if it is in the red area (FN), a damage is present but not detected (false alarm).
+\item if it is in the green area (FP), a damage is detected while there is actually no damage (missing alarm).
 \end{itemize}
 
 
@@ -421,10 +423,10 @@ No detected & FN & TN \\ \hline
 
 Now, to denote correct detection, we will use the terms true positives and negatives, to denote missed alarms we will use false negatives and for false alarms, we will use false positives.
 
-In our experiences, we measure the number of true/false positives and negatives. The Figure \ref{TFPN} present the notations used for the number of true/false positives and negatives.
+In our experiments, we measure the number of true/false positives and negatives. The Figure \ref{TFPN} present the notations used for the number of true/false positives and negatives.
 
 To evaluate the two methods, we use the specificity predictive factors, which are
-$\frac{TP}{TP + FP}$ and $\frac{TN}{TN + FN}$. The first correspond to the probability that there is a damage when we detect one, and the second correspond to the probability there isn't any damage when we detect nothing. A good method has the two factors near to 1.
+$\frac{TP}{TP + FP}$ and $\frac{TN}{TN + FN}$. The first correspond to the probability that there is a damage when we detect one, and the second correspond to the probability there is not any damage when we detect nothing. A good method has the two factors near to 1.
 
 
 \subsection{A variant of the method}
@@ -518,9 +520,9 @@ $|\lambda_j| = \sqrt{\omega_j^2 \xi_j^2 + \omega_j^2 (1 - \xi_j^2)} = \omega_j$
 The matrix $A_c$ has $2 \times n$ eigenvalues, but we obtain $n$ frequencies (for each eigenvalues, another one is its conjugated complex).
 \end{remark}
 
-Now, we have the sampling period:
+Now, we have the sampling period $\Delta t$ which is given by:
 \begin{equation}
-\Delta t = 2 \times max_{j \in \{1 ... n\} } f_j
+\frac{1}{\Delta t} \geq 2 \times max_{j \in \{1 ... n\} } f_j
 \end{equation}
 
 So we can calculate the matrices $A_d, B_d$ and make the simulation with the discrete-time state-space model (Equation (\ref{discrete})). To simulate the forces $f_k$, we use a white noise.
@@ -564,13 +566,13 @@ To test the localization, we compute a threshold for each sensor. Then, an inter
 
 From now on, the majority of the figures will show four curves:
 \begin{itemize}
-\item in dark blue: results of the FRF interpolation method with a threshold at 99\% of the reference errors
-\item in green: results of the FRF interpolation method with a threshold at 95\% of the reference distribution
-\item in red: results of the FRF difference method with a threshold at 99\% of the reference errors
-\item in blue : results of the FRF difference method with a threshold at 95\% of the reference distribution
+\item in blue (continuous line): results of the FRF interpolation method with a threshold at 99\% of the reference errors
+\item in blue (dashes): results of the FRF interpolation method with a threshold at 95\% of the reference distribution
+\item in red (continuous line): results of the FRF difference method with a threshold at 99\% of the reference errors
+\item in red (dashes): results of the FRF difference method with a threshold at 95\% of the reference distribution
 \end{itemize}
 
-To distinguish the two methods with the two thresholds, we denote them with the color initials: the first one DB, the second one G, the third one R and the last one B.
+To distinguish the two methods with the two thresholds, we denote them as follows: the first one I99, the second one I95, the third one D99 and the last one D95.
 
 \subsubsection{Without noise}
 
@@ -587,7 +589,7 @@ We can see that the damage between sensors 6 and 7 are always detected, but ther
 
 
 
-Figure \ref{detect} presents the percent of detection of a damage between sensors 6 and 7 against the damage extent (a single damage is always simulated on sensor 7). We can see here that below 5\% of damage, none of the methods detect the damage more than 50\% of the time, but we can see that B is the best: at 10\% of damage, it reach 90\% of detection, while the others are below 30\%. However, at 15\% of damage, it's DB and G which are the best, with 100\% of detection. B reaches 100\% of detection at 20\% of damage, and R reaches it at 30\% of damage. Here, R seems to be the worst.
+Figure \ref{detect} presents the percent of detection of a damage between sensors 6 and 7 against the damage extent (a single damage is always simulated on sensor 7). We can see here that below 5\% of damage, none of the methods detect the damage more than 50\% of the time, but we can see that D95 is the best: at 10\% of damage, it reach 90\% of detection, while the others are below 30\%. However, at 15\% of damage, it is I95 which is the best, with 99\% of detection. I99 and D95 reach 100\% of detection at 20\% of damage, and D99 reaches it at 30\% of damage. Here, D99 seems to be the worst.
 
 \begin{figure}[h!]
   \centering
@@ -597,7 +599,7 @@ Figure \ref{detect} presents the percent of detection of a damage between sensor
 \end{figure}
 
 
-Figure \ref{fp} presents the percent of false positives against the damage percent. Here, R is the best: around 2\% of false positives regardless of the percent of damage, while the others are between 5\% and 25\%.
+Figure \ref{fp} presents the percent of false positives against the damage percent. Here, D99 is the best: around 2\% of false positives regardless of the percent of damage, while the others are between 5\% and 25\%.
 
 
 \begin{figure}[h!]
@@ -623,7 +625,7 @@ Figure \ref{damage30noise} presents the results of the localization of a damage 
   \label{damage30noise}
 \end{figure}
 
-However, we can see on Figure \ref{detect_noise} that the rate of true positives is impacted by the noise: the G and BD methods reach 100\% of detection at 20\% of damage and the R and BL methods reach it at 40\% of damage.
+However, we can see on Figure \ref{detect_noise} that the rate of true positives is impacted by the noise: the I99 and I95 methods reach 100\% of detection at 20\% of damage and the D99 and D95 methods reach it at 40\% of damage.
 
 
 \begin{figure}[h!]
@@ -633,7 +635,7 @@ However, we can see on Figure \ref{detect_noise} that the rate of true positives
   \label{detect_noise}
 \end{figure}
 
-For the false positives rate, we can notice that the R method is always the best, but the BL method is better than without noise.
+For the false positives rate, we can notice that the D99 method is always the best, but the D95 method is better than without noise.
 
 
 \begin{figure}[h!]
@@ -651,7 +653,7 @@ With the noise, we can do two observations: first, the FRF interpolation method 
 
 First, we present here the the predictive factors for our methods.
 
-Figure \ref{pred} shows the predictive positive and negative factors. For the positive one, we can see that the R method is the best. For the negative one, we can see that all the method reach 1 at 30\% of damage, and are a factor higher than 0.9 for small damages.
+Figure \ref{pred} shows the predictive positive and negative factors. For the positive one, we can see that the D99 method is the best. For the negative one, we can see that all the method reach 1 at 30\% of damage, and are a factor higher than 0.9 for small damages.
 
 \begin{figure}[h!]
   \centering
@@ -668,7 +670,7 @@ Figure \ref{pred} shows the predictive positive and negative factors. For the po
 %  \label{pred_neg}
 %\end{figure}
 
-We can see that the predictive negative factor isn't bad, but the positive one can be better. To improve it, we must have less false positives. We try to remove them with the next idea: the difference between the threshold and the computed values is larger on the damage than on other sensors. As the damage is localized on one spring, so between two sensors, we apply the next algorithm to determine where is the damage:
+We can see that the predictive negative factor is not bad, but the positive one can be better. To improve it, we must have less false positives. We try to remove them with the next idea: the difference between the threshold and the computed values is larger on the damage than on other sensors. As the damage is localized on one spring, so between two sensors, we apply the next algorithm to determine where is the damage:
 \begin{itemize}
 \item We compute the error values
 \item We make the difference with the threshold
@@ -677,8 +679,8 @@ We can see that the predictive negative factor isn't bad, but the positive one c
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.4\textwidth]{images/detect_max_10percent.png}
-  \caption{}
+  \includegraphics[width=0.4\textwidth]{images/detect_max_30percent.png}
+  \caption{Damage detection rate for a damage (30\%) between sensors 6 and 7, with elimination of false positives}
   \label{detect_max}
 \end{figure}
 
@@ -693,7 +695,7 @@ Figure \ref{detect_max} shows the results of this method. We can see that all th
   \label{pred_max}
 \end{figure}
 
-Figure \ref{pred_max} shows the predictive factors with this method. For the positive one, we can see that all the method reach 1 at 30\% of damage. That is what you wanted to obtain with the elimination of the false positives. For the negative one, we can see that this factor is similar at the factor for the initial methods.
+Figure \ref{pred_max} shows the predictive factors with this method. For the positive one, we can see that all the method reach 1 at 30\% of damage. That is what you wanted to obtain with the elimination of the false positives. For the negative one, we can see that this factor is similar at the factor for the initial methods. Here, the method with the best results is the I95 method.
 
 We have here improved the methods, because we eliminate the false positives. The only requirement is to have a detection method. We can notice that all the methods are perfect with damage extent higher than 30\%: in this case, the methods always have a correct localization.
 
@@ -706,7 +708,7 @@ Figure \ref{beam_curve} shows two FRF, one for the undamaged state and the secon
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{images/poutre_curve2.png}
-  \caption{}
+  \caption{FRF for undamaged and damage states of the beam at one frequency, against sensors}
   \label{beam_curve}
 \end{figure}
 
@@ -716,7 +718,7 @@ Figure \ref{beam_error} shows the computed error. We can see that there are only
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{images/poutre_error.png}
-  \caption{}
+  \caption{Interpolation error with the beam}
   \label{beam_error}
 \end{figure}
 
@@ -732,14 +734,14 @@ It could permit to quantify the damage.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.4\textwidth]{images/quantification.png}
-  \caption{}
+  \caption{Error (in percent of the threshold)}
   \label{quant}
 \end{figure}
 
 
 \section{Conclusion}
 
-In this paper, we presented the structure health monitoring and a state of the art for this. Then we detailed one of the methods, the FRF interpolation method, and some physical models. Last, we presented our simulation and our results with the implementation of the FRF interpolation method, and analyzed them.
+In this paper, we presented the structural health monitoring and a state of the art for this. Then we detailed one of the methods, the FRF interpolation method, and the underlying physical models. Last, we presented our simulation and our results with the implementation of the FRF interpolation method, and analyzed them.
 
 %nombre de capteurs, fréquences à considérer
 We have seen that the FRF interpolation method works, and we proposed a method for eliminate the false positives, and improve its performance. But we have seen that under 10\% of damage, this method doesn't detect damages all the time. To improve the method on that, a study of the considered frequencies could be useful. Indeed, we have considered all the frequencies under the maximal frequency of the structure here. A selection of the frequencies could permit to detect damages under 10\% extent.
